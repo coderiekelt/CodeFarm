@@ -19,5 +19,5 @@ Om zelf een ontwikkelingsomgeving op te zetten moet je zelf de database blijven 
 Naam | Gebruik
 --- | ---
 Apache | Webserver
-ModPHP | PHP Processor
+PHP | PHP Processor
 MySQL | Database

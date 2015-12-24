@@ -3,9 +3,11 @@
 Deze repository wordt rechtstreeks geupdate naar de server die op school staat, deze server is de ontwikkelings omgeving.
 
 ## Mappen
-`system` : CodeIgniter systeem bestanden.
-`applicaton` : CodeFarm applicatie bestanden.
-`assets` : Alle bestanden die betrekking hebben tot opmaak en grafische inhoud van CodeFarm.
+Naam | Gebruik
+--- | ---
+`system` | CodeIgniter systeem bestanden.
+`applicaton` | CodeFarm applicatie bestanden.
+`assets` | Alle bestanden die betrekking hebben tot opmaak en grafische inhoud van CodeFarm.
 
 ## Update Tijd
 Elke vijf minuten checkt de server voor updates, deze worden dan gecloned naar de server.

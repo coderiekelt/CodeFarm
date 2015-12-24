@@ -15,3 +15,9 @@ Elke vijf minuten checkt de server voor updates, deze worden dan gecloned naar d
 ## Omgeving opzetten
 Om zelf een ontwikkelingsomgeving op te zetten moet je zelf de database blijven updaten, om git op te zetten kun je via het commando `sudo apt-get install git` de git client downloaden, hiervoor zul je zelf een SSH key moeten instellen op je github account.
 
+### Vereisten
+Naam | Gebruik
+--- | ---
+Apache | Webserver
+ModPHP | PHP Processor
+MySQL | Database

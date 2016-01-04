@@ -8,6 +8,7 @@ Naam | Gebruik
 `system` | CodeIgniter systeem bestanden.
 `applicaton` | CodeFarm applicatie bestanden.
 `assets` | Alle bestanden die betrekking hebben tot opmaak en grafische inhoud van CodeFarm.
+`user_guide` | Handleiding voor CodeIgniter versie waarvan CodeFarm gebruik maakt.
 
 ## Update Tijd
 Elke vijf minuten checkt de server voor updates, deze worden dan gecloned naar de server.

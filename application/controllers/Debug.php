@@ -23,5 +23,9 @@ class Debug extends CI_Controller {
 		$this->load->model("usermodel");
 		
 		$this->usermodel->createLeerling("riekelt", "test123", "allahhuakbar");
+		
+		echo "ahhh";
+		
+		return;
 	}
 }

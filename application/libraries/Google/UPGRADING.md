@@ -179,12 +179,8 @@ $client->getAuth()->sign($request);
 **After**
 
 ```php
-// create an authorized HTTP client
-$httpClient = $client->authorize();
-
-// OR add authorization to an existing client
 $httpClient = new GuzzleHttp\Client();
-$httpClient = $client->authorize($httpClient);
+$client->authorize($httpClient);
 ```
 
 **Before**
@@ -197,13 +193,11 @@ $response = $client->getAuth()->authenticatedRequest($request);
 **After**
 
 ```php
-$httpClient = $client->authorize();
-$request = new GuzzleHttp\Psr7\Request('POST', $url);
+$httpClient = new GuzzleHttp\Client();
+$client->authorize($httpClient);
+$request = $httpClient->createRequest('POST', $url);
 $response = $httpClient->send($request);
 ```
-
-> NOTE: `$request` can be any class implementing
-> `Psr\Http\Message\RequestInterface`
 
 In addition, other methods that were callable on `Google_Auth_OAuth2` are now called
 on the `Google_Client` object:
@@ -231,21 +225,18 @@ $client->isAccessTokenExpired();
 This was previously `PHP 5.2`. If you still need to use PHP 5.2, please continue to use
 the [v1-master](https://github.com/google/google-api-php-client/tree/v1-master) branch.
 
-## Guzzle and PSR-7 are used for HTTP Requests
+## Guzzle 5 is used for HTTP Requests
 
-The HTTP library Guzzle is used for all HTTP Requests. By default, [`Guzzle 6`][Guzzle 6]
-is used, but this library is also compatible with [`Guzzle 5`][Guzzle 5]. As a result,
-all `Google_IO`-related functionality and `Google_Http`-related functionality has been
-changed or removed.
+[`Guzzle 5`][Guzzle 5] is used for all HTTP Requests. As a result, all `Google_IO`-related
+functionality and `Google_Http`-related functionality has been changed or removed.
 
 1. Removed `Google_Http_Request`
 1. Removed `Google_IO_Abstract`, `Google_IO_Exception`, `Google_IO_Curl`, and `Google_IO_Stream`
 1. Removed methods `Google_Client::getIo` and `Google_Client::setIo`
-1. Refactored `Google_Http_Batch` and `Google_Http_MediaFileUpload` for Guzzle
+1. Refactored `Google_Http_Batch` and `Google_Http_MediaFileUpload` for Guzzle 5
+1. Added `Google_Http_Pool` for HTTP Pooling via Guzzle 5
 1. Added `Google_Client::getHttpClient` and `Google_Client::setHttpClient` for getting and
-setting the Guzzle `GuzzleHttp\ClientInterface` object.
-
-> NOTE: `PSR-7`-compatible libraries can now be used with this library.
+setting the Guzzle 5 `GuzzleHttp\ClientInterface` object.
 
 ## Other Changes
 
@@ -298,7 +289,6 @@ setting the Guzzle `GuzzleHttp\ClientInterface` object.
 
 [PSR 3]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
 [Guzzle 5]: https://github.com/guzzle/guzzle
-[Guzzle 6]: http://docs.guzzlephp.org/en/latest/psr7.html
 [Monolog]: https://github.com/Seldaek/monolog
 [Google Auth]: https://github.com/google/google-auth-library-php
 [Google Auth GCE]: https://github.com/google/google-auth-library-php/blob/master/src/GCECredentials.php

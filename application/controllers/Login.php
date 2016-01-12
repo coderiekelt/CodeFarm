@@ -52,6 +52,20 @@ class Login extends CI_Controller {
 		
 		$user = $service->userinfo->get();
 		
+		$email = $user->email;
+		
+		$split = explode("@", $email);
+		
+		if ($split[1] == "edu.rocfriesepoort.nl") 
+		{
+			echo "Dit is een geldig DEELNEMER email adres.";
+		} elseif ($split[1] == "rocfriesepoort.nl") 
+		{
+			echo "Dit is een geldig BEHEERDER email adres.";
+		} else {
+			echo "Dit is GEEN geldig email adres.";
+		}
+		
 		echo $user->email;
 	}
 }

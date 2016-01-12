@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include(APPPATH."libraries/Google/vendor/autoload.php");
+
 class Login extends CI_Controller {
 	public function index()
 	{
@@ -30,6 +31,7 @@ class Login extends CI_Controller {
 	
 	public function googleworker()
 	{
+		try {
 		if (isset($_SESSION['username'])) { return false; }
 		if (!isset($_GET['code'])) { redirect("googledirector");}
 		// DIT MET NIEMAND DELEN
@@ -50,19 +52,6 @@ class Login extends CI_Controller {
 		$_SESSION['access_token'] = $client->getAccessToken();
 		$client->setAccessToken($_SESSION['access_token']);
 		
-		use GuzzleHttp\Ring\Exception\ConnectException;
-
-try {
-    // the code which throws the error
-} catch( ConnectException $ex ) {
-    switch ( $ex->getMessage() ) {
-        case '7': // to be verified
-            // handle your exception in the way you want,
-            // maybe with a graceful fallback
-            break;
-    }
-}
-		
 		$user = $service->userinfo->get();
 		
 		$email = $user->email;
@@ -80,5 +69,8 @@ try {
 		}
 		
 		echo $user->email;
+		} catch(RequestException $e) {
+			echo $e->getResponse()->json();
+		}
 	}
 }

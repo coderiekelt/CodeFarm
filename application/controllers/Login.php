@@ -59,12 +59,22 @@ class Login extends CI_Controller {
 		
 		$split = explode("@", $email);
 		
+		$this->load->model("usermodel");
+		
 		if ($split[1] == "edu.rocfriesepoort.nl") 
 		{
-			echo "Dit is een geldig DEELNEMER email adres.";
+			if ($this->usermodel->verifyFe("deelnemer", $split[0] . "_edufp"))
+			{
+				$this->usermodel->setupSession("deelnemer", $split[0] . "_edufp");
+				redirect("dashboard");
+			}
 		} elseif ($split[1] == "rocfriesepoort.nl") 
 		{
-			echo "Dit is een geldig BEHEERDER email adres.";
+			if ($this->usermodel->verifyFe("beheerder", $split[0] . "_fp"))
+			{
+				$this->usermodel->setupSession("beheerder", $split[0] . "_fp");
+				redirect("dashboard");
+			}
 		} else {
 			echo "Dit is GEEN geldig email adres.";
 			$this->load->view("login", array("error_invalid" => true));

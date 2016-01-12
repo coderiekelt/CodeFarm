@@ -104,6 +104,20 @@
 			}
 		}
 		
+		public function verifyFe($domein, $gebruikersnaam)
+		{
+			if ($this->existsInDomein($domein, $gebruikersnaam))
+			{
+				$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => $gebruikersnaam));     
+				$num = $query->num_rows();
+				
+				if ($num == 0) { return false ;}
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
 		public function setupSession($domein, $gebruikersnaam)
 		{
 			if (!$this->existsInDomein($domein, $gebruikersnaam)) { return false; }

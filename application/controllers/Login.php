@@ -44,6 +44,8 @@ class Login extends CI_Controller {
 		$client->addScope("email");
 		$client->addScope("profile");
 		
+		$service = new Google_Service_Oauth2($client);
+		
 		$client->authenticate($_GET['code']);
 		$_SESSION['access_token'] = $client->getAccessToken();
 		$client->setAccessToken($_SESSION['access_token']);

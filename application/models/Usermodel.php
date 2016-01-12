@@ -89,4 +89,38 @@
         	$this->db->where('gebruikersnaam', $gebruikersnaam);
         	$this->db->update('gebruiker');
         }
+		
+		public function verify($domein, $gebruikersnaam, $wachtwoord)
+		{
+			if ($this->existsInDomein($domein, $gebruikersnaam))
+			{
+				$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => $gebruikersnaam, 'wachtwoord' => hash("sha256", $wachtwoord)));     
+				$num = $query->num_rows();
+				
+				if ($num == 0) { return false ;}
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		public function setupSession($domein, $gebruikersnaam)
+		{
+			if (!$this->existsInDomein($domein, $gebruikersnaam)) { return false; }
+			$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => $gebruikersnaam));
+			$result = $query->result();
+			$result = $result[0];
+			
+			if (isset($result['voornaam']))
+			{
+				$_SESSION['displaynaam'] = $result['voornaam'] . " " . $result['achternaam'];
+			} else {
+				$_SESSION['displaynaam'] = $gebruikersnaam;
+			}
+			
+			$_SESSION['usernaam'] = $gebruikersnaam;
+			
+			$_SESSION['domein'] = $domein;
+			return true;
+		}
 	}

@@ -50,6 +50,19 @@ class Login extends CI_Controller {
 		$_SESSION['access_token'] = $client->getAccessToken();
 		$client->setAccessToken($_SESSION['access_token']);
 		
+		use GuzzleHttp\Ring\Exception\ConnectException;
+
+try {
+    // the code which throws the error
+} catch( ConnectException $ex ) {
+    switch ( $ex->getMessage() ) {
+        case '7': // to be verified
+            // handle your exception in the way you want,
+            // maybe with a graceful fallback
+            break;
+    }
+}
+		
 		$user = $service->userinfo->get();
 		
 		$email = $user->email;

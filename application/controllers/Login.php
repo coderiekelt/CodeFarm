@@ -66,6 +66,7 @@ class Login extends CI_Controller {
 			if ($this->usermodel->verifyFe("deelnemer", $split[0] . "_edufp"))
 			{
 				$this->usermodel->setupSession("deelnemer", $split[0] . "_edufp");
+				echo "eeedu";
 				redirect("dashboard");
 			}
 		} elseif ($split[1] == "rocfriesepoort.nl") 

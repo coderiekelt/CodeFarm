@@ -76,14 +76,8 @@ class Login extends CI_Controller {
 				redirect("dashboard");
 			}
 		} else {
-			echo "Dit is GEEN geldig email adres.";
 			$this->load->view("login", array("error_invalid" => true));
 		}
-		echo "<br>";
-		echo "CLIENT ESP: " . $split[1];
-		echo "<br>";
-		
-		echo "CLIENT EID: ". $user->email;
 		} catch(RequestException $e) {
 			echo $e->getResponse()->json();
 		}

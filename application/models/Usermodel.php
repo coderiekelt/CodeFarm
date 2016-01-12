@@ -27,7 +27,7 @@
         // BESTAAT GEBRUIKER IN DOMEIN? (DEELNEMER, GAST, BEHEERDER)
         public function existsInDomein($domein, $gebruikersnaam)
         {
-        	$query = $this->db->get_where($domein, array('gebruikersnaam' => $naam));   
+        	$query = $this->db->get_where($domein, array('gebruikersnaam' => $gebruikersnaam));   
 
         	$num = $query->num_rows();
 

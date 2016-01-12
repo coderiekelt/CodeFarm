@@ -78,7 +78,7 @@
 											<div class="space-6"></div>
 
 											<div class="social-login center">
-												<a href="login/googledirector">
+												<a href="<?php echo site_url("login/googledirector"); ?>">
 													<button style="width: 100%;" class="btn btn-danger">
 														<i class="ace-icon fa fa-google-plus"></i>
 														Login met uw school email!

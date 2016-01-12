@@ -6,7 +6,8 @@ class Debug extends CI_Controller {
 	{
 		$this->load->model("usermodel");
 		
-		$this->usermodel->createLeerling("riekelt", "test123", "allahhuakbar");
+		if ($this->usermodel->exists("riekelt")) { return; }
+		$this->usermodel->create("leerling", "riekelt", "test123", "allahhuakbar");
 		
 		echo "ahhh";
 		

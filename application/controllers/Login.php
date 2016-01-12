@@ -55,8 +55,6 @@ class Login extends CI_Controller {
 		
 		$user = $service->userinfo->get();
 		
-		print_r($service);
-		
 		$email = $user->email;
 		
 		$split = explode("@", $email);

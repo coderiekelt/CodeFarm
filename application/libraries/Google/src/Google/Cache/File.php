@@ -73,7 +73,7 @@ class Google_Cache_File implements CacheInterface
     if ($this->acquireReadLock($storageFile)) {
       if (filesize($storageFile) > 0) {
         $data = fread($this->fh, filesize($storageFile));
-        $data = unserialize($data);
+        $data =  unserialize($data);
       } else {
         $this->log(
             'debug',
@@ -81,7 +81,7 @@ class Google_Cache_File implements CacheInterface
             array('file' => $storageFile)
         );
       }
-      $this->unlock();
+      $this->unlock($storageFile);
     }
 
     $this->log(
@@ -100,8 +100,8 @@ class Google_Cache_File implements CacheInterface
       // We serialize the whole request object, since we don't only want the
       // responseContent but also the postBody used, headers, size, etc.
       $data = serialize($value);
-      fwrite($this->fh, $data);
-      $this->unlock();
+      $result = fwrite($this->fh, $data);
+      $this->unlock($storageFile);
 
       $this->log(
           'debug',
@@ -212,7 +212,7 @@ class Google_Cache_File implements CacheInterface
     return true;
   }
 
-  public function unlock()
+  public function unlock($storageFile)
   {
     if ($this->fh) {
       flock($this->fh, LOCK_UN);

@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Url;
 
 /**
  * Manage large file uploads, which may be media but can be any type
@@ -54,7 +53,7 @@ class Google_Http_MediaFileUpload
   /** @var Google_Client */
   private $client;
 
-  /** @var Psr\Http\Message\RequestInterface */
+  /** @var Google_Http_Request */
   private $request;
 
   /** @var string */
@@ -75,7 +74,7 @@ class Google_Http_MediaFileUpload
    */
   public function __construct(
       Google_Client $client,
-      RequestInterface $request,
+      $request,
       $mimeType,
       $data,
       $resumable = false,
@@ -134,7 +133,7 @@ class Google_Http_MediaFileUpload
         'PUT',
         $resumeUri,
         $headers,
-        Psr7\stream_for($chunk)
+        Stream::factory($chunk)
     );
 
     return $this->makePutRequest($request);
@@ -158,18 +157,19 @@ class Google_Http_MediaFileUpload
   * @return false|mixed false when the upload is unfinished or the decoded http response
   *
   */
-  private function makePutRequest(RequestInterface $request)
+  private function makePutRequest(Request $request)
   {
-    $response = $this->client->execute($request);
+    $http = $this->client->getHttpClient();
+    $response = $http->send($request);
     $this->httpResultCode = $response->getStatusCode();
 
     if (308 == $this->httpResultCode) {
       // Track the amount uploaded.
-      $range = explode('-', $response->getHeaderLine('range'));
+      $range = explode('-', $response->getHeader('range'));
       $this->progress = $range[1] + 1;
 
       // Allow for changing upload URLs.
-      $location = $response->getHeaderLine('location');
+      $location = $response->getHeader('location');
       if ($location) {
         $this->resumeUri = $location;
       }
@@ -178,7 +178,14 @@ class Google_Http_MediaFileUpload
       return false;
     }
 
-    return Google_Http_REST::decodeHttpResponse($response, $this->request);
+    $result = $response->json();
+    $expectedClass = $this->request->getHeader('X-Php-Expected-Class');
+
+    if ($expectedClass) {
+      $result = new $expectedClass($result);
+    }
+
+    return $result;
   }
 
   /**
@@ -192,9 +199,9 @@ class Google_Http_MediaFileUpload
        'content-range' => "bytes */$this->size",
        'content-length' => 0,
      );
-     $httpRequest = new Request(
-         'PUT',
+     $httpRequest = new Google_Http_Request(
          $this->resumeUri,
+         'PUT',
          $headers
      );
 
@@ -202,28 +209,24 @@ class Google_Http_MediaFileUpload
   }
 
   /**
-   * @return Psr\Http\Message\RequestInterface $request
+   * @return array|bool
    * @visible for testing
    */
   private function process()
   {
     $this->transformToUploadUrl();
-    $request = $this->request;
 
     $postBody = '';
     $contentType = false;
 
-    $meta = (string) $request->getBody();
+    $meta = (string) $this->request->getBody();
     $meta = is_string($meta) ? json_decode($meta, true) : $meta;
 
     $uploadType = $this->getUploadType($meta);
-    $request = $request->withUri(
-        Uri::withQueryValue($request->getUri(), 'uploadType', $uploadType)
-    );
-
+    $this->request->getQuery()->set('uploadType', $uploadType);
     $mimeType = $this->mimeType ?
         $this->mimeType :
-        $request->getHeaderLine('content-type');
+        $this->request->getHeader('content-type');
 
     if (self::UPLOAD_RESUMABLE_TYPE == $uploadType) {
       $contentType = $mimeType;
@@ -247,13 +250,13 @@ class Google_Http_MediaFileUpload
       $postBody = $related;
     }
 
-    $request = $request->withBody(Psr7\stream_for($postBody));
+    $this->request->setBody(Stream::factory($postBody));
 
     if (isset($contentType) && $contentType) {
-      $request = $request->withHeader('content-type', $contentType);
+      $this->request->setHeader('content-type', $contentType);
     }
 
-    return $this->request = $request;
+    return $this->request;
   }
 
   /**
@@ -300,12 +303,12 @@ class Google_Http_MediaFileUpload
         'expect' => '',
       );
       foreach ($headers as $key => $value) {
-        $this->request = $this->request->withHeader($key, $value);
+        $this->request->setHeader($key, $value);
       }
     }
 
-    $response = $this->client->execute($this->request, false);
-    $location = $response->getHeaderLine('location');
+    $response = $this->client->getHttpClient()->send($this->request);
+    $location = $response->getHeader('location');
     $code = $response->getStatusCode();
 
     if (200 == $code && true == $location) {
@@ -313,7 +316,7 @@ class Google_Http_MediaFileUpload
     }
 
     $message = $code;
-    $body = json_decode((string) $this->request->getBody(), true);
+    $body = $response->json();
     if (isset($body['error']['errors'])) {
       $message .= ': ';
       foreach ($body['error']['errors'] as $error) {
@@ -330,22 +333,17 @@ class Google_Http_MediaFileUpload
 
   private function transformToUploadUrl()
   {
-    $parts = parse_url((string) $this->request->getUri());
+    $parts = parse_url($this->request->getUrl());
     if (!isset($parts['path'])) {
       $parts['path'] = '';
     }
     $parts['path'] = '/upload' . $parts['path'];
-    $uri = Uri::fromParts($parts);
-    $this->request = $this->request->withUri($uri);
+    $url = Url::fromString(Url::buildUrl($parts));
+    $this->request->setUrl($url);
   }
 
   public function setChunkSize($chunkSize)
   {
     $this->chunkSize = $chunkSize;
-  }
-
-  public function getRequest()
-  {
-    return $this->request;
   }
 }

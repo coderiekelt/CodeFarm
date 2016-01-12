@@ -25,7 +25,8 @@ echo pageHeader("User Query - Multiple APIs");
  * Ensure you've downloaded your oauth credentials
  ************************************************/
 if (!$oauth_credentials = getOAuthCredentialsFile()) {
-  return missingOAuth2CredentialsWarning();
+  echo missingOAuth2CredentialsWarning();
+  exit;
 }
 
 /************************************************

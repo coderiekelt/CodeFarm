@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-use Google\Auth\HttpHandler\HttpHandlerFactory;
+use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\ParseException;
 
 /**
  * This class implements the RESTful transport of apiServiceRequest()'s
@@ -27,11 +27,11 @@ use Psr\Http\Message\ResponseInterface;
 class Google_Http_REST
 {
   /**
-   * Executes a Psr\Http\Message\RequestInterface and (if applicable) automatically retries
+   * Executes a GuzzleHttp\Message\Request and (if applicable) automatically retries
    * when errors occur.
    *
    * @param Google_Client $client
-   * @param Psr\Http\Message\RequestInterface $req
+   * @param GuzzleHttp\Message\Request $req
    * @return array decoded result
    * @throws Google_Service_Exception on server side error (ie: not authenticated,
    *  invalid or malformed post body, invalid url)
@@ -39,15 +39,14 @@ class Google_Http_REST
   public static function execute(
       ClientInterface $client,
       RequestInterface $request,
-      $expectedClass = null,
       $config = array(),
       $retryMap = null
   ) {
     $runner = new Google_Task_Runner(
         $config,
-        sprintf('%s %s', $request->getMethod(), (string) $request->getUri()),
+        sprintf('%s %s', $request->getMethod(), $request->getUrl()),
         array(get_class(), 'doExecute'),
-        array($client, $request, $expectedClass)
+        array($client, $request)
     );
 
     if (!is_null($retryMap)) {
@@ -58,19 +57,18 @@ class Google_Http_REST
   }
 
   /**
-   * Executes a Psr\Http\Message\RequestInterface
+   * Executes a GuzzleHttp\Message\RequestInterface
    *
    * @param Google_Client $client
-   * @param Psr\Http\Message\RequestInterface $request
+   * @param GuzzleHttp\Message\RequestInterface $request
    * @return array decoded result
    * @throws Google_Service_Exception on server side error (ie: not authenticated,
    *  invalid or malformed post body, invalid url)
    */
-  public static function doExecute(ClientInterface $client, RequestInterface $request, $expectedClass = null)
+  public static function doExecute(ClientInterface $client, RequestInterface $request)
   {
     try {
-      $httpHandler = HttpHandlerFactory::build($client);
-      $response = $httpHandler($request);
+      $response = $client->send($request);
     } catch (RequestException $e) {
       // if Guzzle throws an exception, catch it and handle the response
       if (!$e->hasResponse()) {
@@ -79,34 +77,33 @@ class Google_Http_REST
       $response = $e->getResponse();
     }
 
-    return self::decodeHttpResponse($response, $request, $expectedClass);
+    return self::decodeHttpResponse($response, $request);
   }
 
   /**
    * Decode an HTTP Response.
    * @static
    * @throws Google_Service_Exception
-   * @param Psr\Http\Message\RequestInterface $response The http response to be decoded.
-   * @param Psr\Http\Message\ResponseInterface $response
+   * @param GuzzleHttp\Message\RequestInterface $response The http response to be decoded.
+   * @param GuzzleHttp\Message\ResponseInterface $response
    * @return mixed|null
    */
   public static function decodeHttpResponse(
       ResponseInterface $response,
-      RequestInterface $request = null,
-      $expectedClass = null
+      RequestInterface $request = null
   ) {
     $body = (string) $response->getBody();
     $code = $response->getStatusCode();
     $result = null;
 
     // return raw response when "alt" is "media"
-    $isJson = !($request && 'media' == $request->getUri()->getQuery('alt'));
+    $isJson = !($request && 'media' == $request->getQuery()->get('alt'));
 
     // set the result to the body if it's not set to anything else
     if ($isJson) {
-      $result = json_decode($body, true);
-      if (null === $result && 0 !== json_last_error()) {
-        // in the event of a parse error, return the raw string
+      try {
+        $result = $response->json();
+      } catch (ParseException $e) {
         $result = $body;
       }
     } else {
@@ -114,25 +111,15 @@ class Google_Http_REST
     }
 
     // retry strategy
-    if ((intVal($code)) >= 400) {
+    if ((intVal($code)) >= 300) {
       $errors = null;
       // Specific check for APIs which don't return error details, such as Blogger.
-      if (isset($result['error']['errors'])) {
+      if (isset($result['error']) && isset($result['error']['errors'])) {
         $errors = $result['error']['errors'];
       }
       throw new Google_Service_Exception($body, $code, null, $errors);
     }
 
-    // use "is_null" because "false" is used to explicitly
-    // prevent an expected class from being returned
-    if (is_null($expectedClass) && $request) {
-      $expectedClass = $request->getHeaderLine('X-Php-Expected-Class');
-    }
-
-    if (!empty($expectedClass)) {
-      return new $expectedClass($result);
-    }
-
-    return $response;
+    return $result;
   }
 }

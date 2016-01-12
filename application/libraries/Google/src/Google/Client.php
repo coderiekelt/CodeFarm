@@ -16,17 +16,19 @@
  */
 
 use Google\Auth\ApplicationDefaultCredentials;
+use Google\Auth\AuthTokenFetcher;
 use Google\Auth\CacheInterface;
 use Google\Auth\CredentialsLoader;
-use Google\Auth\HttpHandler\HttpHandlerFactory;
 use Google\Auth\OAuth2;
-use Google\Auth\Credentials\ServiceAccountCredentials;
-use Google\Auth\Credentials\UserRefreshCredentials;
+use Google\Auth\ScopedAccessToken;
+use Google\Auth\ServiceAccountCredentials;
+use Google\Auth\Simple;
+use Google\Auth\UserRefreshCredentials;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Collection;
 use GuzzleHttp\Ring\Client\StreamHandler;
-use GuzzleHttp\Psr7;
-use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Stream\Stream;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler as MonologStreamHandler;
@@ -90,7 +92,8 @@ class Google_Client
    */
   public function __construct($config = array())
   {
-    $this->config = array_merge(
+    $this->config = Collection::fromConfig(
+        $config,
         [
           'application_name' => '',
 
@@ -112,9 +115,6 @@ class Google_Client
           // fetch the ApplicationDefaultCredentials, if applicable
           // @see https://developers.google.com/identity/protocols/application-default-credentials
           'use_application_default_credentials' => false,
-          'signing_key' => null,
-          'signing_algorithm' => null,
-          'subject' => null,
 
           // Other OAuth2 parameters.
           'hd' => '',
@@ -129,8 +129,7 @@ class Google_Client
           // Task Runner retry configuration
           // @see Google_Task_Runner
           'retry' => array(),
-        ],
-        $config
+        ]
     );
   }
 
@@ -173,8 +172,7 @@ class Google_Client
     $auth->setCode($code);
     $auth->setRedirectUri($this->getRedirectUri());
 
-    $httpHandler = HttpHandlerFactory::build($this->getHttpClient());
-    $creds = $auth->fetchAuthToken($httpHandler);
+    $creds = $auth->fetchAuthToken($this->getHttpClient());
     if ($creds && isset($creds['access_token'])) {
       $creds['created'] = time();
       $this->setAccessToken($creds);
@@ -218,8 +216,7 @@ class Google_Client
 
     $credentials = $this->createApplicationDefaultCredentials();
 
-    $httpHandler = HttpHandlerFactory::build($authHttp);
-    $accessToken = $credentials->fetchAuthToken($httpHandler);
+    $accessToken = $credentials->fetchAuthToken($authHttp);
     if ($accessToken && isset($accessToken['access_token'])) {
       $this->setAccessToken($accessToken);
     }
@@ -258,8 +255,7 @@ class Google_Client
     $auth = $this->getOAuth2Service();
     $auth->setRefreshToken($refreshToken);
 
-    $httpHandler = HttpHandlerFactory::build($this->getHttpClient());
-    $creds = $auth->fetchAuthToken($httpHandler);
+    $creds = $auth->fetchAuthToken($this->getHttpClient());
     if ($creds && isset($creds['access_token'])) {
       $creds['created'] = time();
       $this->setAccessToken($creds);
@@ -285,33 +281,33 @@ class Google_Client
     }
 
     // only accept one of prompt or approval_prompt
-    $approvalPrompt = $this->config['prompt']
+    $approvalPrompt = $this->config->get('prompt')
       ? null
-      : $this->config['approval_prompt'];
+      : $this->config->get('approval_prompt');
 
     // include_granted_scopes should be string "true", string "false", or null
-    $includeGrantedScopes = $this->config['include_granted_scopes'] === null
+    $includeGrantedScopes = $this->config->get('include_granted_scopes') === null
       ? null
-      : var_export($this->config['include_granted_scopes'], true);
+      : var_export($this->config->get('include_granted_scopes'), true);
 
     $params = array_filter(
         [
-          'access_type' => $this->config['access_type'],
+          'access_type' => $this->config->get('access_type'),
           'approval_prompt' => $approvalPrompt,
-          'hd' => $this->config['hd'],
+          'hd' => $this->config->get('hd'),
           'include_granted_scopes' => $includeGrantedScopes,
-          'login_hint' => $this->config['login_hint'],
-          'openid.realm' => $this->config['openid.realm'],
-          'prompt' => $this->config['prompt'],
+          'login_hint' => $this->config->get('login_hint'),
+          'openid.realm' => $this->config->get('openid.realm'),
+          'prompt' => $this->config->get('prompt'),
           'response_type' => 'code',
           'scope' => $scope,
-          'state' => $this->config['state'],
+          'state' => $this->config->get('state'),
         ]
     );
 
     // If the list of scopes contains plus.login, add request_visible_actions
     // to auth URL.
-    $rva = $this->config['request_visible_actions'];
+    $rva = $this->config->get('request_visible_actions');
     if (strlen($rva) > 0 && false !== strpos($scope, 'plus.login')) {
         $params['request_visible_actions'] = $rva;
     }
@@ -329,14 +325,15 @@ class Google_Client
    * @param GuzzleHttp\ClientInterface $authHttp an http client for authentication.
    * @return void
    */
-  public function authorize(ClientInterface $http = null, ClientInterface $authHttp = null)
+  public function authorize(ClientInterface $http, ClientInterface $authHttp = null)
   {
-    $credentials = null;
-    $token = null;
-    $scopes = null;
-    if (is_null($http)) {
-      $http = $this->getHttpClient();
-    }
+    $subscriber = null;
+    $authIdentifier = null;
+
+    // if we end up needing to make an HTTP request to retrieve credentials, we
+    // can use our existing one, but we need to throw exceptions so the error
+    // bubbles up.
+    $authHttp = $authHttp ?: $this->createDefaultAuthHttpClient($http);
 
     // These conditionals represent the decision tree for authentication
     //   1.  Check for Application Default Credentials
@@ -344,7 +341,18 @@ class Google_Client
     //   3a. Check for an Access Token
     //   3b. If access token exists but is expired, try to refresh it
     if ($this->isUsingApplicationDefaultCredentials()) {
-      $credentials = $this->createApplicationDefaultCredentials();
+      $credentials = $this->createApplicationDefaultCredentials($authHttp);
+      $subscriber = new AuthTokenFetcher(
+          $credentials,
+          [],
+          $this->cache,
+          $authHttp
+      );
+      $authIdentifier = 'google_auth';
+    } elseif ($key = $this->config->get('developer_key')) {
+      // if a developer key is set, authorize using that
+      $subscriber = new Simple(['key' => $key]);
+      $authIdentifier = 'simple';
     } elseif ($token = $this->getAccessToken()) {
       $scopes = $this->prepareScopes();
       // add refresh subscriber to request a new token
@@ -353,17 +361,32 @@ class Google_Client
             $scopes,
             $token['refresh_token']
         );
+        $subscriber = new AuthTokenFetcher(
+            $credentials,
+            [],
+            $this->getCache(),
+            $authHttp
+        );
+        $authIdentifier = 'google_auth';
+      } else {
+        $subscriber = new ScopedAccessToken(
+            function ($scopes) use ($token) {
+              return $token['access_token'];
+            },
+            (array) $scopes,
+            []
+        );
+        $authIdentifier = 'scoped';
       }
     }
 
-    $authHandler = $this->getAuthHandler();
-
-    if ($credentials) {
-      $http = $authHandler->attachCredentials($http, $credentials);
-    } elseif ($token) {
-      $http = $authHandler->attachToken($http, $token, (array) $scopes);
-    } elseif ($key = $this->config['developer_key']) {
-      $http = $authHandler->attachKey($http, $key);
+    if ($subscriber) {
+      $http->setDefaultOption('auth', $authIdentifier);
+      $http->getEmitter()->attach($subscriber);
+      $this->getLogger()->log(
+          'info',
+          sprintf('Added listener for auth type "%s"', $authIdentifier)
+      );
     }
 
     return $http;
@@ -378,7 +401,7 @@ class Google_Client
    */
   public function useApplicationDefaultCredentials($useAppCreds = true)
   {
-    $this->config['use_application_default_credentials'] = $useAppCreds;
+    $this->config->set('use_application_default_credentials', $useAppCreds);
   }
 
   /**
@@ -389,7 +412,7 @@ class Google_Client
    */
   public function isUsingApplicationDefaultCredentials()
   {
-    return $this->config['use_application_default_credentials'];
+    return $this->config->get('use_application_default_credentials');
   }
 
   /**
@@ -484,12 +507,12 @@ class Google_Client
    */
   public function setClientId($clientId)
   {
-    $this->config['client_id'] = $clientId;
+    $this->config->set('client_id', $clientId);
   }
 
   public function getClientId()
   {
-    return $this->config['client_id'];
+    return $this->config->get('client_id');
   }
 
   /**
@@ -498,12 +521,12 @@ class Google_Client
    */
   public function setClientSecret($clientSecret)
   {
-    $this->config['client_secret'] = $clientSecret;
+    $this->config->set('client_secret', $clientSecret);
   }
 
   public function getClientSecret()
   {
-    return $this->config['client_secret'];
+    return $this->config->get('client_secret');
   }
 
   /**
@@ -512,12 +535,12 @@ class Google_Client
    */
   public function setRedirectUri($redirectUri)
   {
-    $this->config['redirect_uri'] = $redirectUri;
+    $this->config->set('redirect_uri', $redirectUri);
   }
 
   public function getRedirectUri()
   {
-    return $this->config['redirect_uri'];
+    return $this->config->get('redirect_uri');
   }
 
   /**
@@ -527,7 +550,7 @@ class Google_Client
    */
   public function setState($state)
   {
-    $this->config['state'] = $state;
+    $this->config->set('state', $state);
   }
 
   /**
@@ -537,7 +560,7 @@ class Google_Client
    */
   public function setAccessType($accessType)
   {
-    $this->config['access_type'] = $accessType;
+    $this->config->set('access_type', $accessType);
   }
 
   /**
@@ -547,7 +570,7 @@ class Google_Client
    */
   public function setApprovalPrompt($approvalPrompt)
   {
-    $this->config['approval_prompt'] = $approvalPrompt;
+    $this->config->set('approval_prompt', $approvalPrompt);
   }
 
   /**
@@ -556,7 +579,7 @@ class Google_Client
    */
   public function setLoginHint($loginHint)
   {
-    $this->config['login_hint'] = $loginHint;
+    $this->config->set('login_hint', $loginHint);
   }
 
   /**
@@ -565,7 +588,7 @@ class Google_Client
    */
   public function setApplicationName($applicationName)
   {
-    $this->config['application_name'] = $applicationName;
+    $this->config->set('application_name', $applicationName);
   }
 
   /**
@@ -581,7 +604,7 @@ class Google_Client
     if (is_array($requestVisibleActions)) {
       $requestVisibleActions = join(" ", $requestVisibleActions);
     }
-    $this->config['request_visible_actions'] = $requestVisibleActions;
+    $this->config->set('request_visible_actions', $requestVisibleActions);
   }
 
   /**
@@ -591,7 +614,7 @@ class Google_Client
    */
   public function setDeveloperKey($developerKey)
   {
-    $this->config['developer_key'] = $developerKey;
+    $this->config->set('developer_key', $developerKey);
   }
 
   /**
@@ -602,7 +625,7 @@ class Google_Client
    */
   public function setHostedDomain($hd)
   {
-    $this->config['hd'] = $hd;
+    $this->config->set('hd', $hd);
   }
   /**
    * Set the prompt hint. Valid values are none, consent and select_account.
@@ -612,7 +635,7 @@ class Google_Client
    */
   public function setPrompt($prompt)
   {
-    $this->config['prompt'] = $prompt;
+    $this->config->set('prompt', $prompt);
   }
   /**
    * openid.realm is a parameter from the OpenID 2.0 protocol, not from OAuth
@@ -622,7 +645,7 @@ class Google_Client
    */
   public function setOpenidRealm($realm)
   {
-    $this->config['openid.realm'] = $realm;
+    $this->config->set('openid.realm', $realm);
   }
   /**
    * If this is provided with the value true, and the authorization request is
@@ -632,7 +655,7 @@ class Google_Client
    */
   public function setIncludeGrantedScopes($include)
   {
-    $this->config['include_granted_scopes'] = $include;
+    $this->config->set('include_granted_scopes', $include);
   }
 
   /**
@@ -738,24 +761,28 @@ class Google_Client
   /**
    * Helper method to execute deferred HTTP requests.
    *
-   * @param $request Psr\Http\Message\RequestInterface|Google_Http_Batch
+   * @param $request GuzzleHttp\Message\RequestInterface|Google_Http_Batch
    * @throws Google_Exception
-   * @return object of the type of the expected class or Psr\Http\Message\ResponseInterface.
+   * @return object of the type of the expected class or array.
    */
-  public function execute(RequestInterface $request, $expectedClass = null)
+  public function execute($request, $expectedClass = null)
   {
-    $request = $request->withHeader(
+    $request->setHeader(
         'User-Agent',
-        $this->config['application_name']
+        $this->config->get('application_name')
         . " " . self::USER_AGENT_SUFFIX
         . $this->getLibraryVersion()
     );
 
-    // call the authorize method
-    // this is where most of the grunt work is done
-    $http = $this->authorize();
+    $http = $this->getHttpClient();
 
-    return Google_Http_REST::execute($http, $request, $expectedClass, $this->config['retry']);
+    $result = Google_Http_REST::execute($http, $request, $this->config['retry']);
+    $expectedClass = $expectedClass ?: $request->getHeader('X-Php-Expected-Class');
+    if ($expectedClass) {
+      $result = new $expectedClass($result);
+    }
+
+    return $result;
   }
 
   /**
@@ -783,12 +810,12 @@ class Google_Client
 
   public function setConfig($name, $value)
   {
-    $this->config[$name] = $value;
+    $this->config->set($name, $value);
   }
 
   public function getConfig($name, $default = null)
   {
-    return isset($this->config[$name]) ? $this->config[$name] : $default;
+    return $this->config->get($name) ?: $default;
   }
 
   /**
@@ -832,9 +859,9 @@ class Google_Client
 
       // set the information from the config
       $this->setClientId($config['client_id']);
-      $this->config['client_email'] = $config['client_email'];
-      $this->config['signing_key'] = $config['private_key'];
-      $this->config['signing_algorithm'] = 'HS256';
+      $this->config->set('client_email', $config['client_email']);
+      $this->config->set('signing_key', $config['private_key']);
+      $this->config->set('signing_algorithm', 'HS256');
     } elseif (isset($config[$key])) {
       // old-style
       $this->setClientId($config[$key]['client_id']);
@@ -859,7 +886,7 @@ class Google_Client
    */
   public function setSubject($subject)
   {
-    $this->config['subject'] = $subject;
+    $this->config->set('subject', $subject);
   }
 
   /**
@@ -906,9 +933,9 @@ class Google_Client
           'authorizationUri'   => self::OAUTH2_AUTH_URL,
           'tokenCredentialUri' => self::OAUTH2_TOKEN_URI,
           'redirectUri'       => $this->getRedirectUri(),
-          'issuer'            => $this->config['client_id'],
-          'signingKey'        => $this->config['signing_key'],
-          'signingAlgorithm'  => $this->config['signing_algorithm'],
+          'issuer'            => $this->config->get('client_id'),
+          'signingKey'        => $this->config->get('signing_key'),
+          'signingAlgorithm'  => $this->config->get('signing_algorithm'),
         ]
     );
 
@@ -1000,23 +1027,29 @@ class Google_Client
 
   protected function createDefaultHttpClient()
   {
-    $options = ['exceptions' => false];
+    $options = [
+      'base_url' => $this->config->get('base_path'),
+      'defaults' => ['exceptions' => false],
+    ];
 
-    $version = ClientInterface::VERSION;
-    if ('5' === $version[0]) {
-      $options = [
-        'base_url' => $this->config['base_path'],
-        'defaults' => $options,
-      ];
-      if ($this->isAppEngine()) {
-        // set StreamHandler on AppEngine by default
-        $options['handler']  = new StreamHandler();
-        $options['defaults']['verify'] = '/etc/ca-certificates.crt';
-      }
-    } else {
-      // guzzle 6
-      $options['base_uri'] = $this->config['base_path'];
+    // set StreamHandler on AppEngine by default
+    if ($this->isAppEngine()) {
+      $options['handler']  = new StreamHandler();
     }
+
+    return new Client($options);
+  }
+
+  protected function createDefaultAuthHttpClient($http = null)
+  {
+    $options = [
+      'base_url' => $this->config->get('base_path'),
+      'defaults' => [
+        'exceptions' => true,
+        'verify' => $http ? $http->getDefaultOption('verify') : true,
+        'proxy' => $http ? $http->getDefaultOption('proxy') : null,
+      ]
+    ];
 
     return new Client($options);
   }
@@ -1024,18 +1057,18 @@ class Google_Client
   private function createApplicationDefaultCredentials()
   {
     $scopes = $this->prepareScopes();
-    $sub = $this->config['subject'];
-    $signingKey = $this->config['signing_key'];
+    $sub = $this->config->get('subject');
+    $signingKey = $this->config->get('signing_key');
 
     // create credentials using values supplied in setAuthConfig
     if ($signingKey) {
       $serviceAccountCredentials = array(
-        'client_id' => $this->config['client_id'],
-        'client_email' => $this->config['client_email'],
+        'client_id' => $this->config->get('client_id'),
+        'client_email' => $this->config->get('client_email'),
         'private_key' => $signingKey,
         'type' => 'service_account',
       );
-      $keyStream = Psr7\stream_for(json_encode($serviceAccountCredentials));
+      $keyStream = Stream::factory(json_encode($serviceAccountCredentials));
       $credentials = CredentialsLoader::makeCredentials($scopes, $keyStream);
     } else {
       $credentials = ApplicationDefaultCredentials::getCredentials($scopes);
@@ -1052,11 +1085,6 @@ class Google_Client
     }
 
     return $credentials;
-  }
-
-  protected function getAuthHandler()
-  {
-    return Google_AuthHandler_AuthHandlerFactory::build($this->getCache());
   }
 
   private function createUserRefreshCredentials($scope, $refreshToken)

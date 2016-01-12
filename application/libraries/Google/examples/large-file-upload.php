@@ -24,7 +24,8 @@ echo pageHeader("File Upload - Uploading a large file");
  * Ensure you've downloaded your oauth credentials
  ************************************************/
 if (!$oauth_credentials = getOAuthCredentialsFile()) {
-  return missingOAuth2CredentialsWarning();
+  echo missingOAuth2CredentialsWarning();
+  exit;
 }
 
 /************************************************

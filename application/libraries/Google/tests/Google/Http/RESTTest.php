@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class Google_HTTP_RESTTest extends BaseTest
 {
@@ -29,23 +29,22 @@ class Google_HTTP_RESTTest extends BaseTest
   public function setUp()
   {
     $this->rest = new Google_Http_REST();
-    $this->request = new Request('GET', '/');
   }
 
   public function testDecodeResponse()
   {
     $client = $this->getClient();
     $response = new Response(204);
-    $decoded = $this->rest->decodeHttpResponse($response, $this->request);
-    $this->assertEquals($response, $decoded);
+    $decoded = $this->rest->decodeHttpResponse($response);
+    $this->assertEquals(null, $decoded);
 
     foreach (array(200, 201) as $code) {
       $headers = array('foo', 'bar');
-      $stream = Psr7\stream_for('{"a": 1}');
+      $stream = Stream::factory('{"a": 1}');
       $response = new Response($code, $headers, $stream);
 
-      $decoded = $this->rest->decodeHttpResponse($response, $this->request);
-      $this->assertEquals('{"a": 1}', (string) $decoded->getBody());
+      $decoded = $this->rest->decodeHttpResponse($response);
+      $this->assertEquals(array("a" => 1), $decoded);
     }
   }
 
@@ -55,11 +54,11 @@ class Google_HTTP_RESTTest extends BaseTest
 
     $request =  new Request('GET', 'http://www.example.com?alt=media');
     $headers = array();
-    $stream = Psr7\stream_for('thisisnotvalidjson');
+    $stream = Stream::factory('thisisnotvalidjson');
     $response = new Response(200, $headers, $stream);
 
     $decoded = $this->rest->decodeHttpResponse($response, $request);
-    $this->assertEquals('thisisnotvalidjson', (string) $decoded->getBody());
+    $this->assertEquals('thisisnotvalidjson', $decoded);
   }
 
 
@@ -67,16 +66,16 @@ class Google_HTTP_RESTTest extends BaseTest
   public function testDecode500ResponseThrowsException()
   {
     $response = new Response(500);
-    $this->rest->decodeHttpResponse($response, $this->request);
+    $this->rest->decodeHttpResponse($response);
   }
 
 
   public function testDecodeEmptyResponse()
   {
-    $stream = Psr7\stream_for('{}');
+    $stream = Stream::factory('{}');
     $response = new Response(200, array(), $stream);
-    $decoded = $this->rest->decodeHttpResponse($response, $this->request);
-    $this->assertEquals('{}', (string) $decoded->getBody());
+    $decoded = $this->rest->decodeHttpResponse($response);
+    $this->assertEquals(array(), $decoded);
   }
 
   /**
@@ -84,7 +83,7 @@ class Google_HTTP_RESTTest extends BaseTest
    */
   public function testBadErrorFormatting()
   {
-    $stream = Psr7\stream_for(
+    $stream = Stream::factory(
         '{
          "error": {
           "code": 500,
@@ -93,7 +92,7 @@ class Google_HTTP_RESTTest extends BaseTest
         }'
     );
     $response = new Response(500, array(), $stream);
-    $this->rest->decodeHttpResponse($response, $this->request);
+    $this->rest->decodeHttpResponse($response);
   }
 
   /**
@@ -101,7 +100,7 @@ class Google_HTTP_RESTTest extends BaseTest
    */
   public function tesProperErrorFormatting()
   {
-    $stream = Psr7\stream_for(
+    $stream = Stream::factory(
         '{
           error: {
            errors: [
@@ -118,7 +117,7 @@ class Google_HTTP_RESTTest extends BaseTest
         }'
     );
     $response = new Response(401, array(), $stream);
-    $this->rest->decodeHttpResponse($response, $this->request);
+    $this->rest->decodeHttpResponse($response);
   }
 
   /**
@@ -126,8 +125,8 @@ class Google_HTTP_RESTTest extends BaseTest
    */
   public function testNotJson404Error()
   {
-    $stream = Psr7\stream_for('Not Found');
+    $stream = Stream::factory('Not Found');
     $response = new Response(404, array(), $stream);
-    $this->rest->decodeHttpResponse($response, $this->request);
+    $this->rest->decodeHttpResponse($response);
   }
 }

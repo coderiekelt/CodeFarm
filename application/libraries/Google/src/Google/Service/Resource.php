@@ -15,8 +15,6 @@
  * limitations under the License.
  */
 
-use GuzzleHttp\Psr7\Request;
-
 /**
  * Implements the actual methods/resources of the discovered Google API using magic function
  * calling overloading (__call()), which on call will see if the method name (plus.activities.list)
@@ -73,11 +71,11 @@ class Google_Service_Resource
    * TODO: This function needs simplifying.
    * @param $name
    * @param $arguments
-   * @param $expectedClass - optional, the expected class name
-   * @return Google_Http_Request|expectedClass
+   * @param $expected_class - optional, the expected class name
+   * @return Google_Http_Request|expected_class
    * @throws Google_Exception
    */
-  public function call($name, $arguments, $expectedClass = null)
+  public function call($name, $arguments, $expected_class = null)
   {
     if (! isset($this->methods[$name])) {
       $this->client->getLogger()->error(
@@ -185,28 +183,29 @@ class Google_Service_Resource
         )
     );
 
-    // build the service uri
     $url = $this->createRequestUri(
         $method['path'],
         $parameters
     );
 
-    // NOTE: because we're creating the request by hand,
-    // and because the service has a rootUrl property
-    // the "base_uri" of the Http Client is not accounted for
-    $request = new Request(
+    $http = $this->client->getHttpClient();
+    $this->client->authorize($http);
+
+    // Guzzle 5 cannot locate App Engine certs by default,
+    // so we tell Guzzle where to look
+    if ($this->client->isAppEngine()) {
+      $http->setDefaultOption('verify', '/etc/ca-certificates.crt');
+    }
+
+    $request = $http->createRequest(
         $method['httpMethod'],
         $url,
-        ['content-type' => 'application/json'],
-        $postBody ? json_encode($postBody) : ''
+        ['json' => $postBody]
     );
 
-    // if the client is marked for deferring, rather than
-    // execute the request, return the response
     if ($this->client->shouldDefer()) {
       // @TODO find a better way to do this
-      $request = $request
-        ->withHeader('X-Php-Expected-Class', $expectedClass);
+      $request->setHeader('X-Php-Expected-Class', $expected_class);
 
       return $request;
     }
@@ -218,18 +217,13 @@ class Google_Service_Resource
         : 'application/octet-stream';
       $data = $parameters['data']['value'];
       $upload = new Google_Http_MediaFileUpload($this->client, $request, $mimeType, $data);
-
-      // pull down the modified request
-      $request = $upload->getRequest();
     }
 
-    // if this is a media type, we will return the raw response
-    // rather than using an expected class
     if (isset($parameters['alt']) && $parameters['alt']['value'] == 'media') {
-      $expectedClass = null;
+      $expected_class = null;
     }
-
-    return $this->client->execute($request, $expectedClass);
+    
+    return $this->client->execute($request, $expected_class);
   }
 
   protected function convertToArrayAndStripNulls($o)

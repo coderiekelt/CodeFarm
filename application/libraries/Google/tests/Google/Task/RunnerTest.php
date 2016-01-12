@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
-class Google_Task_RunnerTest extends BaseTest
+class Google_Task_RunnerTest extends PHPUnit_Framework_TestCase
 {
   private $client;
 
@@ -75,7 +75,7 @@ class Google_Task_RunnerTest extends BaseTest
                    ->setNextResponse(200, '{"success": true}')
                    ->makeRequest();
 
-    $this->assertEquals('{"success": true}', (string) $result->getBody());
+    $this->assertEquals(array("success" => true), $result);
   }
 
   /**
@@ -90,7 +90,7 @@ class Google_Task_RunnerTest extends BaseTest
                    ->setNextResponse(200, '{"success": true}')
                    ->makeRequest();
 
-    $this->assertEquals('{"success": true}', (string) $result->getBody());
+    $this->assertEquals(array("success" => true), $result);
   }
 
   /**
@@ -118,7 +118,7 @@ class Google_Task_RunnerTest extends BaseTest
                    ->setNextResponse(200, '{"success": true}')
                    ->makeRequest();
 
-    $this->assertEquals('{"success": true}', (string) $result->getBody());
+    $this->assertEquals(array("success" => true), $result);
   }
 
   /**
@@ -196,7 +196,7 @@ class Google_Task_RunnerTest extends BaseTest
                    ->setNextResponse(200, '{"success": true}')
                    ->makeRequest();
 
-    $this->assertEquals('{"success": true}', (string) $result->getBody());
+    $this->assertEquals(array("success" => true), $result);
   }
 
   /**
@@ -212,7 +212,7 @@ class Google_Task_RunnerTest extends BaseTest
                    ->setNextResponse(200, '{"success": true}')
                    ->makeRequest();
 
-    $this->assertEquals('{"success": true}', (string) $result->getBody());
+    $this->assertEquals(array("success" => true), $result);
   }
 
   /**
@@ -244,7 +244,7 @@ class Google_Task_RunnerTest extends BaseTest
                    ->setNextResponse(200, '{"success": true}')
                    ->makeRequest();
 
-    $this->assertEquals('{"success": true}', (string) $result->getBody());
+    $this->assertEquals(array("success" => true), $result);
   }
 
   /**
@@ -627,17 +627,12 @@ class Google_Task_RunnerTest extends BaseTest
   {
     $request = new Request('GET', '/test');
     $http = $this->getMock('GuzzleHttp\ClientInterface');
+
     $http->expects($this->exactly($this->mockedCallsCount))
        ->method('send')
        ->will($this->returnCallback(array($this, 'getNextMockedCall')));
 
-    if ($this->isGuzzle5()) {
-      $http->expects($this->exactly($this->mockedCallsCount))
-       ->method('createRequest')
-       ->will($this->returnValue(new GuzzleHttp\Message\Request('GET', '/test')));
-    }
-
-    return Google_Http_REST::execute($http, $request, '', $this->retryConfig, $this->retryMap);
+    return Google_Http_REST::execute($http, $request, $this->retryConfig, $this->retryMap);
   }
 
   /**
@@ -655,7 +650,7 @@ class Google_Task_RunnerTest extends BaseTest
       throw $current;
     }
 
-    $stream = Psr7\stream_for($current['body']);
+    $stream = Stream::factory($current['body']);
     $response = new Response($current['code'], $current['headers'], $stream);
 
     return $response;

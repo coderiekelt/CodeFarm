@@ -33,7 +33,7 @@ class Login extends CI_Controller {
 	{
 		try {
 		if (isset($_SESSION['username'])) { return false; }
-		if (!isset($_GET['code'])) { redirect("googledirector");}
+		if (!isset($_GET['code'])) { redirect("login/googledirector");}
 		// DIT MET NIEMAND DELEN
 		$client_id = "690571784639-t8fcgfh35ec0ns4prjl38intv8mkoc02.apps.googleusercontent.com";
 		$client_secret = "VllCcK4yzqzoykW_JSI4bmDj";

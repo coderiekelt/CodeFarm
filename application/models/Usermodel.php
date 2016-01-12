@@ -123,4 +123,9 @@
 			$_SESSION['domein'] = $domein;
 			return true;
 		}
+		
+		public function destroySession()
+		{
+			session_destroy();
+		}
 	}

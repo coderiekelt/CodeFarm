@@ -67,6 +67,9 @@ class Login extends CI_Controller {
 		} else {
 			echo "Dit is GEEN geldig email adres.";
 		}
+		echo "<br>";
+		echo $split[1];
+		echo "<br>";
 		
 		echo $user->email;
 		} catch(RequestException $e) {

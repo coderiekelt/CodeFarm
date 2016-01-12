@@ -54,6 +54,8 @@ class Login extends CI_Controller {
 		
 		$user = $service->userinfo->get();
 		
+		print_r($user);
+		
 		$email = $user->email;
 		
 		$split = explode("@", $email);
@@ -66,13 +68,13 @@ class Login extends CI_Controller {
 			echo "Dit is een geldig BEHEERDER email adres.";
 		} else {
 			echo "Dit is GEEN geldig email adres.";
+			$this->load->view("login", array("error_invalid" => true));
 		}
 		echo "<br>";
 		echo "CLIENT ESP: " . $split[1];
 		echo "<br>";
 		
 		echo "CLIENT EID: ". $user->email;
-		$this->load->view("login", array("error_invalid" => true));
 		} catch(RequestException $e) {
 			echo $e->getResponse()->json();
 		}

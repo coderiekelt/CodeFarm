@@ -68,10 +68,10 @@ class Login extends CI_Controller {
 			echo "Dit is GEEN geldig email adres.";
 		}
 		echo "<br>";
-		echo $split[1];
+		echo "CLIENT ESP: " . $split[1];
 		echo "<br>";
 		
-		echo $user->email;
+		echo "CLIENT EID: ". $user->email;
 		} catch(RequestException $e) {
 			echo $e->getResponse()->json();
 		}

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-include("../libraries/Google/vendor/autoload.php");
+include(APPPATH."libraries/Google/vendor/autoload.php");
 class Login extends CI_Controller {
 	public function index()
 	{

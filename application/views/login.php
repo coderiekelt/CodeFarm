@@ -72,10 +72,10 @@
 											<div class="space-6"></div>
 
 											<div class="social-login center">
-												<a class="btn btn-danger">
+												<button class="btn btn-danger">
 													<i class="ace-icon fa fa-google-plus"></i>
 													Login met uw school email!
-												</a>
+												</button>
 											</div>
 										</div><!-- /.widget-main -->
 									</div><!-- /.widget-body -->

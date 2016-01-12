@@ -32,7 +32,7 @@ class Login extends CI_Controller {
 	public function googleworker()
 	{
 		try {
-		if (isset($_SESSION['username'])) { return false; }
+		if (isset($_SESSION['username'])) { echo "ha"; return false; }
 		if (!isset($_GET['code'])) { redirect("googledirector");}
 		
 		// DIT MET NIEMAND DELEN

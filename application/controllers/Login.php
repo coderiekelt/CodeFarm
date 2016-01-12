@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		// DIT MET NIEMAND DELEN
 		$client_id = "690571784639-t8fcgfh35ec0ns4prjl38intv8mkoc02.apps.googleusercontent.com";
 		$client_secret = "VllCcK4yzqzoykW_JSI4bmDj";
-		$redirect_uri = "http://kutgoogle.riekeltbrands.nl/";
+		$redirect_uri = "http://riekeltbrands.nl/kutding.php";
 		
 		$client = new Google_Client();
 		$client->setClientId($client_id);

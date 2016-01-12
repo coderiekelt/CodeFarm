@@ -27,6 +27,12 @@
 							<div class="space-6"></div>
 
 							<div class="position-relative">
+								<?php if (isset($error_invalid))
+								{
+									?>
+									<div class="alert alert-danger">Dit is geen geldig school e-mail adres.</div>
+									<?php
+								}?>
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">

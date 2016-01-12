@@ -31,7 +31,6 @@ class Login extends CI_Controller {
 	
 	public function googleworker()
 	{
-		try {
 		if (isset($_SESSION['username'])) { return false; }
 		if (!isset($_GET['code'])) { redirect("login/googledirector");}
 		// DIT MET NIEMAND DELEN
@@ -72,8 +71,6 @@ class Login extends CI_Controller {
 		echo "<br>";
 		
 		echo "CLIENT EID: ". $user->email;
-		} catch(RequestException $e) {
-			echo $e->getResponse()->json();
-		}
+		$this->load->view("login", array("error_invalid" => true));
 	}
 }

@@ -72,10 +72,12 @@
 											<div class="space-6"></div>
 
 											<div class="social-login center">
-												<button class="btn btn-danger">
-													<i class="ace-icon fa fa-google-plus"></i>
-													Login met uw school email!
-												</button>
+												<a href="<?php site_url("login/googledirector"); ?>">
+													<button class="btn btn-danger">
+														<i class="ace-icon fa fa-google-plus"></i>
+														Login met uw school email!
+													</button>
+												</a>
 											</div>
 										</div><!-- /.widget-main -->
 									</div><!-- /.widget-body -->

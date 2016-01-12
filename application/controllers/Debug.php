@@ -13,4 +13,9 @@ class Debug extends CI_Controller {
 		
 		return;
 	}
+	
+	public function layout()
+	{
+		$this->load->view("header");
+	}
 }

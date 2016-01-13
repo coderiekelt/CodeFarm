@@ -18,7 +18,7 @@
 			
 			if ($num == 0) { return false; }
 			
-			return $result['klas_naam'];
+			return $result->klas_naam;
 		}
 		
 		// BESTAAT GEBRUIKER?
@@ -136,9 +136,9 @@
 			
 			$result = $query->result();
 			
-			if (isset($result['voornaam']))
+			if (isset($result->voornaam))
 			{
-				$_SESSION['displaynaam'] = $result['voornaam'] . " " . $result['achternaam'];
+				$_SESSION['displaynaam'] = $result->voornaam . " " . $result->achternaam;
 			} else {
 				$_SESSION['displaynaam'] = $gebruikersnaam;
 			}

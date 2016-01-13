@@ -35,6 +35,7 @@ class Login extends CI_Controller {
 			if ($this->usermodel->verify("deelnemer", $_POST['username'], $_POST['password']))
 			{
 				$this->usermodel->setupSession("deelnemer", $_POST['username']);
+				redirect("dashboard");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}
@@ -44,6 +45,7 @@ class Login extends CI_Controller {
 			if ($this->usermodel->verify("beheerder", $_POST['username'], $_POST['password']))
 			{
 				$this->usermodel->setupSession("beheerder", $_POST['username']);
+				redirect("dashboard");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}
@@ -51,6 +53,7 @@ class Login extends CI_Controller {
 			if ($this->usermodel->verify("gast", $_POST['username'], $_POST['password']))
 			{
 				$this->usermodel->setupSession("gast", $_POST['username']);
+				redirect("dashboard");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}

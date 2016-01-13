@@ -124,11 +124,10 @@
 			$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => $gebruikersnaam));
 			
 			$result = $query->result();
-			print_r($result);
 			
 			if (isset($result['voornaam']))
 			{
-				$_SESSION['displaynaam'] = $result[0]['voornaam'] . " " . $result[0]['achternaam'];
+				$_SESSION['displaynaam'] = $result['voornaam'] . " " . $result['achternaam'];
 			} else {
 				$_SESSION['displaynaam'] = $gebruikersnaam;
 			}

@@ -13,6 +13,12 @@ class Login extends CI_Controller {
 		$this->load->view("login");
 	}
 	
+	public function loguit()
+	{
+		session_destroy();
+		redirect("login");
+	}
+	
 	public function process()
 	{
 		if (isset($_SESSION['username']))

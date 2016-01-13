@@ -92,7 +92,11 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-									<h1>U bent nog niet gekoppeld aan een klas, neem contact op met u docent om dit probleem op te lossen.</h1>
+									<div class="alert alert-danger">
+										<b>Waarschuwing!</b><br>
+										Uw account is nog niet gekoppeld aan een klas, hierdoor hebben wij geen trajecten kunnen ophalen.<br>
+										Vraag aan uw docent om u aan de correcte klas te koppelen.
+									</div>
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->

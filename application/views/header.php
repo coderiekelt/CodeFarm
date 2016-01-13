@@ -14,23 +14,15 @@
 	</head>
 
 	<body class="no-skin">
-		<!-- #section:basics/navbar.layout -->
-		<div id="navbar" class="navbar navbar-default          ace-save-state">
+		<div id="navbar" class="navbar navbar-default ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
-				<!-- #section:basics/sidebar.mobile.toggle -->
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 					<span class="sr-only">Toggle sidebar</span>
-
 					<span class="icon-bar"></span>
-
 					<span class="icon-bar"></span>
-
 					<span class="icon-bar"></span>
 				</button>
-
-				<!-- /section:basics/sidebar.mobile.toggle -->
 				<div class="navbar-header pull-left">
-					<!-- #section:basics/navbar.layout.brand -->
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="fa fa-home"></i>
@@ -59,74 +51,31 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="#">
+									<a href="<?php echo site_url("login/loguit"); ?>">
 										<i class="ace-icon fa fa-power-off"></i>
 										Uitloggen
 									</a>
 								</li>
 							</ul>
 						</li>
-
-						<!-- /section:basics/navbar.user_menu -->
 					</ul>
 				</div>
-
-				<!-- /section:basics/navbar.dropdown -->
-			</div><!-- /.navbar-container -->
+			</div>
 		</div>
-
-		<!-- /section:basics/navbar.layout -->
 		<div class="main-container ace-save-state" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.loadState('main-container')}catch(e){}
 			</script>
-
-			<!-- #section:basics/sidebar -->
-			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+			<div id="sidebar" class="sidebar responsive ace-save-state">
 				<script type="text/javascript">
 					try{ace.settings.loadState('sidebar')}catch(e){}
 				</script>
-
-				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						<button class="btn btn-success">
-							<i class="ace-icon fa fa-signal"></i>
-						</button>
-
-						<button class="btn btn-info">
-							<i class="ace-icon fa fa-pencil"></i>
-						</button>
-
-						<!-- #section:basics/sidebar.layout.shortcuts -->
-						<button class="btn btn-warning">
-							<i class="ace-icon fa fa-users"></i>
-						</button>
-
-						<button class="btn btn-danger">
-							<i class="ace-icon fa fa-cogs"></i>
-						</button>
-
-						<!-- /section:basics/sidebar.layout.shortcuts -->
-					</div>
-
-					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-						<span class="btn btn-success"></span>
-
-						<span class="btn btn-info"></span>
-
-						<span class="btn btn-warning"></span>
-
-						<span class="btn btn-danger"></span>
-					</div>
-				</div><!-- /.sidebar-shortcuts -->
-
 				<ul class="nav nav-list">
 					<li class="">
-						<a href="index.html">
+						<a href="<?php echo site_url("dashboard"); ?>">
 							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> Dashboard </span>
+							<span class="menu-text">Mijn Trajecten</span>
 						</a>
-
 						<b class="arrow"></b>
 					</li>
 

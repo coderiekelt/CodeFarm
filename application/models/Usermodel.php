@@ -126,11 +126,9 @@
 			$result = $query->result();
 			print_r($result);
 			
-			$result = $result[0];
-			
-			if (isset($result['voornaam']))
+			if (isset($result[0]['voornaam']))
 			{
-				$_SESSION['displaynaam'] = $result['voornaam'] . " " . $result['achternaam'];
+				$_SESSION['displaynaam'] = $result[0]['voornaam'] . " " . $result[0]['achternaam'];
 			} else {
 				$_SESSION['displaynaam'] = $gebruikersnaam;
 			}

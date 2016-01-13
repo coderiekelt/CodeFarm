@@ -124,6 +124,7 @@
 			$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => $gebruikersnaam));
 			
 			$result = $query->result();
+			print_r($result);
 			
 			$result = $result[0];
 			

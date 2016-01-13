@@ -33,6 +33,12 @@
 									<div class="alert alert-danger">Dit is geen geldig school e-mail adres.</div>
 									<?php
 								}?>
+								<?php if (isset($error_creds))
+								{
+									?>
+									<div class="alert alert-danger">Ongeldige gebruikersnaam of wachtwoord.</div>
+									<?php
+								}?>
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">

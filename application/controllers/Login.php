@@ -32,8 +32,22 @@ class Login extends CI_Controller {
 				$this->load->view("login", array("error_creds" => true));
 			}
 		}
-		
-		
+		elseif ($split[1] == "fp")
+		{
+			if ($this->usermodel->verify("beheerder", $_POST['username'], $_POST['password']))
+			{
+				$this->usermodel->setupSession("beheerder", $_POST['username']);
+			} else {
+				$this->load->view("login", array("error_creds" => true));
+			}
+		} else {
+			if ($this->usermodel->verify("gast", $_POST['username'], $_POST['password']))
+			{
+				$this->usermodel->setupSession("gast", $_POST['username']);
+			} else {
+				$this->load->view("gast", array("error_creds" => true));
+			}
+		}
 	}
 	
 	public function googledirector()

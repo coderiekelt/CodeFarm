@@ -52,7 +52,7 @@ class Login extends CI_Controller {
 			{
 				$this->usermodel->setupSession("gast", $_POST['username']);
 			} else {
-				$this->load->view("gast", array("error_creds" => true));
+				$this->load->view("login", array("error_creds" => true));
 			}
 		}
 	}

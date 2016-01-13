@@ -7,6 +7,6 @@ class Dashboard extends CI_Controller {
 	{
 		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
 		
-		$this->load->view("header");
+		$this->load->view("dashboard");
 	}
 }

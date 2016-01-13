@@ -12,7 +12,7 @@
 
 		public function getKlas($naam)
 		{
-			$query = $this->db->get_where('klaskoppeling', array('deelnemer' => $gebruikersnaam));
+			$query = $this->db->get_where('klaskoppeling', array('deelnemer' => $naam));
 			$num = $query->num_rows();
 			$result = $query->result();
 			

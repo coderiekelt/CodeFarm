@@ -39,10 +39,10 @@
 											<h4 class="header blue lighter bigger">
 												Bent u een gast? Log hier in.
 											</h4>
-
+			
 											<div class="space-6"></div>
 
-											<form>
+											<?php echo form_open("login/process"); ?>
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">

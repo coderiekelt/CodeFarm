@@ -8,6 +8,34 @@ class Login extends CI_Controller {
 		$this->load->view("login");
 	}
 	
+	public function process()
+	{
+		if (!isset($_POST['username']))
+		{
+			redirect("login/index");
+		}
+		
+		if (!isset($_POST['password']))
+		{
+			redirect("login/index");
+		}
+		
+		$this->load->model("usermodel");
+		
+		$split = explode("_", $_POST['username']);
+		if ($split[1] == "edufp")
+		{
+			if ($this->usermodel->verify("deelnemer", $_POST['username'], $_POST['password']))
+			{
+				$this->usermodel->setupSession("deelnemer", $_POST['username']);
+			} else {
+				$this->load->view("login", array("error_creds" => true));
+			}
+		}
+		
+		
+	}
+	
 	public function googledirector()
 	{
 		if (isset($_SESSION['username'])) { return false; }

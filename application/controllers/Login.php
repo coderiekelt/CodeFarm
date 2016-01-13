@@ -23,7 +23,14 @@ class Login extends CI_Controller {
 		$this->load->model("usermodel");
 		
 		$split = explode("_", $_POST['username']);
-		if ($split[1] == "edufp")
+		$check = false;
+		
+		if (isset($split[1]))
+		{
+			$check = true;
+		}
+		
+		if ($check && $split[1] == "edufp")
 		{
 			if ($this->usermodel->verify("deelnemer", $_POST['username'], $_POST['password']))
 			{
@@ -32,7 +39,7 @@ class Login extends CI_Controller {
 				$this->load->view("login", array("error_creds" => true));
 			}
 		}
-		elseif ($split[1] == "fp")
+		elseif ($check && $split[1] == "fp")
 		{
 			if ($this->usermodel->verify("beheerder", $_POST['username'], $_POST['password']))
 			{

@@ -1,6 +1,5 @@
 <?php 
 	// LAATST BEWERKT DOOR: RIEKELT BRANDS / 1-11-2016 18:05
-	// OP TIJD VAN SCHRIJVEN NIET GETEST DOOR RIEKELT, KAN IMPLODEREN, GEBRUIK OP EIGEN RISICO.
 
 	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
@@ -121,8 +120,11 @@
 		public function setupSession($domein, $gebruikersnaam)
 		{
 			if (!$this->existsInDomein($domein, $gebruikersnaam)) { return false; }
+			
 			$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => $gebruikersnaam));
+			
 			$result = $query->result();
+			
 			$result = $result[0];
 			
 			if (isset($result['voornaam']))

@@ -18,7 +18,7 @@
 			
 			if ($num == 0) { return false; }
 			
-			return $result->klas_naam;
+			return $result[0]->klas_naam;
 		}
 		
 		// BESTAAT GEBRUIKER?

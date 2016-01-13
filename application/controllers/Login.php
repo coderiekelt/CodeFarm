@@ -5,11 +5,21 @@ include(APPPATH."libraries/Google/vendor/autoload.php");
 class Login extends CI_Controller {
 	public function index()
 	{
+		if (isset($_SESSION['username']))
+		{
+			redirect("dashboard");
+		}
+		
 		$this->load->view("login");
 	}
 	
 	public function process()
 	{
+		if (isset($_SESSION['username']))
+		{
+			redirect("dashboard");
+		}
+		
 		if (!isset($_POST['username']))
 		{
 			redirect("login/index");
@@ -62,6 +72,11 @@ class Login extends CI_Controller {
 	
 	public function googledirector()
 	{
+		if (isset($_SESSION['username']))
+		{
+			redirect("dashboard");
+		}
+		
 		if (isset($_SESSION['username'])) { return false; }
 		
 		// DIT MET NIEMAND DELEN
@@ -83,6 +98,11 @@ class Login extends CI_Controller {
 	
 	public function googleworker()
 	{
+		if (isset($_SESSION['username']))
+		{
+			redirect("dashboard");
+		}
+		
 		try {
 		if (isset($_SESSION['username'])) { echo "ha"; return false; }
 		if (!isset($_GET['code'])) { redirect("googledirector");}

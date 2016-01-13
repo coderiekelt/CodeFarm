@@ -10,6 +10,17 @@
                 parent::__construct();
         }
 
+		public function getKlas($naam)
+		{
+			$query = $this->db->get_where('klaskoppeling', array('deelnemer' => $gebruikersnaam));
+			$num = $query->num_rows();
+			$result = $query->result();
+			
+			if ($num == 0) { return false; }
+			
+			return $result[0]['klas_naam'];
+		}
+		
 		// BESTAAT GEBRUIKER?
         public function exists($naam)
         {

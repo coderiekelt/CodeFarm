@@ -12,8 +12,8 @@ class Dashboard extends CI_Controller {
 		if (!$this->usermodel->getklas($_SESSION['usernaam']))
 		{
 			$this->load->view("dashboard", array("koppelfout" => true));
+		} else {
+			$this->load->view("dashboard", array("klas" => $this->usermodel->getklas($_SESSION['usernaam'])));
 		}
-		
-		$this->load->view("dashboard");
 	}
 }

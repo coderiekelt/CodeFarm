@@ -18,4 +18,9 @@ class Debug extends CI_Controller {
 	{
 		$this->load->view("header");
 	}
+	
+	public function wachtwoord()
+	{
+		echo hash("sha256", "Brands123");
+	}
 }

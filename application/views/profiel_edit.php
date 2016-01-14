@@ -36,7 +36,30 @@
 								<input type="text" class="frm-control" name="voornaam" style="width: 100%" /><br>
 								<b>Uw achternaam:</b><br>
 								<input type="text" class="frm-control" name="achternaam" style="width: 100%" /><br>
-								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn persoonlijke detials opslaan</button>
+								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn persoonlijke details opslaan</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="widget-box" id="widget-box-2">
+					<div class="widget-header">
+						<h5 class="widget-title">Wachtwoord</h5>
+						<div class="widget-toolbar">
+							<a href="#" data-action="collapse">
+								<i class="ace-icon fa fa-chevron-up"></i>
+							</a>
+						</div>
+					</div>
+					<div class="widget-body">
+						<div class="widget-main">
+							<?php echo form_open("profiel/update_personal"); ?>
+								<b>Oude wachtwoord:</b><br>
+								<input type="password" class="frm-control" name="oldpassword" style="width: 100%" /><br>
+								<b>Gewenst wachtwoord:</b><br>
+								<input type="password" class="frm-control" name="newpassword" style="width: 100%" /><br>
+								<b>Herhaal gewenst wachtwoord:</b><br>
+								<input type="password" class="frm-control" name="reppassword" style="width: 100%" /><br>
+								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn wachtwoord veranderen</button>
 							</form>
 						</div>
 					</div>

@@ -18,7 +18,7 @@
 				<div class="input-group">
 					<input class="form-control input-mask-date" type="text" id="form-field-mask-1" />
 					<span class="input-group-btn">
-						<button class="btn btn-sm btn-default" type="button">
+						<button class="btn btn-sm btn-success" type="button">
 							<i class="ace-icon fa fa-plus bigger-110"></i>
 						</button>
 					</span>

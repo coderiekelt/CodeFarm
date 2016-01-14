@@ -5,7 +5,7 @@
 		Uw account is nog niet gekoppeld aan een klas, hierdoor hebben wij geen trajecten kunnen ophalen.<br>
 		Vraag aan uw docent om u aan de correcte klas te koppelen.
 	</div>
-<?php } else { ?>
+<?php } elseif ($_SESSION['domein'] != "beheerder") { ?>
 	<h6>Trajecten voor <?php echo $klas; ?></h6>
 <?php } ?>
 <?php $this->load->view("footer"); ?>

@@ -34,4 +34,27 @@ class Profiel extends CI_Controller {
 			$this->load->view("profiel_main", array("gebruiker" => $userdata));
 		}
 	}
+	
+	public function edit ()
+	{
+		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
+		
+		$this->load->model("gebruiker");
+		
+		$gebruikersnaam = $_SESSION['usernaam'];
+		
+		if ($this->gebruiker->exists($gebruikersnaam))
+		{
+			$userdata = array();
+			
+			$email = $this->gebruiker->get($gebruikersnaam, "email");
+			$userdata['avatar'] = $this->gebruiker->get_gravatar($email, 320);
+			$userdata["gebruikersnaam"] = $this->gebruiker->get($gebruikersnaam, "gebruikersnaam");
+			$userdata["voornaam"] = $this->gebruiker->get($gebruikersnaam, "voornaam");
+			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");
+			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
+			
+			$this->load->view("profiel_edit", array("gebruiker" => $userdata));
+		}
+	}
 }

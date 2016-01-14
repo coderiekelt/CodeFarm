@@ -99,10 +99,10 @@ class Profiel extends CI_Controller {
 			
 			if ($resultaat = "succes")
 			{
-				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "succes" => $bericht));
+				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "succes" => "Uw gegevens zijn succesvol bijgewerkt."));
 			} elseif ($resultaat = "fout")
 			{
-				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "fout" => $bericht));
+				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "fout" => "Uw wachtwoorden kwamen niet overeen of het oude wachtwoord was niet correct."));
 			} else {
 				$this->load->view("profiel_edit", array("gebruiker" => $userdata));
 			}

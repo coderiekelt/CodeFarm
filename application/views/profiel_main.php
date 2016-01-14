@@ -54,44 +54,32 @@
 								</div>
 							</div>				
 						</div>
-														</div><!-- /.col -->
-													</div><!-- /.row -->
-
-													<div class="space-20"></div>
-
-													<div class="row">
-														<div class="col-xs-12 col-sm-6">
-															<div class="widget-box transparent">
-																<div class="widget-header widget-header-small">
-																	<h4 class="widget-title smaller">
-																		<i class="ace-icon fa fa-check-square-o bigger-110"></i>
-																		Little About Me
-																	</h4>
-																</div>
-
-																<div class="widget-body">
-																	<div class="widget-main">
-																		<p>
-																			My job is mostly lorem ipsuming and dolor sit ameting as long as consectetur adipiscing elit.
-																		</p>
-																		<p>
-																			Sometimes quisque commodo massa gets in the way and sed ipsum porttitor facilisis.
-																		</p>
-																		<p>
-																			The best thing about my job is that vestibulum id ligula porta felis euismod and nullam quis risus eget urna mollis ornare.
-																		</p>
-																		<p>
-																			Thanks for visiting my profile.
-																		</p>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-xs-12 col-sm-6">
-															<div class="widget-box transparent">
-																<div class="widget-header widget-header-small header-color-blue2">
-																	<h4 class="widget-title smaller">
+					</div>
+				</div>
+				<div class="space-20"></div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<div class="widget-box transparent">
+							<div class="widget-header widget-header-small">
+								<h4 class="widget-title smaller">
+									<i class="ace-icon fa fa-check-square-o bigger-110"></i>
+									Over mij
+								</h4>
+							</div>
+							<div class="widget-body">
+								<div class="widget-main">
+								<?php if (!isset($gebruiker['over']) || $gebruiker['over'] == "")
+								{
+									echo "Deze gebruiker heeft nog geen over mij ingevuld.";
+								} ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<div class="widget-box transparent">
+							<div class="widget-header widget-header-small header-color-blue2">
+								<h4 class="widget-title smaller">
 																		<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
 																		My Skills
 																	</h4>

@@ -30,12 +30,6 @@
 
 						<div class="profile-user-info">
 							<div class="profile-info-row">
-								<div class="profile-info-name"> Gebruikersnaam </div>
-								<div class="profile-info-value">
-									<span><?php echo $gebruiker['gebruikersnaam']; ?></span>
-								</div>
-							</div>
-							<div class="profile-info-row">
 								<div class="profile-info-name"> Voornaam </div>
 								<div class="profile-info-value">
 									<span><?php echo $gebruiker['voornaam']; ?></span>

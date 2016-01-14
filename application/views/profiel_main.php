@@ -52,7 +52,13 @@
 								<div class="profile-info-value">
 									<span><?php echo $gebruiker['email']; ?></span>
 								</div>
-							</div>				
+							</div>
+							<div class="profile-info-row">
+								<div class="profile-info-name"> Datum aangemeld </div>
+								<div class="profile-info-value">
+									<span><?php echo $gebruiker['aangemeld']; ?></span>
+								</div>
+							</div>							
 						</div>
 					</div>
 				</div>

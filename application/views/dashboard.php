@@ -19,7 +19,7 @@
 			</a>
 			<a href="<?php echo site_url("dashboard/addtraject"); ?>">
 				<button type="button" class="btn btn-success">
-					<i class="ace-icon fa fa-plus"></i> 
+				<i class="ace-icon fa fa-plus"></i> 
 					Traject toevoegen
 				</button>
 			</a>

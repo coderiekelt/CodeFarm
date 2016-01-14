@@ -18,4 +18,9 @@ class Dashboard extends CI_Controller {
 			$this->load->view("dashboard", array("klas" => $this->gebruiker->getklas($_SESSION['usernaam'])));
 		}
 	}
+	
+	public function addgroup($process = "false")
+	{
+		$this->load->view("dash_admin_group");
+	}
 }

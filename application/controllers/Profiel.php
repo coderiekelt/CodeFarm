@@ -24,6 +24,7 @@ class Profiel extends CI_Controller {
 			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");
 			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
 			$userdata["aangemeld"] = $this->gebruiker->get($gebruikersnaam, "datum_aangemeld");
+			$userdata["laatsgezien"] = $this->gebruiker->get($gebruikersnaam, "datum_laatsgezien");
 			
 			$this->load->view("profiel_main", array("gebruiker" => $userdata));
 		}

@@ -54,9 +54,15 @@
 								</div>
 							</div>
 							<div class="profile-info-row">
-								<div class="profile-info-name"> Datum aangemeld </div>
+								<div class="profile-info-name"> Registratie datum </div>
 								<div class="profile-info-value">
 									<span><?php echo $gebruiker['aangemeld']; ?></span>
+								</div>
+							</div>	
+							<div class="profile-info-row">
+								<div class="profile-info-name"> Laatst gezien </div>
+								<div class="profile-info-value">
+									<span><?php echo $gebruiker['laatsgezien']; ?></span>
 								</div>
 							</div>							
 						</div>

@@ -1,4 +1,4 @@
-<?php $this->load->view("header", array("title" => "Mijn Profiel" ?>
+<?php $this->load->view("header", array("title" => "Mijn Profiel" )) ?>
 <div id="user-profile-2" class="user-profile">
 	<div class="tabbable">
 		<ul class="nav nav-tabs padding-18">

@@ -155,40 +155,40 @@
 		}
 		
 		// SETS
-    public function Set($id, $key, $value)
-    {
-        $CI =& get_instance();
+		public function Set($id, $key, $value)
+		{
+			$CI =& get_instance();
 
-        $CI->db->set($key, $value);
-        $CI->db->where('gebruikersnaam', $id);
-        $CI->db->update('gebruiker');
-    }
+			$CI->db->set($key, $value);
+			$CI->db->where('gebruikersnaam', $id);
+			$CI->db->update('gebruiker');
+		}
 
-    // GETS
-    public function Get($id, $key)
-    {
-        $CI =& get_instance();
-        $query = $CI->db->get_where('gebruiker', array('gebruikersnaam' => $id));
-        $row = $query->row_array();
-
-        if (isset($row))
-        {
-            return $row[$key];
-        } else {
-            return false;
-        }
-    }
+		// GETS
+		public function Get($id, $key)
+		{
+			$CI =& get_instance();
+			$query = $CI->db->get_where('gebruiker', array('gebruikersnaam' => $id));
+			$row = $query->row_array();
 	
-	public function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
-    $url = 'http://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=$s&d=$d&r=$r";
-    if ( $img ) {
-        $url = '<img src="' . $url . '"';
-        foreach ( $atts as $key => $val )
-            $url .= ' ' . $key . '="' . $val . '"';
-        $url .= ' />';
-    }
-    return $url;
-}
+			if (isset($row))
+			{
+				return $row[$key];
+			} else {
+				return false;
+			}
+		}
+	
+		public function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+			$url = 'http://www.gravatar.com/avatar/';
+			$url .= md5( strtolower( trim( $email ) ) );
+			$url .= "?s=$s&d=$d&r=$r";
+			if ( $img ) {
+			$url = '<img src="' . $url . '"';
+			foreach ( $atts as $key => $val )
+				$url .= ' ' . $key . '="' . $val . '"';
+				$url .= ' />';
+			}
+			return $url;
+		}
 	}

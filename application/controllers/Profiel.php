@@ -7,7 +7,7 @@ class Profiel extends CI_Controller {
 	{
 		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
 		
-		$this->load->model("usermodel");
+		$this->load->model("gebruiker");
 		
 		$this->load->view("profiel_main");
 	}

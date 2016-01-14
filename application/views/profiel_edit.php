@@ -52,7 +52,7 @@
 					</div>
 					<div class="widget-body">
 						<div class="widget-main">
-							<?php echo form_open("profiel/update_personal"); ?>
+							<?php echo form_open("profiel/update_password"); ?>
 								<b>Oude wachtwoord:</b><br>
 								<input type="password" class="frm-control" name="oldpassword" style="width: 100%" /><br>
 								<b>Gewenst wachtwoord:</b><br>
@@ -60,6 +60,25 @@
 								<b>Herhaal gewenst wachtwoord:</b><br>
 								<input type="password" class="frm-control" name="reppassword" style="width: 100%" /><br>
 								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn wachtwoord veranderen</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="widget-box" id="widget-box-3">
+					<div class="widget-header">
+						<h5 class="widget-title">Extra informatie</h5>
+						<div class="widget-toolbar">
+							<a href="#" data-action="collapse">
+								<i class="ace-icon fa fa-chevron-up"></i>
+							</a>
+						</div>
+					</div>
+					<div class="widget-body">
+						<div class="widget-main">
+							<?php echo form_open("profiel/update_about"); ?>
+								<b>Over mij:</b><br>
+								<textarea name="overmij"></textarea><br>
+								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn extra informatie opslaan</button>
 							</form>
 						</div>
 					</div>

@@ -2,7 +2,7 @@
 <div id="user-profile-2" class="user-profile">
 	<div class="tabbable">
 		<ul class="nav nav-tabs padding-18">
-			<li class="active">
+			<li>
 				<a href="<?php echo site_url("profiel/index"); ?>">
 					<i class="green ace-icon fa fa-user bigger-120"></i>
 					Profiel

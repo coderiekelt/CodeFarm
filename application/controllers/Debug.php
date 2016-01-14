@@ -23,4 +23,12 @@ class Debug extends CI_Controller {
 	{
 		echo hash("sha256", "Deado651");
 	}
+	
+	public function ojee()
+	{
+		$query = $this->db->get_where('gebruiker', array('gebruikersnaam' => "199439_edufp", 'wachtwoord' => hash("sha256", "Deado651")));     
+		$num = $query->num_rows();
+		
+		echo $num;
+	}
 }

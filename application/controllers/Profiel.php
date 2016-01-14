@@ -77,7 +77,7 @@ class Profiel extends CI_Controller {
 		}
 	}
 	
-	public function edit ($resultaat = "geen", $bericht = "nee")
+	public function edit ($resultaat = "geen")
 	{
 		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
 		
@@ -97,10 +97,10 @@ class Profiel extends CI_Controller {
 			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
 			$userdata["over"] = $this->gebruiker->get($gebruikersnaam, "overmij");
 			
-			if ($resultaat = "succes")
+			if ($resultaat == "succes")
 			{
 				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "succes" => "Uw gegevens zijn succesvol bijgewerkt."));
-			} elseif ($resultaat = "fout")
+			} elseif ($resultaat == "fout")
 			{
 				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "fout" => "Uw wachtwoorden kwamen niet overeen of het oude wachtwoord was niet correct."));
 			} else {

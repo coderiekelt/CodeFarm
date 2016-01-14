@@ -20,6 +20,18 @@
 		</ul>
 		<div class="tab-content no-border padding-24">
 			<div id="home" class="tab-pane in active">
+				<?php if (isset($fout))
+				{
+					?>
+						<div class="alert alert-danger"><?php echo $fout; ?></div>
+					<?php
+				} ?>
+				<?php if (isset($succes))
+				{
+					?>
+						<div class="alert alert-success"><?php echo $succes; ?></div>
+					<?php
+				} ?>
 				<div class="widget-box" id="widget-box-1">
 					<div class="widget-header">
 						<h5 class="widget-title">Persoonlijke details</h5>

@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-3 center">
 						<span class="profile-picture">
-							<img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="dist/avatars/profile-pic.jpg" />
+							<img class="editable img-responsive" alt="<?php echo $gebruiker['voornaam']; ?>'s Avatar" id="avatar2" src="<?php echo $gebruiker['avatar']; ?>" />
 						</span>
 					</div>
 					<div class="col-xs-12 col-sm-9">

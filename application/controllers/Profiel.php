@@ -10,6 +10,8 @@ class Profiel extends CI_Controller {
 		redirect("profiel/view/" . $_SESSION['usernaam']);
 	}
 	
+	
+	
 	public function view ($gebruikersnaam)
 	{
 		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
@@ -19,6 +21,9 @@ class Profiel extends CI_Controller {
 		if ($this->gebruiker->exists($gebruikersnaam))
 		{
 			$userdata = array();
+			
+			
+			$userdata['avatar'] = $this->gebruiker->get_gravatar($this->gebruiker->get($gebruiker, "email"));
 			$userdata["gebruikersnaam"] = $this->gebruiker->get($gebruikersnaam, "gebruikersnaam");
 			$userdata["voornaam"] = $this->gebruiker->get($gebruikersnaam, "voornaam");
 			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");

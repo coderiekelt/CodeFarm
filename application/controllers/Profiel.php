@@ -23,7 +23,7 @@ class Profiel extends CI_Controller {
 			$userdata = array();
 			
 			$email = $this->gebruiker->get($gebruikersnaam, "email");
-			$userdata['avatar'] = $this->gebruiker->get_gravatar($email);
+			$userdata['avatar'] = $this->gebruiker->get_gravatar($email, 160);
 			$userdata["gebruikersnaam"] = $this->gebruiker->get($gebruikersnaam, "gebruikersnaam");
 			$userdata["voornaam"] = $this->gebruiker->get($gebruikersnaam, "voornaam");
 			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");

@@ -108,6 +108,7 @@
 				$num = $query->num_rows();
 				
 				if ($num == 0) { return false ;}
+				
 				return true;
 			} else {
 				return false;

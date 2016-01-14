@@ -56,7 +56,7 @@ class Profiel extends CI_Controller {
 			
 			if ($this->gebruiker->verify($_SESSION['domein'], $_SESSION['usernaam'], $_POST['oldpassword']))
 			{
-				if ($_POST['newpassword'] == $_POST['oldpassword'])
+				if ($_POST['newpassword'] == $_POST['reppassword'])
 				{
 					$this->gebruiker->set($_SESSION['usernaam'], "wachtwoord", hash("sha256", $_POST['newpassword']));
 					$this->load->view("profiel_edit", array("gebruiker" => $userdata, "succes" => "Uw wachtwoord is bijgewerkt!"));

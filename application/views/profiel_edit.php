@@ -4,7 +4,7 @@
 		<ul class="nav nav-tabs padding-18">
 			<li>
 				<a href="<?php echo site_url("profiel/index"); ?>">
-					<i class="green ace-icon fa fa-user bigger-120"></i>
+					<i class="ace-icon fa fa-user bigger-120"></i>
 					Profiel
 				</a>
 			</li>
@@ -12,7 +12,7 @@
 			{ ?>
 			<li class="active">
 				<a href="<?php echo site_url("profiel/edit"); ?>">
-					<i class="orange ace-icon fa fa-edit bigger-120"></i>
+					<i class="ace-icon fa fa-edit bigger-120"></i>
 					Aanpassen
 				</a>
 			</li>
@@ -31,6 +31,13 @@
 					</div>
 					<div class="widget-body">
 						<div class="widget-main">
+							<?php echo form_open("profiel/update_personal"); ?>
+								<b>Uw voornaam:</b><br>
+								<input type="text" class="frm-control" name="voornaam" style="width: 100%" /><br>
+								<b>Uw achternaam:</b><br>
+								<input type="text" class="frm-control" name="achternaam" style="width: 100%" /><br>
+								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn persoonlijke detials opslaan</button>
+							</form>
 						</div>
 					</div>
 				</div>

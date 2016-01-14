@@ -11,7 +11,7 @@
 			<?php if ($gebruiker['gebruikersnaam'] == $_SESSION['usernaam'])
 			{ ?>
 			<li>
-				<a data-toggle="tab" href="#aanpassen">
+				<a href="<?php site_url("profiel/edit"); ?>">
 					<i class="orange ace-icon fa fa-edit bigger-120"></i>
 					Aanpassen
 				</a>
@@ -105,10 +105,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="aanpassen" class="tab-pane in active">
-			hooi
-		</div>					
+		</div>			
 	</div>
 </div>
 <?php $this->load->view("footer"); ?>

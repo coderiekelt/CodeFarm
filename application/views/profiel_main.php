@@ -12,7 +12,7 @@
 			{ ?>
 			<li>
 				<a data-toggle="tab" href="#feed">
-					<i class="orange ace-icon fa fa-rss bigger-120"></i>
+					<i class="orange ace-icon fa fa-edit bigger-120"></i>
 					Aanpassen
 				</a>
 			</li>

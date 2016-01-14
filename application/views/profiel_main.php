@@ -80,7 +80,9 @@
 								<?php if (!isset($gebruiker['over']) || $gebruiker['over'] == "")
 								{
 									echo '<div class="alert alert-danger">Deze gebruiker heeft nog geen over mij ingevuld.</div>';
-								} ?>
+								} else {
+									echo $gebruiker['over'];
+								}?>
 								</div>
 							</div>
 						</div>

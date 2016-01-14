@@ -45,6 +45,7 @@
 		<script src="<?php echo asset_url(); ?>js/ace/ace.settings-skin.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/ace.widget-on-reload.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/ace.searchbox-autocomplete.js"></script>
+		<script src="dist/js/bootstrap-wysiwyg.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 

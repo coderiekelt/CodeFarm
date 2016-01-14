@@ -18,7 +18,7 @@
 				<b>Uw achternaam:</b><br>
 				<input type="text" class="frm-control" style="width:100%" name="achternaam" />
 				<b>Uw e-mail adres:</b><br>
-				<input type="text" class="frm-control" style="width:100%" name="email" /><br>
+				<input type="text" class="frm-control" style="width:100%" name="email" /><br><br>
 				<button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn instellingen opslaan</button>
 			</form>
 		</div>

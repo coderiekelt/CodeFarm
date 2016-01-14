@@ -59,12 +59,12 @@ class Profiel extends CI_Controller {
 				if ($_POST['newpassword'] == $_POST['oldpassword'])
 				{
 					$this->gebruiker->set($_SESSION['usernaam'], "wachtwoord", hash("sha256", $_POST['newpassword']));
-					$this->load->view("profile_edit", array("gebruiker" => $userdata, "succes" => "Uw wachtwoord is bijgewerkt!"));
+					$this->load->view("profiel_edit", array("gebruiker" => $userdata, "succes" => "Uw wachtwoord is bijgewerkt!"));
 				} else {
-					$this->load->view("profile_edit", array("gebruiker" => $userdata, "fout" => "De nieuwe wachtwoorden kwamen niet overeen."));
+					$this->load->view("profiel_edit", array("gebruiker" => $userdata, "fout" => "De nieuwe wachtwoorden kwamen niet overeen."));
 				}
 			} else {
-				$this->load->view("profile_edit", array("gebruiker" => $userdata, "fout" => "Uw oude wachtwoord klopt niet."));
+				$this->load->view("profiel_edit", array("gebruiker" => $userdata, "fout" => "Uw oude wachtwoord klopt niet."));
 			}
 		}
 	}

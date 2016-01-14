@@ -53,6 +53,7 @@ class Profiel extends CI_Controller {
 			$userdata["voornaam"] = $this->gebruiker->get($gebruikersnaam, "voornaam");
 			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");
 			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
+			$userdata["over"] = $this->gebruiker->get($gebruikersnaam, "overmij");
 			
 			$this->load->view("profiel_edit", array("gebruiker" => $userdata));
 		}

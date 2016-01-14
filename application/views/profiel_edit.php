@@ -33,9 +33,9 @@
 						<div class="widget-main">
 							<?php echo form_open("profiel/update_personal"); ?>
 								<b>Uw voornaam:</b><br>
-								<input type="text" class="frm-control" name="voornaam" style="width: 100%" /><br>
+								<input type="text" class="frm-control" name="voornaam" style="width: 100%" value="<?php echo $gebruiker['voornaam']; ?>"/><br>
 								<b>Uw achternaam:</b><br>
-								<input type="text" class="frm-control" name="achternaam" style="width: 100%" /><br>
+								<input type="text" class="frm-control" name="achternaam" style="width: 100%" value="<?php echo $gebruiker['achternaam']; ?>"/><br>
 								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn persoonlijke details opslaan</button>
 							</form>
 						</div>
@@ -77,7 +77,7 @@
 						<div class="widget-main">
 							<?php echo form_open("profiel/update_about"); ?>
 								<b>Over mij:</b><br>
-								<textarea style="width: 100%" name="overmij"></textarea><br>
+								<textarea style="width: 100%" name="overmij"><?php echo $gebruiker['over']; ?></textarea><br>
 								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn extra informatie opslaan</button>
 							</form>
 						</div>

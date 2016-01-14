@@ -11,15 +11,15 @@
 	</div>
 	<div class="widget-body">
 		<div class="widget-main">
-			Alle informatie die u hier invult is alleen voor u en uw docent zichtbaar.
+			Alle informatie die u hier invult is alleen voor u en uw docent zichtbaar.<br>
 			<?php form_open("profiel/update"); ?>
 				<b>Uw voornaam:</b><br>
 				<input type="text" class="frm-control" style="width:100%" name="voornaam" />
 				<b>Uw achternaam:</b><br>
 				<input type="text" class="frm-control" style="width:100%" name="achternaam" />
 				<b>Uw e-mail adres:</b><br>
-				<input type="text" class="frm-control" style="width:100%" name="email" />
-				<button type="submit" class="btn btn-success">Mijn instellingen opslaan</button>
+				<input type="text" class="frm-control" style="width:100%" name="email" /><br>
+				<button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn instellingen opslaan</button>
 			</form>
 		</div>
 	</div>

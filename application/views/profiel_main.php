@@ -1,4 +1,4 @@
-<?php $this->load->view("header", array("title" => "Mijn Profiel")); ?>
+<?php $this->load->view("header", array("title" => $gebruiker['voornaam'] . " " . $gebruiker['achternaam'];)); ?>
 <span style="font-size: 16pt;">Mijn Profiel</span>
 <div id="user-profile-2" class="user-profile">
 	<div class="tabbable">
@@ -26,7 +26,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-9">
 						<h4 class="blue">
-							<span class="middle">Alex M. Doe</span>
+							<span class="middle"><?php echo $gebruiker['voornaam'] . " " . $gebruiker['achternaam']; ?></span>
 						</h4>
 
 						<div class="profile-user-info">

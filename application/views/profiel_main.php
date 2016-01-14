@@ -8,12 +8,15 @@
 					Profiel
 				</a>
 			</li>
+			<?php if ($gebruiker['gebruikersnaam'] == $_SESSION['usernaam'])
+			{ ?>
 			<li>
 				<a data-toggle="tab" href="#feed">
 					<i class="orange ace-icon fa fa-rss bigger-120"></i>
-					Activiteiten
+					Aanpassen
 				</a>
 			</li>
+			<?php } ?>
 		</ul>
 		<div class="tab-content no-border padding-24">
 			<div id="home" class="tab-pane in active">

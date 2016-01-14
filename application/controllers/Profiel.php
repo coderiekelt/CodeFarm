@@ -11,6 +11,14 @@ class Profiel extends CI_Controller {
 	}
 	
 	
+	public function update_about ()
+	{
+		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
+		
+		$this->load->model("gebruiker");
+		$this->gebruiker->set($gebruiker, "overmij", $_POST['overmij']);
+		redirect("profiel/edit");
+	}
 	
 	public function view ($gebruikersnaam)
 	{
@@ -30,6 +38,7 @@ class Profiel extends CI_Controller {
 			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
 			$userdata["aangemeld"] = $this->gebruiker->get($gebruikersnaam, "datum_aangemeld");
 			$userdata["laatsgezien"] = $this->gebruiker->get($gebruikersnaam, "datum_laatsgezien");
+			$userdata["over"] = $this->gebruiker->get($gebruikersnaam, "overmij");
 			
 			$this->load->view("profiel_main", array("gebruiker" => $userdata));
 		}

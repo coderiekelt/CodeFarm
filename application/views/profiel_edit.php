@@ -77,7 +77,7 @@
 						<div class="widget-main">
 							<?php echo form_open("profiel/update_about"); ?>
 								<b>Over mij:</b><br>
-								<textarea name="overmij"></textarea><br>
+								<textarea class="wysiwyg-editor" name="overmij"></textarea><br>
 								<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Mijn extra informatie opslaan</button>
 							</form>
 						</div>

@@ -19,7 +19,38 @@ class Profiel extends CI_Controller {
 		
 		$this->gebruiker->set($_SESSION['usernaam'], "overmij", $_POST['overmij']);
 		
-		redirect("profiel/edit");
+		redirect("profiel/edit/succes/Uw gegevens zijn bijgewerkt!");
+	}
+	
+	public function update_personal ()
+	{
+		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
+		
+		$this->load->model("gebruiker");
+		
+		$this->gebruiker->set($_SESSION['usernaam'], "voornaam", $_POST['voornaam']);
+		$this->gebruiker->set($_SESSION['usernaam'], "achternaam", $_POST['achternaam']);
+		
+		redirect("profiel/edit/succes/Uw gegevens zijn bijgewerkt!");
+	}
+	
+	public function update_password ()
+	{
+		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
+		
+		$this->load->model("gebruiker");
+		
+		if ($this->gebruiker->verify($_SESSION['domein'], $_SESSION['usernaam'], $_POST['oldpassword']))
+		{
+			if ($_POST['newpassword'] == $_POST['oldpassword'])
+			{
+				$this->gebruiker->set($_SESSION['usernaam'], "wachtwoord", hash("sha256", $_POST['newpassword']));
+			} else {
+				redirect("profiel/edit/fout/Uw nieuwe wachtwoorden kwamen niet overeen.");
+			}
+		} else {
+			redirect("profiel/edit/fout/Uw oude wachtwoord is niet correct.");
+		}
 	}
 	
 	public function view ($gebruikersnaam)

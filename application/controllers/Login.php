@@ -36,7 +36,7 @@ class Login extends CI_Controller {
 			redirect("login/index");
 		}
 		
-		$this->load->model("usermodel");
+		$this->load->model("gebruiker");
 		
 		$split = explode("_", $_POST['username']);
 		$check = false;
@@ -48,9 +48,9 @@ class Login extends CI_Controller {
 		
 		if ($check && $split[1] == "edufp")
 		{
-			if ($this->usermodel->verify("deelnemer", $_POST['username'], $_POST['password']))
+			if ($this->gebruiker->verify("deelnemer", $_POST['username'], $_POST['password']))
 			{
-				$this->usermodel->setupSession("deelnemer", $_POST['username']);
+				$this->gebruiker->setupSession("deelnemer", $_POST['username']);
 				redirect("dashboard");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
@@ -58,17 +58,17 @@ class Login extends CI_Controller {
 		}
 		elseif ($check && $split[1] == "fp")
 		{
-			if ($this->usermodel->verify("beheerder", $_POST['username'], $_POST['password']))
+			if ($this->gebruiker->verify("beheerder", $_POST['username'], $_POST['password']))
 			{
-				$this->usermodel->setupSession("beheerder", $_POST['username']);
+				$this->gebruiker->setupSession("beheerder", $_POST['username']);
 				redirect("dashboard");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}
 		} else {
-			if ($this->usermodel->verify("gast", $_POST['username'], $_POST['password']))
+			if ($this->gebruiker->verify("gast", $_POST['username'], $_POST['password']))
 			{
-				$this->usermodel->setupSession("gast", $_POST['username']);
+				$this->gebruiker->setupSession("gast", $_POST['username']);
 				redirect("dashboard");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
@@ -137,21 +137,21 @@ class Login extends CI_Controller {
 		
 		$split = explode("@", $email);
 		
-		$this->load->model("usermodel");
+		$this->load->model("gebruiker");
 		
 		if ($split[1] == "edu.rocfriesepoort.nl") 
 		{
-			if ($this->usermodel->verifyFe("deelnemer", $split[0] . "_edufp"))
+			if ($this->gebruiker->verifyFe("deelnemer", $split[0] . "_edufp"))
 			{
-				$this->usermodel->setupSession("deelnemer", $split[0] . "_edufp");
+				$this->gebruiker->setupSession("deelnemer", $split[0] . "_edufp");
 				echo "eeedu";
 				redirect("dashboard");
 			}
 		} elseif ($split[1] == "rocfriesepoort.nl") 
 		{
-			if ($this->usermodel->verifyFe("beheerder", $split[0] . "_fp"))
+			if ($this->gebruiker->verifyFe("beheerder", $split[0] . "_fp"))
 			{
-				$this->usermodel->setupSession("beheerder", $split[0] . "_fp");
+				$this->gebruiker->setupSession("beheerder", $split[0] . "_fp");
 				redirect("dashboard");
 			}
 		} else {

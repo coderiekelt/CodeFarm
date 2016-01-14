@@ -11,7 +11,7 @@
 			<?php if ($gebruiker['gebruikersnaam'] == $_SESSION['usernaam'])
 			{ ?>
 			<li>
-				<a href="<?php site_url("profiel/edit"); ?>">
+				<a href="<?php echo site_url("profiel/edit"); ?>">
 					<i class="orange ace-icon fa fa-edit bigger-120"></i>
 					Aanpassen
 				</a>

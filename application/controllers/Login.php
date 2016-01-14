@@ -48,6 +48,8 @@ class Login extends CI_Controller {
 		
 		if ($check && $split[1] == "edufp")
 		{
+			echo "herkend als edufp";
+			exit;
 			if ($this->gebruiker->verify("deelnemer", $_POST['username'], $_POST['password']))
 			{
 				$this->gebruiker->setupSession("deelnemer", $_POST['username']);

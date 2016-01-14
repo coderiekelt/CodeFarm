@@ -153,4 +153,29 @@
 		{
 			session_destroy();
 		}
+		
+		// SETS
+    public function Set($id, $key, $value)
+    {
+        $CI =& get_instance();
+
+        $CI->db->set($key, $value);
+        $CI->db->where('gebruikersnaam', $id);
+        $CI->db->update('gebruiker');
+    }
+
+    // GETS
+    public function Get($id, $key)
+    {
+        $CI =& get_instance();
+        $query = $CI->db->get_where('gebruiker', array('gebruikersnaam' => $id));
+        $row = $query->row_array();
+
+        if (isset($row))
+        {
+            return $row[$key];
+        } else {
+            return false;
+        }
+    }
 	}

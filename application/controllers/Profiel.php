@@ -7,8 +7,24 @@ class Profiel extends CI_Controller {
 	{
 		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
 		
+		redirect("profiel/view/" . $_SESSION['usernaam']);
+	}
+	
+	public function view ($gebruikersnaam)
+	{
+		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
+		
 		$this->load->model("gebruiker");
 		
-		$this->load->view("profiel_main");
+		if ($this->gebruiker->exists($gebruikersnaam))
+		{
+			$userdata = array();
+			$userdata["gebruikersnaam"] = $this->gebruiker->get($gebruikersnaam, "gebruikersnaam");
+			$userdata["voornaam"] = $this->gebruiker->get($gebruikersnaam, "voornaam");
+			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");
+			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
+			
+			$this->load->view("profiel_main", array("gebruiker" => $userdata));
+		}
 	}
 }

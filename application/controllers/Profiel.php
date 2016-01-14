@@ -19,7 +19,7 @@ class Profiel extends CI_Controller {
 		
 		$this->gebruiker->set($_SESSION['usernaam'], "overmij", $_POST['overmij']);
 		
-		redirect("profiel/edit/succes/Uw gegevens zijn bijgewerkt!");
+		redirect("profiel/edit/succes/Uw gegevens zijn bijgewerkt");
 	}
 	
 	public function update_personal ()
@@ -31,7 +31,7 @@ class Profiel extends CI_Controller {
 		$this->gebruiker->set($_SESSION['usernaam'], "voornaam", $_POST['voornaam']);
 		$this->gebruiker->set($_SESSION['usernaam'], "achternaam", $_POST['achternaam']);
 		
-		redirect("profiel/edit/succes/Uw gegevens zijn bijgewerkt!");
+		redirect("profiel/edit/succes/Uw gegevens zijn bijgewerkt");
 	}
 	
 	public function update_password ()
@@ -46,10 +46,10 @@ class Profiel extends CI_Controller {
 			{
 				$this->gebruiker->set($_SESSION['usernaam'], "wachtwoord", hash("sha256", $_POST['newpassword']));
 			} else {
-				redirect("profiel/edit/fout/Uw nieuwe wachtwoorden kwamen niet overeen.");
+				redirect("profiel/edit/fout/Uw nieuwe wachtwoorden kwamen niet overeen");
 			}
 		} else {
-			redirect("profiel/edit/fout/Uw oude wachtwoord is niet correct.");
+			redirect("profiel/edit/fout/Uw oude wachtwoord is niet correct");
 		}
 	}
 	

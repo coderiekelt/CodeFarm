@@ -11,7 +11,7 @@
 			<?php if ($gebruiker['gebruikersnaam'] == $_SESSION['usernaam'])
 			{ ?>
 			<li>
-				<a data-toggle="tab" href="#feed">
+				<a data-toggle="tab" href="#aanpassen">
 					<i class="orange ace-icon fa fa-edit bigger-120"></i>
 					Aanpassen
 				</a>
@@ -105,7 +105,10 @@
 					</div>
 				</div>
 			</div>
-		</div><!-- /#home -->										
+		</div>
+		<div id="aanpassen" class="tab-pane in active">
+			hooi
+		</div>					
 	</div>
 </div>
 <?php $this->load->view("footer"); ?>

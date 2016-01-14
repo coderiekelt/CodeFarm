@@ -39,7 +39,9 @@
 					<ul class="nav ace-nav">
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<?php echo asset_url(); ?>avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="<?php $this->load->model("gebruiker");
+																$email = $this->gebruiker->get($_SESSION['usernaam'], "email");
+																$this->gebruiker->get_gravatar($email); ?>" alt="Avatar" />
 								<span class="user-info">
 									<small>Welkom,</small>
 									<?php if (isset($_SESSION['displaynaam'])) { echo $_SESSION['displaynaam']; } else { echo "NULL"; } ?>

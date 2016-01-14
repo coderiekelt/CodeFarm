@@ -45,8 +45,8 @@
 		<script src="<?php echo asset_url(); ?>js/ace/ace.settings-skin.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/ace.widget-on-reload.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/ace.searchbox-autocomplete.js"></script>
-		<script src="dist/js/bootstrap-wysiwyg.min.js"></script>
-		<script>$(".wysiwyg").wysiwyg();</script>
+		<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+		<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
 		<!-- inline scripts related to this page -->
 

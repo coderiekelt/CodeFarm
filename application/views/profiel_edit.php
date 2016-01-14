@@ -20,7 +20,20 @@
 		</ul>
 		<div class="tab-content no-border padding-24">
 			<div id="home" class="tab-pane in active">
-				tets
+				<div class="widget-box" id="widget-box-1">
+					<div class="widget-header">
+						<h5 class="widget-title">Persoonlijke details</h5>
+						<div class="widget-toolbar">
+							<a href="#" data-action="collapse">
+								<i class="ace-icon fa fa-chevron-up"></i>
+							</a>
+						</div>
+					</div>
+					<div class="widget-body">
+						<div class="widget-main">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>			
 	</div>

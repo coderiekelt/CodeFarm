@@ -12,8 +12,17 @@
 		<div class="widget-main">
 			<?php echo form_open("profiel/update_password"); ?>
 				<b>Geef uw nieuwe groep een naam:</b><br>
-				<input type="password" class="frm-control" name="oldpassword" style="width: 100%" /><br>
+				<input type="text" class="frm-control" name="groepnaam" style="width: 100%" /><br>
+				<br>
 				<b>Indien u klassen al wilt koppelen voer dan hier de klas naam in en klik op het plusje.</b><br>
+				<div class="input-group">
+					<input class="form-control input-mask-date" type="text" id="form-field-mask-1" />
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-default" type="button">
+							<i class="ace-icon fa fa-plus bigger-110"></i>
+						</button>
+					</span>
+				</div>
 				Reeds toegevoegde klassen:<br>
 				<i>Er zijn nog geen klassen toegevoegd</i><br>
 				<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Nieuwe groep aanmaken</button>

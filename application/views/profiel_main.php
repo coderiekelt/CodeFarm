@@ -1,5 +1,4 @@
-<?php $this->load->view("header", array("title" => $gebruiker['voornaam'] . " " . $gebruiker['achternaam'];)); ?>
-<span style="font-size: 16pt;">Mijn Profiel</span>
+<?php $this->load->view("header", array("title" => $gebruiker['voornaam'] . " " . $gebruiker['achternaam'])); ?>
 <div id="user-profile-2" class="user-profile">
 	<div class="tabbable">
 		<ul class="nav nav-tabs padding-18">

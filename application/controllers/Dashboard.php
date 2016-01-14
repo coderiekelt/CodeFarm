@@ -9,11 +9,11 @@ class Dashboard extends CI_Controller {
 		
 		$this->load->model("gebruiker");
 		
-		if (!$this->gebruiker->getklas($_SESSION['usernaam']))
+		if ($_SESSION['domein'] == "beheerder"){
+			$this->load->view("dashboard", array("beheerder" => true));
+		} elseif (!$this->gebruiker->getklas($_SESSION['usernaam']))
 		{
 			$this->load->view("dashboard", array("koppelfout" => true));
-		} elseif ($_SESSION['domein'] == "beheerder"){
-			$this->load->view("dashboard", array("beheerder" => true));
 		} else {
 			$this->load->view("dashboard", array("klas" => $this->gebruiker->getklas($_SESSION['usernaam'])));
 		}

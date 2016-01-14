@@ -11,8 +11,17 @@
 	{
 	?>
 		<span class="pull-right">
+			<a href="<?php echo site_url("dashboard/addgroup"); ?>">
+				<button type="button" class="btn btn-success">
+					<i class="ace-icon fa fa-plus"></i> 
+					Groep toevoegen
+				</button>
+			</a>
 			<a href="<?php echo site_url("dashboard/addtraject"); ?>">
-				<button type="button" class="btn btn-success">Nieuw Traject</button>
+				<button type="button" class="btn btn-success">
+					<i class="ace-icon fa fa-plus"></i> 
+					Traject toevoegen
+				</button>
 			</a>
 		</span>
 	<?php

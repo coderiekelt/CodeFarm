@@ -63,14 +63,14 @@
 							<div class="widget-header widget-header-small">
 								<h4 class="widget-title smaller">
 									<i class="ace-icon fa fa-check-square-o bigger-110"></i>
-									Over mij
+									Over <?php echo $gebruiker['voornaam']; ?>
 								</h4>
 							</div>
 							<div class="widget-body">
 								<div class="widget-main">
 								<?php if (!isset($gebruiker['over']) || $gebruiker['over'] == "")
 								{
-									echo "Deze gebruiker heeft nog geen over mij ingevuld.";
+									echo '<div class="alert alert-danger">Deze gebruiker heeft nog geen over mij ingevuld.</div>';
 								} ?>
 								</div>
 							</div>
@@ -80,90 +80,23 @@
 						<div class="widget-box transparent">
 							<div class="widget-header widget-header-small header-color-blue2">
 								<h4 class="widget-title smaller">
-																		<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
-																		My Skills
-																	</h4>
-																</div>
-
-																<div class="widget-body">
-																	<div class="widget-main padding-16">
-																		<div class="clearfix">
-																			<div class="grid3 center">
-																				<div class="easy-pie-chart percentage" data-percent="45" data-color="#CA5952">
-																					<span class="percent">45</span>%
-																				</div>
-
-																				<div class="space-2"></div>
-																				Graphic Design
-																			</div>
-
-																			<div class="grid3 center">
-																				<div class="center easy-pie-chart percentage" data-percent="90" data-color="#59A84B">
-																					<span class="percent">90</span>%
-																				</div>
-
-																				<div class="space-2"></div>
-																				HTML5 & CSS3
-																			</div>
-
-																			<div class="grid3 center">
-																				<div class="center easy-pie-chart percentage" data-percent="80" data-color="#9585BF">
-																					<span class="percent">80</span>%
-																				</div>
-
-																				<div class="space-2"></div>
-																				Javascript/jQuery
-																			</div>
-																		</div>
-
-																		<div class="hr hr-16"></div>
-
-																		<div class="profile-skills">
-																			<div class="progress">
-																				<div class="progress-bar" style="width:80%">
-																					<span class="pull-left">HTML5 & CSS3</span>
-																					<span class="pull-right">80%</span>
-																				</div>
-																			</div>
-
-																			<div class="progress">
-																				<div class="progress-bar progress-bar-success" style="width:72%">
-																					<span class="pull-left">Javascript & jQuery</span>
-
-																					<span class="pull-right">72%</span>
-																				</div>
-																			</div>
-
-																			<div class="progress">
-																				<div class="progress-bar progress-bar-purple" style="width:70%">
-																					<span class="pull-left">PHP & MySQL</span>
-
-																					<span class="pull-right">70%</span>
-																				</div>
-																			</div>
-
-																			<div class="progress">
-																				<div class="progress-bar progress-bar-warning" style="width:50%">
-																					<span class="pull-left">Wordpress</span>
-
-																					<span class="pull-right">50%</span>
-																				</div>
-																			</div>
-
-																			<div class="progress">
-																				<div class="progress-bar progress-bar-danger" style="width:38%">
-																					<span class="pull-left">Photoshop</span>
-
-																					<span class="pull-right">38%</span>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div><!-- /#home -->
+									<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+									Voortgang <small>simpele weergave</small>
+								</h4>
+							</div>
+							<div class="widget-body">
+								<div class="widget-main padding-16">
+									<?php if (!isset($gebruiker['voortgang']))
+										{
+										echo '<div class="alert alert-danger">Deze gebruiker heeft nog geen voortgang gemaakt.</div>';
+									} ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- /#home -->
 
 												<div id="feed" class="tab-pane">
 													<div class="profile-feed row">

@@ -21,6 +21,6 @@ class Debug extends CI_Controller {
 	
 	public function wachtwoord()
 	{
-		echo hash("sha256", "deado651");
+		echo hash("sha256", "Deado651");
 	}
 }

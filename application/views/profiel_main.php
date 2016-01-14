@@ -4,7 +4,7 @@
 		<ul class="nav nav-tabs padding-18">
 			<li class="active">
 				<a data-toggle="tab" href="#home">
-					<i class="green ace-icon fa fa-user bigger-120"></i>
+					<i class="ace-icon fa fa-user bigger-120"></i>
 					Profiel
 				</a>
 			</li>
@@ -12,7 +12,7 @@
 			{ ?>
 			<li>
 				<a href="<?php echo site_url("profiel/edit"); ?>">
-					<i class="orange ace-icon fa fa-edit bigger-120"></i>
+					<i class="ace-icon fa fa-edit bigger-120"></i>
 					Aanpassen
 				</a>
 			</li>

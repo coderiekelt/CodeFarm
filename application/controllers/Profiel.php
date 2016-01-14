@@ -16,7 +16,9 @@ class Profiel extends CI_Controller {
 		if (!isset($_SESSION['usernaam'])) { redirect("login"); }
 		
 		$this->load->model("gebruiker");
-		$this->gebruiker->set($gebruiker, "overmij", $_POST['overmij']);
+		
+		$this->gebruiker->set($_SESSION['usernaam'], "overmij", $_POST['overmij']);
+		
 		redirect("profiel/edit");
 	}
 	

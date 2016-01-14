@@ -7,5 +7,15 @@
 	</div>
 <?php } elseif ($_SESSION['domein'] != "beheerder") { ?>
 	<h6>Trajecten voor <?php echo $klas; ?></h6>
-<?php } ?>
+<?php } elseif (isset($beheerder))
+	{
+	?>
+		<span class="pull-right">
+			<a href="<?php echo site_url("dashboard/addtraject"); ?>">
+				<button type="button" class="btn btn-success">Nieuw Traject</button>
+			</a>
+		</span>
+	<?php
+	}
+?>
 <?php $this->load->view("footer"); ?>

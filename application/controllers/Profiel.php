@@ -40,16 +40,32 @@ class Profiel extends CI_Controller {
 		
 		$this->load->model("gebruiker");
 		
-		if ($this->gebruiker->verify($_SESSION['domein'], $_SESSION['usernaam'], $_POST['oldpassword']))
+		$gebruikersnaam = $_SESSION['usernaam'];
+		
+		if ($this->gebruiker->exists($gebruikersnaam))
 		{
-			if ($_POST['newpassword'] == $_POST['oldpassword'])
+			$userdata = array();
+			
+			$email = $this->gebruiker->get($gebruikersnaam, "email");
+			$userdata['avatar'] = $this->gebruiker->get_gravatar($email, 320);
+			$userdata["gebruikersnaam"] = $this->gebruiker->get($gebruikersnaam, "gebruikersnaam");
+			$userdata["voornaam"] = $this->gebruiker->get($gebruikersnaam, "voornaam");
+			$userdata["achternaam"] = $this->gebruiker->get($gebruikersnaam, "achternaam");
+			$userdata["email"] = $this->gebruiker->get($gebruikersnaam, "email");
+			$userdata["over"] = $this->gebruiker->get($gebruikersnaam, "overmij");
+			
+			if ($this->gebruiker->verify($_SESSION['domein'], $_SESSION['usernaam'], $_POST['oldpassword']))
 			{
-				$this->gebruiker->set($_SESSION['usernaam'], "wachtwoord", hash("sha256", $_POST['newpassword']));
+				if ($_POST['newpassword'] == $_POST['oldpassword'])
+				{
+					$this->gebruiker->set($_SESSION['usernaam'], "wachtwoord", hash("sha256", $_POST['newpassword']));
+					$this->load->view("profile_edit", array("gebruiker" => $userdata, "succes" => "Uw wachtwoord is bijgewerkt!"));
+				} else {
+					$this->load->view("profile_edit", array("gebruiker" => $userdata, "fout" => "De nieuwe wachtwoorden kwamen niet overeen."));
+				}
 			} else {
-				redirect("profiel/edit/fout/Uw nieuwe wachtwoorden kwamen niet overeen");
+				$this->load->view("profile_edit", array("gebruiker" => $userdata, "fout" => "Uw oude wachtwoord klopt niet."));
 			}
-		} else {
-			redirect("profiel/edit/fout/Uw oude wachtwoord is niet correct");
 		}
 	}
 	

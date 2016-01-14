@@ -147,6 +147,8 @@
 			$_SESSION['usernaam'] = $gebruikersnaam;
 			
 			$_SESSION['domein'] = $domein;
+			
+			$this->set($gebruikersnaam, "datum_laatsgezien", date('Y-m-d H:i:s'))
 			return true;
 		}
 		

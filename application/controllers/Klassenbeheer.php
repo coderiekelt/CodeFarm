@@ -27,4 +27,13 @@ class Klassenbeheer extends CI_Controller {
 		
  		$this->load->view("footer");
 	}
+	
+	public function nieuw()
+	{
+		$this->load->view("header", array("title" => "Nieuwe klas"));
+		
+		$this->load->view("klassenbeheer_nieuw");
+		
+ 		$this->load->view("footer");
+	}
 }

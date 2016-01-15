@@ -26,7 +26,7 @@
 					$(document).ready(function() {
 						$("#klasBtn").click(function()
 						{
-							$("#klassen").append('<tr><td><a id="removeDlnr"><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></a></td></tr>>");
+							$("#klassen").append('<a id="removeDlnr" href="#"><tr><td><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></td></tr></a>");
 						});
 						
 						$("#removeDlnr").click(function()

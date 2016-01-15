@@ -21,8 +21,10 @@ class Klassenbeheer extends CI_Controller {
 		
 		// HAAL LIJST VAN ALLE KLASSEN TOEGEWEZEN OP
 		
-		$this->load->view("klassenbeheer_main");
+		$klassen = $this->klas->fetchAll();
 		
-		$this->load->view("footer");
+		$this->load->view("klassenbeheer_main", array("klassen" => $klassen));
+		
+ 		$this->load->view("footer");
 	}
 }

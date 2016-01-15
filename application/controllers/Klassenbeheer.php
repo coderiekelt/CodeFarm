@@ -7,10 +7,10 @@ class Klassenbeheer extends CI_Controller {
 	{
 		if (!isset($_SESSION['usernaam']))
 		{
-			redirect("login");
+			header("Location: index.php/login");
 		} elseif (!$_SESSION['domein'] == "beheerder")
 		{
-			redirect("dashboard");
+			header("Location: index.php/dashboard");
 		}
 	}
 	

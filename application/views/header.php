@@ -114,10 +114,17 @@
 					try{ace.settings.loadState('sidebar')}catch(e){}
 				</script>
 				<ul class="nav nav-list">
-					<li class="">
+					<li>
 						<a href="<?php echo site_url("dashboard"); ?>">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text">Mijn Trajecten</span>
+							<i class="menu-icon fa fa-tasks"></i>
+							<span class="menu-text">Trajecten</span>
+						</a>
+						<b class="arrow"></b>
+					</li>
+					<li>
+						<a href="<?php echo site_url("klassenbeheer"); ?>">
+							<i class="menu-icon fa fa-group"></i>
+							<span class="menu-text">Klassenbeheer</span>
 						</a>
 						<b class="arrow"></b>
 					</li>

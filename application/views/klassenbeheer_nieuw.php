@@ -24,17 +24,18 @@
 				</table>
 				<script>
 					$(document).ready(function() {
+						var last = 0;
 						$("#klasBtn").click(function()
 						{
-							$("#klassen").append('<a id="removeDlnr" href="#"><tr><td><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></td></tr></a>");
-						});
-						
-						$("#removeDlnr").click(function()
-						{
-							$(this).remove();
-						})
+							$("#klassen").append('<tr id="' + last + '"><td><a onclick="removedlnr("'+ last +'")"><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></a></td></tr>");]
+							last++;
+						}); 
 					});
 					
+					function removednlr(id)
+					{
+						$("#" + id).remove();
+					}
 					
 				</script>
 				<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Nieuwe groep aanmaken</button>

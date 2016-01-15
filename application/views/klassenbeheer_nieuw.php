@@ -20,13 +20,13 @@
 						</button>
 					</span>
 				</div>
-				<div id="klassen">
-				</div>
+				<table class="table" id="klassen">
+				</table>
 				<script>
 					$(document).ready(function() {
 						$("#klasBtn").click(function()
 						{
-							$("#klassen").append($("#klasInpt").val() + "<br>");
+							$("#klassen").append('<tr><td><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></td></tr>>");
 						});
 					});
 				</script>

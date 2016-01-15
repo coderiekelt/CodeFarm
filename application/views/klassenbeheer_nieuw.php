@@ -32,7 +32,7 @@
 						}); 
 					});
 					
-					function removednlr(id)
+					function removedlnr(id)
 					{
 						$("#" + id).remove();
 					}

@@ -5,12 +5,13 @@ include(APPPATH."libraries/Google/vendor/autoload.php");
 class Klassenbeheer extends CI_Controller {
 	public function __construct()
 	{
+		parent::__construct();
 		if (!isset($_SESSION['usernaam']))
 		{
-			header("Location: index.php/login");
+			redirect("login");
 		} elseif (!$_SESSION['domein'] == "beheerder")
 		{
-			header("Location: index.php/dashboard");
+			redirect("dashboard");
 		}
 	}
 	

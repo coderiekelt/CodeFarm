@@ -121,6 +121,7 @@
 						</a>
 						<b class="arrow"></b>
 					</li>
+					<?php if ($_SESSION['domein'] == "beheerder") { ?>
 					<li>
 						<a href="<?php echo site_url("klassenbeheer"); ?>">
 							<i class="menu-icon fa fa-group"></i>
@@ -128,6 +129,14 @@
 						</a>
 						<b class="arrow"></b>
 					</li>
+					<li>
+						<a href="<?php echo site_url("gebruikersbeheer"); ?>">
+							<i class="menu-icon fa fa-user"></i>
+							<span class="menu-text">Gebruikersbeheer</span>
+						</a>
+						<b class="arrow"></b>
+					</li>
+					<?php } ?>
 				</ul>
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

@@ -13,7 +13,7 @@
 				<b>Deelnemers:</b><br>
 				<small>Deelnemers die nog niet bestaan worden geregistreerd, bestaande deelnemers worden uit hun oude klas gehaald en toegewezen aan de nieuwe.</small><br>
 				<div class="input-group">
-					<input id="klasInpt" class="form-control input-mask-date" type="text" id="form-field-mask-1" />
+					<input id="klasInpt" class="form-control input-mask-date" type="text" id="form-field-mask-1" placeholder="leerlingnr" />
 					<span class="input-group-btn">
 						<button id="klasBtn" class="btn btn-sm btn-success" type="button">
 							<i class="ace-icon fa fa-plus bigger-110"></i>
@@ -26,9 +26,16 @@
 					$(document).ready(function() {
 						$("#klasBtn").click(function()
 						{
-							$("#klassen").append('<tr><td><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></td></tr>>");
+							$("#klassen").append('<tr><td><a id="removeDlnr"><b><input type="hidden" name="deelnemers[]" value="' + $("#klasInpt").val() + '"/>' + $("#klasInpt").val() + "</b></a></td></tr>>");
 						});
+						
+						$("#removeDlnr").click(function()
+						{
+							$(this).remove();
+						})
 					});
+					
+					
 				</script>
 				<br><button type="submit" class="btn btn-success"><i class="ace-icon fa fa-save"></i> Nieuwe groep aanmaken</button>
 			</form>

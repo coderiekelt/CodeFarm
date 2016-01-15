@@ -1,4 +1,4 @@
-<span style="font-size: 16pt; font-weight: bold;">
+<span style="font-size: 18pt; font-weight: bold;">
 	Klassenbeheer
 </span>
 <span class="pull-right">

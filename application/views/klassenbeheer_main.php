@@ -1,5 +1,13 @@
-<span style="font-size: 16pt; font-weight: bold;">
+<span class="pull-left" style="font-size: 16pt; font-weight: bold;">
 	Klassenbeheer
+</span>
+<span class="pull-right">
+	<a href="<?php echo site_url("klassenbeheer/nieuw"); ?>">
+		<button type="button" class="btn btn-success">
+			<i class="ace-icon fa fa-plus"></i> 
+			Nieuwe klas
+		</button>
+	</a>
 </span>
 <?php if (!isset($klassen))
 {

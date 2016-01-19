@@ -16,19 +16,11 @@
 		<link rel="stylesheet" href="<?php echo asset_url(); ?>css/ace-fonts.css" />
 		<link rel="stylesheet" href="<?php echo asset_url(); ?>css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<script src="<?php echo asset_url(); ?>js/ace-extra.js"></script>
-		<!-- basic scripts -->
-		<!--[if !IE]> -->
 		<script src="<?php echo asset_url(); ?>js/jquery.js"></script>
-		<!-- <![endif]-->
-		<!--[if IE]>
-		<script src="<?php echo asset_url(); ?>js/jquery1x.js"></script>
-		<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo asset_url(); ?>js/jquery.mobile.custom.js'>"+"<"+"/script>");
 		</script>
 		<script src="<?php echo asset_url(); ?>js/bootstrap.js"></script>
-		<!-- page specific plugin scripts -->
-		<!-- ace scripts -->
 		<script src="<?php echo asset_url(); ?>js/ace/elements.scroller.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/elements.colorpicker.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/elements.fileinput.js"></script>
@@ -150,4 +142,22 @@
 					<div class="page-content">
 						<div class="row">
 							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->								
+								<!-- PAGE CONTENT BEGINS -->
+								<?php if (isset($notificatie))	
+								{
+									?>
+										<div class="alert alert-succes"><?php echo $notificatie; ?></div>
+									<?php
+								}
+								if (isset($foutmelding))
+								{
+									?> 
+										<div class="alert alert-danger"><?php echo $foutmelding; ?></div>
+									<?php
+								}
+								if (isset($waarschuwing))
+								{
+									?> 
+										<div class="alert alert-warning"><?php echo $waarschuwing; ?></div>
+									<?php
+								} ?>

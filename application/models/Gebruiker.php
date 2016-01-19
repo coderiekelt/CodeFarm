@@ -129,6 +129,11 @@
 			}
 		}
 		
+		public function delete($gebruiker)
+		{
+			$this->db->delete('gebruiker', array('gebruikersnaam' => $gebruiker));
+		}
+
 		public function verifyFe($domein, $gebruikersnaam)
 		{
 			if ($this->existsInDomein($domein, $gebruikersnaam))

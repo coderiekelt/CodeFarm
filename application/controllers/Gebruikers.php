@@ -58,6 +58,9 @@ class Gebruikers extends CI_Controller {
 			$this->load->view("gebruikers_verwijder", array("gebruiker" => $gebruiker));
 
 			$this->load->view("footer");
+		} else {
+			$this->gebruiker->delete($gebruiker);
+			redirect("gebruikers/lijst");
 		}
 	}
 }

@@ -18,7 +18,7 @@
 				print('<td>');
 					print('<a href="' . site_url("gebruikers/edit/" . $gebruiker->gebruikersnaam) . '">');
 						print('<i class="ace-icon fa fa-edit"></i>');
-					print('</a>');
+					print('</a> || ');
 					print('<a href="' . site_url("gebruikers/delete/" . $gebruiker->gebruikersnaam) . '">');
 						print('<i class="ace-icon fa fa-remove"></i>');
 					print('</a>');

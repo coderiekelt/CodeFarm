@@ -37,7 +37,8 @@
         public function fetchDetails($naam)
         {
         	$query = $this->db->get_where("gebruiker", array("gebruikersnaam" => $naam));
-        	return $query->result();
+        	$result = $query->result();
+        	return $result[0];
         }
 
         public function fetchDomein($domein)

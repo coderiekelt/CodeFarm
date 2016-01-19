@@ -16,7 +16,7 @@ class Gebruikers extends CI_Controller {
 
 	public function index()
 	{
-		redirect("gebruikers/list/deelnemer")
+		redirect("gebruikers/list/deelnemer");
 	}
 
 	public function list($domein = "deelnemer")

@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="<?php echo asset_url(); ?>css/ace-fonts.css" />
 		<link rel="stylesheet" href="<?php echo asset_url(); ?>css/ace.css" />
 		<link rel="stylesheet" href="<?php echo asset_url(); ?>css/ace-rtl.css" />
+		<script src="<?php echo asset_url(); ?>js/jquery.js"></script>
 	</head>
 	<body class="login-layout">
 		<div class="main-container">
@@ -27,16 +28,10 @@
 							<div class="space-6"></div>
 
 							<div class="position-relative">
-								<?php if (isset($error_invalid))
+								<?php if (isset($error))
 								{
 									?>
-									<div class="alert alert-danger">Dit is geen geldig school e-mail adres.</div>
-									<?php
-								}?>
-								<?php if (isset($error_creds))
-								{
-									?>
-									<div class="alert alert-danger">Ongeldige gebruikersnaam of wachtwoord.</div>
+									<div class="alert alert-danger"><?php echo $error; ?></div>
 									<?php
 								}?>
 								<div id="login-box" class="login-box visible widget-box no-border">
@@ -87,22 +82,18 @@
 												<a href="<?php echo site_url("login/googledirector"); ?>">
 													<button style="width: 100%;" class="btn btn-danger">
 														<i class="ace-icon fa fa-google-plus"></i>
-														Login met uw school email!
+														Login met uw school email adres
 													</button>
 												</a>
 											</div>
-										</div><!-- /.widget-main -->
-									</div><!-- /.widget-body -->
-								</div><!-- /.login-box -->
-							</div><!-- /.position-relative -->
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.main-content -->
-		</div><!-- /.main-container -->
-		<script src="<?php echo asset_url(); ?>js/jquery.js"></script>
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo asset_url(); ?>js/jquery.mobile.custom.js'>"+"<"+"/script>");
-		</script>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

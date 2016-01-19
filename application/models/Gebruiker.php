@@ -34,6 +34,19 @@
             return true;
         }
 
+        public function fetchDetails($naam)
+        {
+        	$query = $this->db->get_where("gebruikers", array("gebruikersnaam" => $naam));
+        	return $query->result();
+        }
+
+        public function fetchDomein($domein)
+        {
+        	$query = $this->db->get($domein);   
+
+        	return $query->result();
+        }
+
         // BESTAAT GEBRUIKER IN DOMEIN? (DEELNEMER, GAST, BEHEERDER)
         public function existsInDomein($domein, $gebruikersnaam)
         {

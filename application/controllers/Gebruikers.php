@@ -32,6 +32,20 @@ class Gebruikers extends CI_Controller {
 
 		$this->load->view("header", $hargs);
 
+		$userlist = $this->gebruiker->fetchDomein($domein);
+
+		$gebruikerslijst = array();
+
+		foreach ($userlist as $gebruiker)
+		{
+			$newentry = $this->gebruiker->fetchDetails($gebruiker->gebruikersnaam);
+			array_push($gebruikerslijst, $newentry);
+		}
+
+		echo "<pre>";
+			print_r($gebruikerlijst);
+		echo "</pre>";
+
 		$this->load->view("footer");
 	}
 }

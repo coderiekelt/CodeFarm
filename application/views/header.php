@@ -146,7 +146,7 @@
 								<?php if (isset($notificatie))	
 								{
 									?>
-										<div class="alert alert-succes"><?php echo $notificatie; ?></div>
+										<div class="alert alert-success"><?php echo $notificatie; ?></div>
 									<?php
 								}
 								if (isset($foutmelding))

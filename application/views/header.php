@@ -117,7 +117,7 @@
 					<li>
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-users"></i>
-							<span class="menu-text"> Authenticatie </span>
+							<span class="menu-text"> Gebruikers </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -137,7 +137,7 @@
 							<li class="">
 								<a href="jqgrid.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Gebruikers
+									Deelnemers
 								</a>
 
 								<b class="arrow"></b>
@@ -147,6 +147,15 @@
 								<a href="jqgrid.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Beheerders
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="jqgrid.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Gasten
 								</a>
 
 								<b class="arrow"></b>

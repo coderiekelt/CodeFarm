@@ -17,10 +17,10 @@
 				print('<td>' . $gebruiker->datum_aangemeld . '</td>');
 				print('<td>');
 					print('<a href="' . site_url("gebruikers/edit/" . $gebruiker->gebruikersnaam) . '">');
-						print('<button class="btn btn-small btn-warning"><i class="ace-icon fa fa-edit"></i></button>');
+						print('<i class="ace-icon fa fa-edit"></i>');
 					print('</a>');
 					print('<a href="' . site_url("gebruikers/delete/" . $gebruiker->gebruikersnaam) . '">');
-						print('<button class="btn btn-small btn-danger"><i class="ace-icon fa fa-remove"></i></button>');
+						print('<i class="ace-icon fa fa-remove"></i>');
 					print('</a>');
 				print('</td>');
 			print("</tr>");

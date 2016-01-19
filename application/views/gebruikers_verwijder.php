@@ -9,6 +9,6 @@
 		<br>
 		<a href="<?php echo site_url("gebruikers/edit/" . $gebruiker->gebruikersnaam); ?>">Nee, laat mij deze gebruiker bewerken.</a><br>
 		<a href="<?php echo site_url("gebruikers"); ?>">Nee, breng mij terug naar de gebruikerslijst.</a><br>
-		<a href="<?php echo site_url("gebruikers/edit/" . $gebruiker->gebruikersnaam . "/confirm"); ?>">Ja, verwijder deze gebruiker.</a>
+		<a href="<?php echo site_url("gebruikers/delete/" . $gebruiker->gebruikersnaam . "/confirm"); ?>">Ja, verwijder deze gebruiker.</a>
 	</div>
 </div>

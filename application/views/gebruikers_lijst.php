@@ -17,7 +17,7 @@
 				print('<td>' . $gebruiker->datum_aangemeld . '</td>');
 				print('<td>');
 					print('<a href="' . site_url("gebruikers/edit/" . $gebruiker->gebruikersnaam) . '">');
-						print('<button clas="btn btn-warning"><i class="ace-icon fa fa-angle-double-left"></i></button>');
+						print('<button class="btn btn-warning"><i class="ace-icon fa fa-edit"></i></button>');
 					print('</a>');
 				print('</td>');
 			print("</tr>");

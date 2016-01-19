@@ -7,7 +7,7 @@ class Login extends CI_Controller {
 	{
 		if (isset($_SESSION['username']))
 		{
-			redirect("dashboard");
+			redirect("trajecten");
 		}
 		
 		$this->load->view("login");
@@ -51,7 +51,7 @@ class Login extends CI_Controller {
 			if ($this->gebruiker->verify("deelnemer", $_POST['username'], $_POST['password']))
 			{
 				$this->gebruiker->setupSession("deelnemer", $_POST['username']);
-				redirect("dashboard");
+				redirect("trajecten");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}
@@ -61,7 +61,7 @@ class Login extends CI_Controller {
 			if ($this->gebruiker->verify("beheerder", $_POST['username'], $_POST['password']))
 			{
 				$this->gebruiker->setupSession("beheerder", $_POST['username']);
-				redirect("dashboard");
+				redirect("trajecten");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}
@@ -69,7 +69,7 @@ class Login extends CI_Controller {
 			if ($this->gebruiker->verify("gast", $_POST['username'], $_POST['password']))
 			{
 				$this->gebruiker->setupSession("gast", $_POST['username']);
-				redirect("dashboard");
+				redirect("trajecten");
 			} else {
 				$this->load->view("login", array("error_creds" => true));
 			}
@@ -80,7 +80,7 @@ class Login extends CI_Controller {
 	{
 		if (isset($_SESSION['username']))
 		{
-			redirect("dashboard");
+			redirect("trajecten");
 		}
 		
 		if (isset($_SESSION['username'])) { return false; }

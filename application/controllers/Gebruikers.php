@@ -46,4 +46,18 @@ class Gebruikers extends CI_Controller {
 
 		$this->load->view("footer");
 	}
+
+	public function delete($gebruiker, $confirm = "no")
+	{
+		if ($confirm != "confirm")
+		{
+			$this->load->view("header", array("title" => "Consent"));
+
+			$gebruiker = $this->gebruiker->fetchDetails($gebruiker);
+
+			$this->load->view("gebruikers_verwijder", array("gebruiker" => $gebruiker));
+
+			$this->load->view("footer");
+		}
+	}
 }

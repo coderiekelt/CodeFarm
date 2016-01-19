@@ -43,7 +43,7 @@ class Gebruikers extends CI_Controller {
 		}
 
 		echo "<pre>";
-			print_r($gebruikerlijst);
+			print_r($gebruikerslijst);
 		echo "</pre>";
 
 		$this->load->view("footer");

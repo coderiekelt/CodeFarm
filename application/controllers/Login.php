@@ -106,7 +106,7 @@ class Login extends CI_Controller {
 	{
 		if (isset($_SESSION['username']))
 		{
-			redirect("dashboard");
+			redirect("trajecten");
 		}
 		
 		try {
@@ -144,14 +144,14 @@ class Login extends CI_Controller {
 			if ($this->gebruiker->verifyFe("deelnemer", $split[0] . "_edufp"))
 			{
 				$this->gebruiker->setupSession("deelnemer", $split[0] . "_edufp");
-				redirect("dashboard");
+				redirect("trajecten");
 			}
 		} elseif ($split[1] == "rocfriesepoort.nl") 
 		{
 			if ($this->gebruiker->verifyFe("beheerder", $split[0] . "_fp"))
 			{
 				$this->gebruiker->setupSession("beheerder", $split[0] . "_fp");
-				redirect("dashboard");
+				redirect("trajecten");
 			}
 		} else {
 			$this->load->view("login", array("error_invalid" => true));

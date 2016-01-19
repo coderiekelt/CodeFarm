@@ -135,7 +135,7 @@
 							</li>
 
 							<li class="">
-								<a href="<?php echo site_url("gebruikers/lijt/deelnemer"); ?>">
+								<a href="<?php echo site_url("gebruikers/lijst/deelnemer"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Deelnemers
 								</a>

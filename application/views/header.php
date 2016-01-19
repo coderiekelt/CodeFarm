@@ -115,18 +115,43 @@
 					</li>
 					<?php if ($_SESSION['domein'] == "beheerder") { ?>
 					<li>
-						<a href="<?php echo site_url("klassenbeheer"); ?>">
-							<i class="menu-icon fa fa-group"></i>
-							<span class="menu-text">Klassenbeheer</span>
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-users"></i>
+							<span class="menu-text"> Authenticatie </span>
+
+							<b class="arrow fa fa-angle-down"></b>
 						</a>
+
 						<b class="arrow"></b>
-					</li>
-					<li>
-						<a href="<?php echo site_url("gebruikersbeheer"); ?>">
-							<i class="menu-icon fa fa-user"></i>
-							<span class="menu-text">Gebruikersbeheer</span>
-						</a>
-						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="tables.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Klassen
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="jqgrid.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Gebruikers
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="jqgrid.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Beheerders
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
 					</li>
 					<?php } ?>
 				</ul>

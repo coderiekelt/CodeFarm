@@ -15,6 +15,11 @@
 				print('<td>' . $gebruiker->voornaam . '</td>');
 				print('<td>' . $gebruiker->achternaam . '</td>');
 				print('<td>' . $gebruiker->datum_aangemeld . '</td>');
+				print('<td>');
+					print('<a href="' . site_url("gebruikers/edit/" . $gebruiker->gebruikersnaam) . '</a>');
+						print('<button clas="btn btn-warning"><i class="ace-icon fa fa-angle-double-left"></i></button>');
+					print('</a>');
+				print('</td>');
 			print("</tr>");
 		}
 	?>

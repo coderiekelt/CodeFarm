@@ -135,7 +135,7 @@
 							</li>
 
 							<li class="">
-								<a href="<?php echo site_url("gebruikers/list/deelnemer"); ?>">
+								<a href="<?php echo site_url("gebruikers/lijt/deelnemer"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Deelnemers
 								</a>
@@ -144,7 +144,7 @@
 							</li>
 
 							<li class="">
-								<a href="<?php echo site_url("gebruikers/list/beheerder"); ?>">
+								<a href="<?php echo site_url("gebruikers/lijst/beheerder"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Beheerders
 								</a>
@@ -153,7 +153,7 @@
 							</li>
 
 							<li class="">
-								<a href="<?php echo site_url("gebruikers/list/gast"); ?>">
+								<a href="<?php echo site_url("gebruikers/lijst/gast"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Gasten
 								</a>

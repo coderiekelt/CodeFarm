@@ -11,6 +11,11 @@ class Gebruikers extends CI_Controller {
 		if (!isset($_SESSION['usernaam']))
 		{
 			redirect("login");
+		} else {
+			if ($_SESSION['domein'] != "beheerder")
+			{
+				redirect("trajecten");
+			}
 		}
 	}
 
@@ -19,7 +24,7 @@ class Gebruikers extends CI_Controller {
 		redirect("gebruikers/list/deelnemer");
 	}
 
-	public function list($domein = "deelnemer")
+	public function lijst($domein = "deelnemer")
 	{
 		$hargs = array();
 

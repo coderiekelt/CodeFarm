@@ -36,6 +36,7 @@
 
         public function fetchDetails($naam)
         {
+        	if (!$this->exists($naam)) { return; }
         	$query = $this->db->get_where("gebruiker", array("gebruikersnaam" => $naam));
         	$result = $query->result();
         	return $result[0];

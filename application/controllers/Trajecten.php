@@ -16,7 +16,19 @@ class Trajecten extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view("header", array("notificatie" => "Hoi!"));
+		$hargs = array();
+
+		$hargs["title"] = "Trajecten";
+
+		if ($_SESSION['domein'] == "deelnemer")
+		{
+			if (!$this->gebruiker->getklas($_SESSION['usernaam']))
+			{
+				$hargs["foutmelding"] = "<b>Foutmelding!</b><br>U bent niet toegewezen aan een klas, vraag uw docent om u alsnog toe te wijzen aan een klas om te beginnen.";
+			}
+		}
+
+		$this->load->view("header", $hargs);
 
 		$this->load->view("footer");
 	}

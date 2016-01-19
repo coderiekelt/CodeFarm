@@ -14,7 +14,7 @@
 				print('<td>' . $gebruiker->gebruikersnaam . '</td>');
 				print('<td>' . $gebruiker->voornaam . '</td>');
 				print('<td>' . $gebruiker->achternaam . '</td>');
-				print('<td>' . $gebruiker->datum_registratie . '</td>');
+				print('<td>' . $gebruiker->datum_aangemeld . '</td>');
 			print("</tr>");
 		}
 	?>

@@ -126,7 +126,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="tables.html">
+								<a href="<?php echo site_url("klassen/list"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Klassen
 								</a>
@@ -135,7 +135,7 @@
 							</li>
 
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="<?php echo site_url("gebruikers/list/deelnemer"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Deelnemers
 								</a>
@@ -144,7 +144,7 @@
 							</li>
 
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="<?php echo site_url("gebruikers/list/beheerder"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Beheerders
 								</a>
@@ -153,7 +153,7 @@
 							</li>
 
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="<?php echo site_url("gebruikers/list/gast"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Gasten
 								</a>

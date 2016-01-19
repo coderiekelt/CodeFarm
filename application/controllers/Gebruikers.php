@@ -42,9 +42,7 @@ class Gebruikers extends CI_Controller {
 			array_push($gebruikerslijst, $newentry);
 		}
 
-		echo "<pre>";
-			print_r($gebruikerslijst);
-		echo "</pre>";
+		$this->load->view("gebruikers_lijst", array("gebruikers" => $gebruikerslijst, "domein" => $domein))
 
 		$this->load->view("footer");
 	}

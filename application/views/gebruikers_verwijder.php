@@ -1,4 +1,4 @@
-<h3>Verwijder <?php echo $gebruiker->gebruikersnaam; ?></h3>
+<h3>Verwijder <?php echo $gebruiker->voornaam . " " . $gebruiker->achternaam . "<small>". $gebruiker->gebruikersnaam . "</small>"; ?></h3>
 <div class="panel panel-danger">
 	<div class="panel-heading">
 		U staat op het punt om een actie te ondernemen die niet ongedaan gemaakt kan worden!

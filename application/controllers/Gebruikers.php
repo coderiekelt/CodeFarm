@@ -42,12 +42,12 @@ class Gebruikers extends CI_Controller {
 			array_push($gebruikerslijst, $newentry);
 		}
 
-		$this->load->view("gebruikers_lijst", array("gebruikers" => $gebruikerslijst, "domein" => $domein));
+		$this->load->view("gebruikers/lijst", array("gebruikers" => $gebruikerslijst, "domein" => $domein));
 
 		$this->load->view("footer");
 	}
 
-	public function delete($gebruiker, $confirm = "no")
+	public function delete($gebruiker, $domein, $confirm = "no")
 	{
 		if ($confirm != "confirm")
 		{
@@ -55,12 +55,26 @@ class Gebruikers extends CI_Controller {
 
 			$gebruiker = $this->gebruiker->fetchDetails($gebruiker);
 
-			$this->load->view("gebruikers_verwijder", array("gebruiker" => $gebruiker));
+			$this->load->view("gebruikers/verwijder", array("gebruiker" => $gebruiker, "domein" => $domein));
 
 			$this->load->view("footer");
 		} else {
-			$this->gebruiker->delete($gebruiker);
+			$this->gebruiker->delete($gebruiker, $domein);
 			redirect("gebruikers/lijst");
+		}
+	}
+
+	public function create($confirm = "no")
+	{
+		if ($confirm != "confirm")
+		{
+			$this->load->view("header", array("title" => "Gebruiker toevoegen", "waarschuwing" => "Maakt u een nieuwe klas aan? Wij raden u aan om leerlingnummers in het klas aanmaak formulier in te vullen, dit genereert automatisch gebruikers!"));
+
+			$this->load->view("gebruikers/nieuw");
+
+			$this->load->view("footer");
+		} else {
+			echo "haai";
 		}
 	}
 }

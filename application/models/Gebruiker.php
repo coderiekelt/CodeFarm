@@ -130,9 +130,10 @@
 			}
 		}
 		
-		public function delete($gebruiker)
+		public function delete($domein, $gebruiker)
 		{
 			$this->db->delete('gebruiker', array('gebruikersnaam' => $gebruiker));
+			$this->db->delete($domein, array('gebruikersnaam' => $gebruiker));
 		}
 
 		public function verifyFe($domein, $gebruikersnaam)

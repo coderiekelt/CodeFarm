@@ -7,7 +7,7 @@
 		</small>
 	</h1>
 </div>
-<?php echo form_open("gebruikers/create/confirm"); ?>
+<?php echo form_open("gebruikers/edit/". $gebruiker->gebruikersnaam ."/confirm"); ?>
 <div>
 	<label>
 		Voornaam:

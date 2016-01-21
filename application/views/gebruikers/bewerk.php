@@ -1,11 +1,11 @@
 <div class="page-header">
 	<h1>
 		Gebruiker bewerken
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			<?php echo $gebruiker->gebruikersnaam; ?>
+		</small>
 	</h1>
-	<small>
-		<i class="ace-icon fa fa-angle-double-right"></i>
-		<?php echo $gebruiker->gebruikersnaam; ?>
-	</small>
 </div>
 <?php echo form_open("gebruikers/create/confirm"); ?>
 <div>

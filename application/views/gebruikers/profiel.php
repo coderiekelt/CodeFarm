@@ -16,8 +16,8 @@
 			<b>Voornaam: </b><?php echo $gebruiker->voornaam; ?><br>
 			<b>Achternaam: </b><?php echo $gebruiker->achternaam; ?><br>
 			<b>E-mail adres: </b><?php echo $gebruiker->email; ?><br>
-			<b>Datum van registratie: </b><?php echo $gebruiker->datumaangemeld; ?><br>
-			<b>Datum laatst gezien: </b><?php echo $gebruiker->datumlaatsgezien; ?><br>
+			<b>Datum van registratie: </b><?php echo $gebruiker->datum_aangemeld; ?><br>
+			<b>Datum laatst gezien: </b><?php echo $gebruiker->datum_laatsgezien; ?><br>
 		</div>
 	</div>
 </div>

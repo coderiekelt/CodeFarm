@@ -76,10 +76,10 @@ class Gebruikers extends CI_Controller {
 
 	public function edit($gebruiker = "199386_edufp")
 	{
-		$this->load->view("header", array("title" => "Gebruiker " . $gebruiker));
+		$this->load->view("header", array("title" => "Bewerk " . $gebruiker));
 		
 		$geb = $this->gebruiker->fetchdetails($gebruiker);
-		$this->load->view("gebruikers/profiel", array("gebruiker" => $geb));
+		$this->load->view("gebruikers/bewerken", array("gebruiker" => $geb));
 
 		$this->load->view("footer");
 	}

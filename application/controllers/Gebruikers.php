@@ -74,7 +74,22 @@ class Gebruikers extends CI_Controller {
 
 			$this->load->view("footer");
 		} else {
-			echo "haai";
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('gebruikersnaam', 'Gebruikersnaam', 'required');
+			$this->form_validation->set_rules('voornaam', 'Voornaam', 'required');
+			$this->form_validation->set_rules('achternaam', 'Achternaam', 'required');
+			$this->form_validation->set_rules('email', 'Email', 'required');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view("header", array("title" => "Gebruiker toevoegen", "foutmelding" => "Gelieve alle vereiste velden in te vullen!"));
+
+				$this->load->view("gebruikers/nieuw");
+
+				$this->load->view("footer");
+			} else {
+
+			}
 		}
 	}
 }

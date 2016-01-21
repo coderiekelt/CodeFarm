@@ -33,6 +33,7 @@
 			var pass = randomPassword(12);
 			$("input[wachtwoord]").val(pass);
 			$("#passInfo").text("Uw nieuwe wachtwoord is: " + pass);
+			$("#passInfo").show();
 		});
 	});
 </script>

@@ -86,7 +86,7 @@ class Gebruikers extends CI_Controller {
 				$hargs["foutmelding"] = "Gelieve alle vereiste velden in te vullen!";
 			} else {
 				$wachtwoord = "";
-				if (!isset($_POST['password']))
+				if (!isset($_POST['password']) || $_POST['wachtwoord'] == "")
 				{
 					$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
     				for ($i = 0; $i < 8; $i++) {

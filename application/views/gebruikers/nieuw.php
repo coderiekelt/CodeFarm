@@ -31,7 +31,7 @@
 		$("#genPass").click(function()
 		{
 			var pass = randomPassword(12);
-			$("input[wachtwoord]").val(pass);
+			$("input[name='wachtwoord']").val(pass);
 			$("#passInfo").text("Uw nieuwe wachtwoord is: " + pass);
 			$("#passInfo").show();
 		});

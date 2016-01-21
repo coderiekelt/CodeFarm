@@ -85,7 +85,10 @@ class Gebruikers extends CI_Controller {
 			if ($this->form_validation->run() == FALSE) {
 				$hargs["foutmelding"] = "Gelieve alle vereiste velden in te vullen!";
 			} else {
-
+				if (!isset($_POST['password']))
+				{
+					echo "GENEERDERS KOM D'R MAAR IN!";
+				}
 			}
 			$hargs['title'] = "Nieuwe gebruiker";
 

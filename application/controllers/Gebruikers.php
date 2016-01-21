@@ -64,10 +64,13 @@ class Gebruikers extends CI_Controller {
 		}
 	}
 
-	public function profile($gebruiker)
+	public function profile($gebruiker = "199386_edufp")
 	{
 		$this->load->view("header", array("title" => "Gebruiker " . $gebruiker));
-			
+		
+		$geb = $this->gebruiker->fetchdetails($gebruiker);
+		$this->load->view("gebruikesr/profiel", $geb);
+
 		$this->load->view("footer");
 	}
 

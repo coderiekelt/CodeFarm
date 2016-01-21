@@ -74,14 +74,26 @@ class Gebruikers extends CI_Controller {
 		$this->load->view("footer"); 
 	}
 
-	public function edit($gebruiker = "199386_edufp")
+	public function edit($gebruiker = "199386_edufp", $confirm = "no")
 	{
-		$this->load->view("header", array("title" => "Bewerk " . $gebruiker));
+		if ($confirm == "no") {
+			$this->load->view("header", array("title" => "Bewerk " . $gebruiker));
 		
-		$geb = $this->gebruiker->fetchdetails($gebruiker);
-		$this->load->view("gebruikers/bewerk", array("gebruiker" => $geb));
+			$geb = $this->gebruiker->fetchdetails($gebruiker);
+			$this->load->view("gebruikers/bewerk", array("gebruiker" => $geb));
 
-		$this->load->view("footer");
+			$this->load->view("footer");
+		} else {
+			$this->load->view("header", array("title" => "Bewerk " . $gebruiker, "notificatie" => "Uw weizigingen zijn doorgevoerd naar de database!"));
+		
+			$this->gebruiker->updatePersonal($gebruiker, $_POST['voornaam'], $_POST['achternaam']);
+			$this->gebruiker->set($gebruiker, "email", $_POST['email']);
+
+			$geb = $this->gebruiker->fetchdetails($gebruiker);
+			$this->load->view("gebruikers/bewerk", array("gebruiker" => $geb));
+
+			$this->load->view("footer");
+		}
 	}
 
 	public function create($confirm = "no")

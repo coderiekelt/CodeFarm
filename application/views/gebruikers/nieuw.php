@@ -14,6 +14,28 @@
 	</div>
 </div>
 <br>
+<script>
+	function randomPassword(length) {
+    	var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    	var pass = "";
+    	for (var x = 0; x < length; x++) {
+     	   var i = Math.floor(Math.random() * chars.length);
+    	    pass += chars.charAt(i);
+    	}
+    	return pass;
+	}
+
+	$(document).ready(function() {
+		$("#passInfo").hide();
+
+		$("#genPass").click(function()
+		{
+			var pass = randomPassword(12);
+			$("input[wachtwoord]").val(pass);
+			$("#passInfo").text("Uw nieuwe wachtwoord is: " + pass);
+		});
+	});
+</script>
 <div>
 	<label>
 		Wachtwoord: <small>laat dit leeg om een willekeurig wachtwoord te genereren, gelieve dit alleen te doen voor deelnemers</small>
@@ -22,13 +44,14 @@
 	<div class="input-group" style="width: 100%">
 		<input class="form-control" type="password" name="wachtwoord" />
 		<span class="input-group-btn">
-			<button class="btn btn-sm btn-primary" type="button">
+			<button class="btn btn-sm btn-primary" id="genPass" type="button">
 				<i class="ace-icon fa fa-gears bigger-110"></i>
 				Genereer
 			</button>
 		</span>
 	</div>
 </div>
+<div class="alert alert-info" id="passInfo"></div>
 <br>
 <div>
 	<label>

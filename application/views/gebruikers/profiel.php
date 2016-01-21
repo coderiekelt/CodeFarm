@@ -9,7 +9,9 @@
 </div>
 <div class="row">
 	<div class="col-xs-2">
-
+		<div class="well">
+			<img src="echo $this->gebruiker->get_gravatar($gebruiker->email); ?>" />
+		</div>
 	</div>
 	<div class="col-xs-10">
 		<div class="well">

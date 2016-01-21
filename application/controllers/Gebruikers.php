@@ -80,6 +80,7 @@ class Gebruikers extends CI_Controller {
 			$this->form_validation->set_rules('gebruikersnaam', 'Gebruikersnaam', 'required');
 			$this->form_validation->set_rules('voornaam', 'Voornaam', 'required');
 			$this->form_validation->set_rules('achternaam', 'Achternaam', 'required');
+			$this->form_validation->set_rules('wachtwoord', 'Wachtwoord', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'required');
 
 			if ($this->form_validation->run() == FALSE) {

@@ -37,7 +37,7 @@
 	</label>
 
 	<div class="input-group" style="width: 100%">
-		<input class="form-control" type="password" name="wachtwoord" value=""/>
+		<input class="form-control" type="password" name="newwachtwoord" value=""/>
 		<span class="input-group-btn">
 			<button class="btn btn-sm btn-primary" id="genPass" type="button">
 				<i class="ace-icon fa fa-gears bigger-110"></i>

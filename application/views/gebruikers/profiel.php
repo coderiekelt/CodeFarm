@@ -7,3 +7,17 @@
 		</small>
 	</h1>
 </div>
+<div class="row">
+	<div class="col-xs-4">
+
+	</div>
+	<div class="col-xs-8">
+		<div class="well">
+			<b>Voornaam: </b><?php echo $gebruiker->voornaam; ?><br>
+			<b>Achternaam: </b><?php echo $gebruiker->achternaam; ?><br>
+			<b>E-mail adres: </b><?php echo $gebruiker->email; ?><br>
+			<b>Datum van registratie: </b><?php echo $gebruiker->datumaangemeld; ?><br>
+			<b>Datum laatst gezien: </b><?php echo $gebruiker->datumlaatsgezien; ?><br>
+		</div>
+	</div>
+</div>

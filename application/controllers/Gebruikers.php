@@ -102,6 +102,8 @@ class Gebruikers extends CI_Controller {
 					$hargs['foutmelding'] = "Er bestaat al een gebruiker met deze gebruikersnaam!";
 				} else {
 					$hargs['notificatie'] = "Uw gebruiker is succesvol toegevoegd!";
+					echo $wachtwoord;
+					exit;
 					$this->gebruiker->create($_POST['domein'], $_POST['gebruikersnaam'], $wachtwoord, $_POST['email']);
 					$this->gebruiker->updatePersonal($_POST['gebruikersnaam'], $_POST['voornaam'], $_POST['achternaam']);
 				}

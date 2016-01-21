@@ -66,7 +66,7 @@ class Gebruikers extends CI_Controller {
 
 	public function profile($gebruiker)
 	{
-		$this->load->view("header", array("title" => "Gebruiker " + $gebruiker));
+		$this->load->view("header", array("title" => "Gebruiker " . $gebruiker));
 			
 		$this->load->view("footer");
 	}

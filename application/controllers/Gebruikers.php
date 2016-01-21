@@ -85,9 +85,9 @@ class Gebruikers extends CI_Controller {
 			if ($this->form_validation->run() == FALSE) {
 				$hargs["foutmelding"] = "Gelieve alle vereiste velden in te vullen!";
 			} else {
-				
+
 			}
-			$hargs['title'] = "Nieuwe gebruiker"
+			$hargs['title'] = "Nieuwe gebruiker";
 
 			$this->load->view("header", $hargs);
 

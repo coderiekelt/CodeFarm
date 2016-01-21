@@ -69,7 +69,7 @@ class Gebruikers extends CI_Controller {
 		$this->load->view("header", array("title" => "Gebruiker " . $gebruiker));
 		
 		$geb = $this->gebruiker->fetchdetails($gebruiker);
-		$this->load->view("gebruikesr/profiel", $geb);
+		$this->load->view("gebruikers/profiel", $geb);
 
 		$this->load->view("footer");
 	}

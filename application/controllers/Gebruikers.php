@@ -92,7 +92,17 @@ class Gebruikers extends CI_Controller {
 				} else {
 					$hargs['notificatie'] = "Uw gebruiker is succesvol toegevoegd!";
 
-					$this->gebruiker->create($_POST['domein'], $_POST['gebruikersnaam'], $_POST['wachtwoord'], $_POST['email']);
+					if ($_POST['domein'] == "deelnemer")
+					{
+						$naam = $_POST['gebruikersnaam'] . "_edufp";
+					} elseif ($_POST['domein'] == "beheerder")
+					{
+						$naam = $_POST['gebruikersnaam'] . "_fp";
+					} else {
+						$naam = $_POST['gebruikersnaam'];
+					}
+
+					$this->gebruiker->create($_POST['domein'], $naam, $_POST['wachtwoord'], $_POST['email']);
 					$this->gebruiker->updatePersonal($_POST['gebruikersnaam'], $_POST['voornaam'], $_POST['achternaam']);
 				}
 			}

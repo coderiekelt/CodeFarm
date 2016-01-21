@@ -103,7 +103,7 @@ class Gebruikers extends CI_Controller {
 					}
 
 					$this->gebruiker->create($_POST['domein'], $naam, $_POST['wachtwoord'], $_POST['email']);
-					$this->gebruiker->updatePersonal($_POST['gebruikersnaam'], $_POST['voornaam'], $_POST['achternaam']);
+					$this->gebruiker->updatePersonal($naam, $_POST['voornaam'], $_POST['achternaam']);
 				}
 			}
 			$hargs['title'] = "Nieuwe gebruiker";

@@ -59,7 +59,7 @@ class Gebruikers extends CI_Controller {
 
 			$this->load->view("footer");
 		} else {
-			$this->gebruiker->delete($gebruiker, $domein);
+			$this->gebruiker->delete($domein, $gebruiker);
 			redirect("gebruikers/lijst");
 		}
 	}

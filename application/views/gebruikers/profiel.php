@@ -8,10 +8,10 @@
 	</h1>
 </div>
 <div class="row">
-	<div class="col-xs-4">
+	<div class="col-xs-2">
 
 	</div>
-	<div class="col-xs-8">
+	<div class="col-xs-10">
 		<div class="well">
 			<b>Voornaam: </b><?php echo $gebruiker->voornaam; ?><br>
 			<b>Achternaam: </b><?php echo $gebruiker->achternaam; ?><br>

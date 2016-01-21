@@ -87,7 +87,22 @@ class Gebruikers extends CI_Controller {
 			} else {
 				if (!isset($_POST['password']))
 				{
-					echo "GENEERDERS KOM D'R MAAR IN!";
+					$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    				for ($i = 0; $i < 8; $i++) {
+        				$n = rand(0, count($alphabet)-1);
+        				$pass[$i] = $alphabet[$n];
+    				}
+					$wachtwoord = $pass;
+				} else {
+					$wachtwoord = $_POST['wachtwoord'];
+				}
+				if ($this->gebruiker->exists($_POST['gebruikersnaam']))
+				{
+					$hargs['foutmelding'] = "Er bestaat al een gebruiker met deze gebruikersnaam!";
+				} else {
+					$hargs['notificatie'] = "Uw gebruiker is succesvol toegevoegd!";
+					$this->gebruiker->create($_POST['domein'], $_POST['gebruikersnaam'], $wachtwoord, $_POST['email']);
+					$this->gebruiker->updatePersonal($_POST['gebruikersnaam'], $_POST['voornaam'], $_POST['achternaam']);
 				}
 			}
 			$hargs['title'] = "Nieuwe gebruiker";

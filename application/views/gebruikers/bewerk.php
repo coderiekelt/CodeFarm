@@ -38,5 +38,5 @@
 	</div>
 </div>
 <br>
-<button type="submit" class="btn btn-primary"><i class="ace-icon fa fa-plus"></i> Gebruiker aanmaken</button>
+<button type="submit" class="btn btn-primary"><i class="ace-icon fa fa-save"></i> Gebruiker opslaan</button>
 </form>

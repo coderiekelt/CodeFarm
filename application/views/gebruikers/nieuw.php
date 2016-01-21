@@ -22,9 +22,9 @@
 	<div class="input-group" style="width: 100%">
 		<input class="form-control" type="password" name="wachtwoord" />
 		<span class="input-group-btn">
-			<button class="btn btn-sm btn-default" type="button">
-				<i class="ace-icon fa fa-calendar bigger-110"></i>
-				Go!
+			<button class="btn btn-sm btn-primary" type="button">
+				<i class="ace-icon fa fa-gears bigger-110"></i>
+				Genereer
 			</button>
 		</span>
 	</div>

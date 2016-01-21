@@ -21,5 +21,8 @@
 			<b>Datum van registratie: </b><?php echo $gebruiker->datum_aangemeld; ?><br>
 			<b>Datum laatst gezien: </b><?php echo $gebruiker->datum_laatsgezien; ?><br>
 		</div>
+		<div class="well">
+			Wij hebben geen voortgang voor deze gebruiker.
+		</div>
 	</div>
 </div>

@@ -71,7 +71,7 @@ class Gebruikers extends CI_Controller {
 		$geb = $this->gebruiker->fetchdetails($gebruiker);
 		$this->load->view("gebruikers/profiel", array("gebruiker" => $geb));
 
-		$this->load->view("footer");
+		$this->load->view("footer"); 
 	}
 
 	public function edit($gebruiker = "199386_edufp")
@@ -79,7 +79,7 @@ class Gebruikers extends CI_Controller {
 		$this->load->view("header", array("title" => "Bewerk " . $gebruiker));
 		
 		$geb = $this->gebruiker->fetchdetails($gebruiker);
-		$this->load->view("gebruikers/bewerken", array("gebruiker" => $geb));
+		$this->load->view("gebruikers/bewerk", array("gebruiker" => $geb));
 
 		$this->load->view("footer");
 	}

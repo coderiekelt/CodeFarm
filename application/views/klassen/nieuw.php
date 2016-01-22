@@ -21,53 +21,52 @@
 	</label>
 	<div class="row">
 		<div class="col-xs-6">
-				<div>
-					<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Leerlingnummer</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									199386
-								</td>
-								<td>
-									<button class="btn btn-minier btn-success dropdown-toggle">
-										<i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<div>
+				<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Leerlingnummer</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								199386
+							</td>
+							<td>
+								<button class="btn btn-minier btn-success dropdown-toggle">
+									<i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i>
+								</button>
+							</td>
+					</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<div class="col-xs-6">
 			<div>
-					<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Leerlingnummer</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									199386
-								</td>
-								<td>
-									<button class="btn btn-minier btn-danger dropdown-toggle">
-										<i class="ace-icon fa fa-remove icon-only bigger-120"></i>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Leerlingnummer</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								199386
+							</td>
+							<td>
+								<button class="btn btn-minier btn-danger dropdown-toggle">
+									<i class="ace-icon fa fa-remove icon-only bigger-120"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

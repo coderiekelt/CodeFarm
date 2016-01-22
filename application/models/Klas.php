@@ -53,20 +53,6 @@
 		{
 			$this->db->delete('klas', array('klas_id' => $id));
 		}
-
-
-        // BESTAAT KLAS? (NAAM)
-        public function existsNaam($naam)
-        {
-            $query = $this->db->get_where('klas', array('naam' => $naam));     
-            $num = $query->num_rows();
-
-            if ($num == 0) 
-            {
-            	return false;
-            }
-            return true;
-        }
 		
 		// KLAS AANMAKEN
 		// LETOP: CONTROLEER ZELF EERST OF KLAS AL BESTAAT

@@ -31,7 +31,7 @@
 	function reloadParticipating()
 	{
 		$("#participatingStudents").empty();
-		available.forEach(function (entry)
+		participating.forEach(function (entry)
 		{
 			var sn = "moveToAvail('" + entry + "')";
 			$("#participatingStudents").append('<tr><td>'+ entry +'</td><td><button type="button" onclick="'+ sn +'" class="btn btn-minier btn-success dropdown-toggle"><i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i></button</td></tr>');

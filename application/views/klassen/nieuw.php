@@ -20,12 +20,12 @@
 		<small>Waarschuwing! Als een deelnemer al in een klas zit, wordt deze toegewezen aan de nieuwe klas.</small>
 	</label>
 	<div class="row">
-		<div class="col-xs-4">
+		<div class="col-xs-6">
 			<div class="well">
 				Hier komen de beschikbaar deelnemers
 			</div>
 		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-6">
 			<div class="well">
 				Hier komen de deelnemers van de klas
 			</div>

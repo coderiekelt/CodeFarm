@@ -26,12 +26,18 @@
 						<thead>
 							<tr>
 								<th>Leerlingnummer</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									<a href="#">app.com</a>
+									199386
+								</td>
+								<td>
+									<button class="btn btn-minier btn-primary dropdown-toggle">
+										<i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i>
+									</button>
 								</td>
 							</tr>
 						</tbody>

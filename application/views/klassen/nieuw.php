@@ -24,15 +24,15 @@
 		{
 			var sn = "moveToPart('" + entry + "')";
 			$("#availableStudents").append('<tr>
-							<td>
-								'+ entry +'
-							</td>
-							<td>
-								<button onclick="'+ sn +'" class="btn btn-minier btn-danger dropdown-toggle">
-									<i class="ace-icon fa fa-remove icon-only bigger-120"></i>
-								</button>
-							</td>
-						</tr>');
+							/<td>
+								/'+ entry +'
+							/</td>
+							/<td>
+								/<button onclick="'+ sn +'" class="btn btn-minier btn-danger dropdown-toggle">
+									/<i class="ace-icon fa fa-remove icon-only bigger-120"></i>
+								/</button>
+							/</td>
+						/</tr>');
 		});
 	}
 

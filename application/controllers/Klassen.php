@@ -34,7 +34,7 @@ class Klassen extends CI_Controller {
 
 		$klassen = $this->klas->fetchAll();
 
-		$this->load->view("klassen/lijst", array("klassen" => $klassen));
+		$this->load->view("klassen/lijst", array("klassen" => $klassen[0]));
 
 		$this->load->view("footer");
 	}

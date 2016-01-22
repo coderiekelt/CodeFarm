@@ -21,8 +21,21 @@
 	</label>
 	<div class="row">
 		<div class="col-xs-6">
-			<div class="well">
-				Hier komen de beschikbaar deelnemers
+				<div>
+					<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Leerlingnummer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="#">app.com</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 			</div>
 		</div>
 		<div class="col-xs-6">

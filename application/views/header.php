@@ -56,7 +56,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div class="navbar-header pull-left">
-					<a href="#" class="navbar-brand">
+					<a href="<?php echo site_url("trajecten"); ?>" class="navbar-brand">
 						<small>
 							<i class="fa fa-home"></i>
 							CodeFarm
@@ -107,7 +107,7 @@
 				</script>
 				<ul class="nav nav-list">
 					<li>
-						<a href="<?php echo site_url("dashboard"); ?>">
+						<a href="<?php echo site_url("trajecten"); ?>">
 							<i class="menu-icon fa fa-tasks"></i>
 							<span class="menu-text">Trajecten</span>
 						</a>

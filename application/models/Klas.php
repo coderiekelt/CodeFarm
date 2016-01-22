@@ -37,6 +37,12 @@
         	return $result[0];
         }
 
+        public function delete($id)
+		{
+			$this->db->delete('klas', array('klas_id' => $id));
+		}
+
+
         // BESTAAT KLAS? (NAAM)
         public function existsNaam($naam)
         {

@@ -14,6 +14,34 @@
 	</div>
 </div>
 <br>
+<script>
+	var available = ['199386', '199439', '200101', '198716'];
+
+	function reloadAvailable()
+	{
+		$("#availableStudents").empty();
+		available.forEach(function (entry)
+		{
+			var sn = "moveToPart('" + entry + "')";
+			$("#availableStudents").append('<tr>
+							<td>
+								'+ entry +'
+							</td>
+							<td>
+								<button onclick="'+ sn +'" class="btn btn-minier btn-danger dropdown-toggle">
+									<i class="ace-icon fa fa-remove icon-only bigger-120"></i>
+								</button>
+							</td>
+						</tr>');
+		});
+	}
+
+	$(document).ready(function()
+	{
+		$("#btnsubmit").hide();
+		reloadAvailable();
+	});
+</script>
 <div>
 	<label>
 		Deelnemers:
@@ -29,7 +57,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="availableStudents">
 						<tr>
 							<td>
 								199386
@@ -39,7 +67,7 @@
 									<i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i>
 								</button>
 							</td>
-					</tr>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -53,7 +81,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="participatingaStudents">
 						<tr>
 							<td>
 								199386
@@ -71,5 +99,5 @@
 	</div>
 </div>
 <br>
-<button type="submit" class="btn btn-primary"><i class="ace-icon fa fa-plus"></i> Klas aanmaken</button>
+<button type="submit" id="submitbtn" class="btn btn-primary"><i class="ace-icon fa fa-plus"></i> Klas aanmaken</button>
 </form>

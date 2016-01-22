@@ -9,6 +9,7 @@
 		</a>
 	</h1>
 </div>
+<?php print_r($klassen); ?>
 <table class="table table-bordered">
 	<tr>
 		<th>#</th>

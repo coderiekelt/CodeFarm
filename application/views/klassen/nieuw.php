@@ -71,7 +71,7 @@
 
 	$(document).ready(function()
 	{
-		$("#btnsubmit").hide();
+		$("#submitbtn").hide();
 		reloadAvailable();
 		reloadParticipating();
 	});
@@ -133,5 +133,6 @@
 	</div>
 </div>
 <br>
+<button type="submit" id="klasbtn" class="btn btn-primary"><i class="ace-icon fa fa-gears"></i> Genereer klassenlijst</button>
 <button type="submit" id="submitbtn" class="btn btn-primary"><i class="ace-icon fa fa-plus"></i> Klas aanmaken</button>
 </form>

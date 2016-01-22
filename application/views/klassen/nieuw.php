@@ -100,7 +100,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody id="participatingaStudents">
+					<tbody id="participatingStudents">
 						<tr>
 							<td>
 								199386

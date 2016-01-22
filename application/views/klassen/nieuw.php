@@ -78,6 +78,7 @@
 
 		$("#klasbtn").click(function()
 		{
+			$("#finalStudents").empty();
 			participating.forEach(function (entry)
 			{
 				$("#finalStudents").append('<tr><td>'+ entry +'</td></tr>');
@@ -105,16 +106,6 @@
 						</tr>
 					</thead>
 					<tbody id="availableStudents">
-						<tr>
-							<td>
-								199386
-							</td>
-							<td>
-								<button class="btn btn-minier btn-success dropdown-toggle">
-									<i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i>
-								</button>
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -129,16 +120,6 @@
 						</tr>
 					</thead>
 					<tbody id="participatingStudents">
-						<tr>
-							<td>
-								199386
-							</td>
-							<td>
-								<button class="btn btn-minier btn-danger dropdown-toggle">
-									<i class="ace-icon fa fa-remove icon-only bigger-120"></i>
-								</button>
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>

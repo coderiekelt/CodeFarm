@@ -82,7 +82,8 @@ class Klassen extends CI_Controller {
 		{
 			$this->load->view("header", array("title" => "Klas toevoegen"));
 
-			$borkborkborkbork = $this->gebruiker->fetchDomein($domein);
+			$borkborkborkborkborkbork = "deelnemer";
+			$borkborkborkbork = $this->gebruiker->fetchDomein($borkborkborkborkborkbork);
 			$borkborkbork = array();
 			foreach ($borkborkborkbork as $borkborkborkborkbork)
 			{

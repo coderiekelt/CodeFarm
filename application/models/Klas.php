@@ -30,6 +30,13 @@
 			return $query->result();
 		}
 
+		public function fetchDetails($id)
+        {
+        	$query = $this->db->get_where("klas", array("klas_id" => $id));
+        	$result = $query->result();
+        	return $result[0];
+        }
+
         // BESTAAT KLAS? (NAAM)
         public function existsNaam($naam)
         {

@@ -1,6 +1,6 @@
 <div class="page-header">
 	<h1>
-		Verwijder <?php echo $klas; ?>
+		Verwijder <?php echo $this->klas->fetchDetails($klas)->naam; ?>
 	</h1>
 </div>
 <div class="panel panel-danger">

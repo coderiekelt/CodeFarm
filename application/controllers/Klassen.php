@@ -39,34 +39,22 @@ class Klassen extends CI_Controller {
 		$this->load->view("footer");
 	}
 
-	public function delete($gebruiker, $domein, $confirm = "no")
+	public function delete($klas, $confirm = "no")
 	{
 		if ($confirm != "confirm")
 		{
 			$this->load->view("header", array("title" => "Consent"));
 
-			$gebruiker = $this->gebruiker->fetchDetails($gebruiker);
-
-			$this->load->view("gebruikers/verwijder", array("gebruiker" => $gebruiker, "domein" => $domein));
+			$this->load->view("klassen/verwijder", array("klas" => $klas));
 
 			$this->load->view("footer");
 		} else {
-			$this->gebruiker->delete($domein, $gebruiker);
-			redirect("gebruikers/lijst");
+			$this->klas->delete($klas);
+			redirect("klassen/lijst");
 		}
 	}
 
-	public function profile($gebruiker = "199386_edufp")
-	{
-		$this->load->view("header", array("title" => "Gebruiker " . $gebruiker));
-		
-		$geb = $this->gebruiker->fetchdetails($gebruiker);
-		$this->load->view("gebruikers/profiel", array("gebruiker" => $geb));
-
-		$this->load->view("footer"); 
-	}
-
-	public function edit($gebruiker = "199386_edufp", $confirm = "no")
+	public function edit($klas)
 	{
 		if ($confirm == "no") {
 			$this->load->view("header", array("title" => "Bewerk " . $gebruiker));

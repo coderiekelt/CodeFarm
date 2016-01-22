@@ -82,7 +82,16 @@ class Klassen extends CI_Controller {
 		{
 			$this->load->view("header", array("title" => "Klas toevoegen"));
 
-			$this->load->view("klassen/nieuw");
+			$borkborkborkbork = $this->gebruiker->fetchDomein($domein);
+			$borkborkbork = array();
+			foreach ($borkborkborkbork as $borkborkborkborkbork)
+			{
+				$bork = explode("_", $borkborkborkborkbork);
+				$borkbork = $bork[0];
+				array_push($borkborkbork, $borkbork);
+			}
+
+			$this->load->view("klassen/nieuw", array("bork" => $borkborkbork));
 
 			$this->load->view("footer");
 		} else {

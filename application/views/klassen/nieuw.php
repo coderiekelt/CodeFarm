@@ -14,6 +14,7 @@
 	</div>
 </div>
 <br>
+<?php print_r($bork); ?>
 <script>
 	var available = ['199386', '199439', '200101', '198716'];
 	var participating = [];

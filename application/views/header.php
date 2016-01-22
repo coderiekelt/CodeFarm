@@ -126,7 +126,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="<?php echo site_url("klassen/list"); ?>">
+								<a href="<?php echo site_url("klassen/lijst"); ?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Klassen
 								</a>

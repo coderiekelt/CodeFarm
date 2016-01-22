@@ -59,6 +59,7 @@
         public function delete($id)
 		{
 			$this->db->delete('klas', array('klas_id' => $id));
+			$this->db->delete('klaskoppeling', array('klas_id' => $id));
 		}
 		
 		// KLAS AANMAKEN

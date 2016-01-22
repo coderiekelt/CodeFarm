@@ -18,7 +18,7 @@
 			
 			if ($num == 0) { return false; }
 			
-			return $result[0]->naam;
+			return $result[0]->klas_id;
 		}
 
 		public function setKlas($naam, $klas)

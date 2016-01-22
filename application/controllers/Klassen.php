@@ -87,7 +87,8 @@ class Klassen extends CI_Controller {
 			$borkborkbork = array();
 			foreach ($borkborkborkbork as $borkborkborkborkbork)
 			{
-				$bork = explode("_", $borkborkborkborkbork);
+				$borkborkborkborkborkborkborkbork = $borkborkborkborkbork->gebruikersnaam;
+				$bork = explode("_", $borkborkborkborkborkborkborkbork);
 				$borkbork = $bork[0];
 				array_push($borkborkbork, $borkbork);
 			}

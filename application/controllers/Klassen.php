@@ -80,7 +80,7 @@ class Klassen extends CI_Controller {
 	{
 		if ($confirm != "confirm")
 		{
-			$this->load->view("header", array("title" => "Klas toevoegen");
+			$this->load->view("header", array("title" => "Klas toevoegen"));
 
 			$this->load->view("klassen/nieuw");
 

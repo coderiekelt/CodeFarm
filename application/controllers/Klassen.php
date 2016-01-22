@@ -21,7 +21,7 @@ class Klassen extends CI_Controller {
 
 	public function index()
 	{
-		redirect("gebruikers/lijst/deelnemer");
+		redirect("klassen/lijst/deelnemer");
 	}
 
 	public function lijst()

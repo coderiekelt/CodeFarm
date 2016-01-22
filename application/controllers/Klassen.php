@@ -80,9 +80,9 @@ class Klassen extends CI_Controller {
 	{
 		if ($confirm != "confirm")
 		{
-			$this->load->view("header", array("title" => "Gebruiker toevoegen", "waarschuwing" => "Maakt u een nieuwe klas aan? Wij raden u aan om leerlingnummers in het klas aanmaak formulier in te vullen, dit genereert automatisch gebruikers!"));
+			$this->load->view("header", array("title" => "Klas toevoegen");
 
-			$this->load->view("gebruikers/nieuw");
+			$this->load->view("klassen/nieuw");
 
 			$this->load->view("footer");
 		} else {

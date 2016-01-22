@@ -24,25 +24,17 @@ class Klassen extends CI_Controller {
 		redirect("gebruikers/lijst/deelnemer");
 	}
 
-	public function lijst($domein = "deelnemer")
+	public function lijst()
 	{
 		$hargs = array();
 
-		$hargs["title"] = "Gebruikers (" . $domein . ")";
+		$hargs["title"] = "Klassen";
 
 		$this->load->view("header", $hargs);
 
-		$userlist = $this->gebruiker->fetchDomein($domein);
+		$klassen = $this->klas->fetchAll();
 
-		$gebruikerslijst = array();
-
-		foreach ($userlist as $gebruiker)
-		{
-			$newentry = $this->gebruiker->fetchDetails($gebruiker->gebruikersnaam);
-			array_push($gebruikerslijst, $newentry);
-		}
-
-		$this->load->view("gebruikers/lijst", array("gebruikers" => $gebruikerslijst, "domein" => $domein));
+		$this->load->view("klassen/lijst", array("klassen" => $klassen));
 
 		$this->load->view("footer");
 	}

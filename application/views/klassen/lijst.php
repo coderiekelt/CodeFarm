@@ -16,7 +16,7 @@
 		<th>Acties</th>
 	</tr>
 	<?php
-		foreach($gebruikers as $gebruiker)
+		foreach($klassen as $klas)
 		{
 			print("<tr>");
 				print('<td>' . $gebruiker->gebruikersnaam . '</td>');
@@ -37,3 +37,4 @@
 		}
 	?>
 </table>
+<?php print_r($klassen); ?>

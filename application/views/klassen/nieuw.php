@@ -14,9 +14,20 @@
 	</div>
 </div>
 <br>
-<?php print_r($bork); ?>
 <script>
-	var available = ['199386', '199439', '200101', '198716'];
+	var available = <?php 
+
+	$borkbork = "[";
+	echo $borkbork;
+
+	foreach ($bork as $borkborkbork)
+	{
+		echo "'" . $borkborkbork . "',";
+	}
+
+	$borkborkborkbork = "];";
+	echo $borkborkborkbork;
+	?>
 	var participating = [];
 
 	function reloadAvailable()

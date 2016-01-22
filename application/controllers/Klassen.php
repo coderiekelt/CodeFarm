@@ -110,12 +110,16 @@ class Klassen extends CI_Controller {
 					$hargs['foutmelding'] = "Er bestaat al een klas met deze naam!";
 				} else {
 					$hargs['notificatie'] = "De klas is succesvol aangemaakt!";
+					$this->klas->create($_POST['naam']);
+					$id = $this->klas->fetchid($_POST['naam']);
 
-					
+					foreach($_POST['deelnemers'] as $deelnemer)
+					{
+						$this->gebruiker->setklas($deelnemer, $id);
+					} 
 				}
 			}
 			$hargs['title'] = "Klas toevoegen";
-			$hargs['waarschuwing'] = print_r($_POST);
 
 			$this->load->view("header", $hargs);
 

@@ -20,6 +20,23 @@
 			
 			return $result[0]->klas_naam;
 		}
+
+		public function setKlas($naam, $klas)
+		{
+			if ($this->getKlas($naam) == false) 
+			{
+				$data = array(
+					"deelnemer" => $naam,
+					"klas_id" => $klas
+				);
+			
+            	$this->db->insert('klaskoppeling', $data);
+			} else {
+				$this->db->set('klas_id', $klas);
+				$this->db->where('deelnemer', $naam);
+				$this->db->update('klaskoppeling');
+			}
+		}
 		
 		// BESTAAT GEBRUIKER?
         public function exists($naam)

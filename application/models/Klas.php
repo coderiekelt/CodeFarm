@@ -42,6 +42,13 @@
 			return $query->result();
 		}
 
+		public function fetchId($naam)
+        {
+        	$query = $this->db->get_where("klas", array("naam" => $naam));
+        	$result = $query->result();
+        	return $result[0]->klas_id;
+        }
+
 		public function fetchDetails($id)
         {
         	$query = $this->db->get_where("klas", array("klas_id" => $id));

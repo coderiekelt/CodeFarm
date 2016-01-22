@@ -22,6 +22,18 @@
             }
             return true;
         }
+
+        public function existsNaam($naam)
+        {
+            $query = $this->db->get_where('klas', array('naam' => $naam));     
+            $num = $query->num_rows();
+
+            if ($num == 0) 
+            {
+            	return false;
+            }
+            return true;
+        }
 		
 		public function fetchAll()
 		{

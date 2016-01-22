@@ -94,6 +94,7 @@
 			participating.forEach(function (entry)
 			{
 				$("#finalStudents").append('<tr><td>'+ entry +'</td></tr>');
+				$("#inputs").append('<input type="hidden" name="deelnemers[]" value="' + entry + '_edufp" />');
 			});
 
 			$("#pregenlijst").fadeOut(1000, function() {
@@ -149,6 +150,8 @@
 			</tbody>
 		</table>
 	</div>
+</div>
+<div id="inputs">
 </div>
 <br>
 <button type="button" id="klasbtn" class="btn btn-primary"><i class="ace-icon fa fa-gears"></i> Genereer klassenlijst</button>

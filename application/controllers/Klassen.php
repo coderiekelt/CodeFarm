@@ -100,40 +100,26 @@ class Klassen extends CI_Controller {
 			$hargs = array();
 			$this->load->library('form_validation');
 
-			$this->form_validation->set_rules('gebruikersnaam', 'Gebruikersnaam', 'required');
-			$this->form_validation->set_rules('voornaam', 'Voornaam', 'required');
-			$this->form_validation->set_rules('achternaam', 'Achternaam', 'required');
-			$this->form_validation->set_rules('wachtwoord', 'Wachtwoord', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required');
+			$this->form_validation->set_rules('naam', 'Klasnaam', 'required');
 
 			if ($this->form_validation->run() == FALSE) {
 				$hargs["foutmelding"] = "Gelieve alle vereiste velden in te vullen!";
 			} else {
-				if ($this->gebruiker->exists($_POST['gebruikersnaam']))
+				if ($this->klas->existsNaam($_POST['naam']))
 				{
-					$hargs['foutmelding'] = "Er bestaat al een gebruiker met deze gebruikersnaam!";
+					$hargs['foutmelding'] = "Er bestaat al een klas met deze naam!";
 				} else {
-					$hargs['notificatie'] = "Uw gebruiker is succesvol toegevoegd!";
+					$hargs['notificatie'] = "De klas is succesvol aangemaakt!";
 
-					if ($_POST['domein'] == "deelnemer")
-					{
-						$naam = $_POST['gebruikersnaam'] . "_edufp";
-					} elseif ($_POST['domein'] == "beheerder")
-					{
-						$naam = $_POST['gebruikersnaam'] . "_fp";
-					} else {
-						$naam = $_POST['gebruikersnaam'];
-					}
-
-					$this->gebruiker->create($_POST['domein'], $naam, $_POST['wachtwoord'], $_POST['email']);
-					$this->gebruiker->updatePersonal($naam, $_POST['voornaam'], $_POST['achternaam']);
+					
 				}
 			}
-			$hargs['title'] = "Nieuwe gebruiker";
+			$hargs['title'] = "Klas toevoegen";
+			$hargs['waarschuwing'] = print_r($_POST);
 
 			$this->load->view("header", $hargs);
 
-			$this->load->view("gebruikers/nieuw");
+			$this->load->view("klassen/nieuw");
 
 			$this->load->view("footer");
 		}

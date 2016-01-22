@@ -25,7 +25,7 @@
 		
 		public function fetchAll()
 		{
-			$query = $this->db->get_where('klas');
+			$query = $this->db->get('klas');
 			
 			return $query->result();
 		}

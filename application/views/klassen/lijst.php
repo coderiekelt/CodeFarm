@@ -23,12 +23,12 @@
 				print('<td>' . $klas->klas_id . '</td>');
 				print('<td>' . $klas->naam . '</td>');
 				print('<td>');
-					print('<a href="' . site_url("klassen/edit/" . $klas->$klas_id) . '">');
+					print('<a href="' . site_url("klassen/edit/" . $klas->klas_id) . '">');
 						print('<button class="btn btn-minier btn-success">');
 							print('<i class="ace-icon fa fa-edit"></i>');
 						print('</button>');
 					print('</a> ');
-					print('<a href="' . site_url("klassen/delete/" . $klas->$klas_id) . '">');
+					print('<a href="' . site_url("klassen/delete/" . $klas->klas_id) . '">');
 						print('<button class="btn btn-minier btn-danger">');
 							print('<i class="ace-icon fa fa-remove"></i>');
 						print('</button>');

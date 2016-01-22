@@ -20,7 +20,7 @@
 		foreach($klassen as $klas)
 		{
 			print("<tr>");
-				print('<td>' . $klas->$klas_id . '</td>');
+				print('<td>' . $klas->klas_id . '</td>');
 				print('<td>' . $klas->naam . '</td>');
 				print('<td>');
 					print('<a href="' . site_url("klassen/edit/" . $klas->$klas_id) . '">');

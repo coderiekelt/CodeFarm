@@ -72,8 +72,20 @@
 	$(document).ready(function()
 	{
 		$("#submitbtn").hide();
+		$("#postgenlist").hide();
 		reloadAvailable();
 		reloadParticipating();
+
+		#("#klasbtn").click(function()
+		{
+			participating.forEach(function (entry)
+			{
+				$("#finalStudents").append('<tr><td>'+ entry +'</td></tr>');
+			});
+			$("#pregenlijst").fadeOut(1000, function() {
+				$("#postgenlist").fadeIn(1000);
+			});
+		});
 	});
 </script>
 <div>
@@ -81,7 +93,7 @@
 		Deelnemers:
 		<small>Waarschuwing! Als een deelnemer al in een klas zit, wordt deze toegewezen aan de nieuwe klas.</small>
 	</label>
-	<div class="row">
+	<div class="row" id="pregenlijst">
 		<div class="col-xs-6">
 			<div>
 				<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -131,8 +143,19 @@
 			</div>
 		</div>
 	</div>
+	<div id="postgenlist">
+		<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Leerlingnummer</th>
+				</tr>
+			</thead>
+			<tbody id="finalStudents">
+			</tbody>
+		</table>
+	</div>
 </div>
 <br>
-<button type="submit" id="klasbtn" class="btn btn-primary"><i class="ace-icon fa fa-gears"></i> Genereer klassenlijst</button>
+<button type="button" id="klasbtn" class="btn btn-primary"><i class="ace-icon fa fa-gears"></i> Genereer klassenlijst</button>
 <button type="submit" id="submitbtn" class="btn btn-primary"><i class="ace-icon fa fa-plus"></i> Klas aanmaken</button>
 </form>

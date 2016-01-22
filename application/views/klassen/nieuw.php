@@ -86,6 +86,7 @@
 
 			$("#pregenlijst").fadeOut(1000, function() {
 				$("#postgenlist").fadeIn(1000);
+				$("#klasbtn").fadeOut(1000, function() { $("#submitbtn").fadeIn(1000); });
 			});
 		});
 	});

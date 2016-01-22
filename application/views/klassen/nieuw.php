@@ -16,6 +16,7 @@
 <br>
 <script>
 	var available = ['199386', '199439', '200101', '198716'];
+	var participating = [];
 
 	function reloadAvailable()
 	{
@@ -27,10 +28,37 @@
 		});
 	}
 
+	function reloadParticipating()
+	{
+		$("#participatingStudents").empty();
+		available.forEach(function (entry)
+		{
+			var sn = "moveToAvail('" + entry + "')";
+			$("#participatingStudents").append('<tr><td>'+ entry +'</td><td><button type="button" onclick="'+ sn +'" class="btn btn-minier btn-success dropdown-toggle"><i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i></button</td></tr>');
+		});
+	}
+
+
+	function moveToPart(dlnr)
+	{
+		for (var i = 0; i < available.length; i++)
+		{
+			if (available[i] == dlnr)
+			{
+				participating.push(dlnr);
+				available.splice(i, 1);
+			}
+		}
+
+		reloadAvailable();
+		reloadParticipating();
+	}
+
 	$(document).ready(function()
 	{
 		$("#btnsubmit").hide();
 		reloadAvailable();
+		reloadParticipating();
 	});
 </script>
 <div>

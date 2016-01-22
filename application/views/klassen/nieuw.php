@@ -72,16 +72,17 @@
 	$(document).ready(function()
 	{
 		$("#submitbtn").hide();
-		$("#postgenlist").hide();
+		//$("#postgenlist").hide();
 		reloadAvailable();
 		reloadParticipating();
 
 		#("#klasbtn").click(function()
 		{
-			participating.forEach(function (entry)
+			/*participating.forEach(function (entry)
 			{
 				$("#finalStudents").append('<tr><td>'+ entry +'</td></tr>');
-			});
+			});/*
+
 			$("#pregenlijst").fadeOut(1000, function() {
 				$("#postgenlist").fadeIn(1000);
 			});

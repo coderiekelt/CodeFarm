@@ -34,10 +34,25 @@
 		participating.forEach(function (entry)
 		{
 			var sn = "moveToAvail('" + entry + "')";
-			$("#participatingStudents").append('<tr><td>'+ entry +'</td><td><button type="button" onclick="'+ sn +'" class="btn btn-minier btn-success dropdown-toggle"><i class="ace-icon fa fa-angle-double-right icon-only bigger-120"></i></button</td></tr>');
+			$("#participatingStudents").append('<tr><td>'+ entry +'</td><td><button type="button" onclick="'+ sn +'" class="btn btn-minier btn-danger dropdown-toggle"><i class="ace-icon fa fa-remove icon-only bigger-120"></i></button</td></tr>');
 		});
 	}
 
+
+	function moveToAvail(dlnr)
+	{
+		for (var i = 0; i < participating.length; i++)
+		{
+			if (participating[i] == dlnr)
+			{
+				available.push(dlnr);
+				participating.splice(i, 1);
+			}
+		}
+
+		reloadAvailable();
+		reloadParticipating();
+	}
 
 	function moveToPart(dlnr)
 	{

@@ -102,8 +102,14 @@
 				$("#klasbtn").fadeOut(1000, function() { $("#submitbtn").fadeIn(1000); });
 			});
 
-			$("#tabel_alle").DataTable();
-			$("#tabel_toegewezen").DataTable();
+			$("#tabel_alle").DataTable({
+				searching: true,
+				ordering: true
+			});
+			$("#tabel_toegewezen").DataTable({
+				searching: true,
+				ordering: true
+			});
 		});
 	});
 </script>

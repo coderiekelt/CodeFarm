@@ -101,6 +101,9 @@
 				$("#postgenlist").fadeIn(1000);
 				$("#klasbtn").fadeOut(1000, function() { $("#submitbtn").fadeIn(1000); });
 			});
+
+			$("#tabel_alle").DataTable();
+			$("#tabel_toegewezen").DataTable();
 		});
 	});
 </script>
@@ -112,7 +115,7 @@
 	<div class="row" id="pregenlijst">
 		<div class="col-xs-6">
 			<div>
-				<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+				<table id="tabel_alle" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>Leerlingnummer</th>
@@ -126,7 +129,7 @@
 		</div>
 		<div class="col-xs-6">
 			<div>
-				<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+				<table id="tabel_toegewezen" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>Leerlingnummer</th>

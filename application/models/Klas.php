@@ -42,6 +42,14 @@
 			return $query->result();
 		}
 
+		public function fetchIn($klas)
+		{
+			$query = $this->db->get_where('klaskoppeling', array("klas_id" => $klas));
+			
+			return $query->result();
+		}
+
+
 		public function fetchId($naam)
         {
         	$query = $this->db->get_where("klas", array("naam" => $naam));

@@ -13,14 +13,30 @@
 		</a>
 	</h1>
 </div>
-<table class="table table-bordered">
-	<tr>
-		<th>Gebruikersnaam</th>
-		<th>Voornaam</th>
-		<th>Achternaam</th>
-		<th>Registratie Datum</th>
-		<th>Acties</th>
-	</tr>
+<script>
+	$(document).ready(function()
+	{
+		$("#tabel_alle").DataTable({
+			searching: true,
+			ordering: true,
+			paging: true,
+			"language": {
+				"url": "http://cdn.datatables.net/plug-ins/1.10.10/i18n/Dutch.json"
+			}
+		});
+	});
+</script>
+<table id="tabel_alle" class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>Gebruikersnaam</th>
+			<th>Voornaam</th>
+			<th>Achternaam</th>
+			<th>Registratie Datum</th>
+			<th>Acties</th>
+		</tr>
+	</thead>
+	<tbody>
 	<?php
 		foreach($gebruikers as $gebruiker)
 		{
@@ -49,4 +65,5 @@
 			print("</tr>");
 		}
 	?>
+	</tbody>
 </table>

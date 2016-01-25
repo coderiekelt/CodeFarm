@@ -82,18 +82,7 @@ class Klassen extends CI_Controller {
 		{
 			$this->load->view("header", array("title" => "Klas toevoegen"));
 
-			$borkborkborkborkborkborkbork = "deelnemer";
-			$borkborkborkbork = $this->gebruiker->fetchDomein($borkborkborkborkborkborkbork);
-			$borkborkbork = array();
-			foreach ($borkborkborkbork as $borkborkborkborkbork)
-			{
-				$borkborkborkborkborkborkborkbork = $borkborkborkborkbork->gebruikersnaam;
-				$bork = explode("_", $borkborkborkborkborkborkborkbork);
-				$borkbork = $bork[0];
-				array_push($borkborkbork, $borkbork);
-			}
-
-			$this->load->view("klassen/nieuw", array("bork" => $borkborkbork));
+			$this->load->view("klassen/nieuw");
 
 			$this->load->view("footer");
 		} else {
@@ -111,12 +100,6 @@ class Klassen extends CI_Controller {
 				} else {
 					$hargs['notificatie'] = "De klas is succesvol aangemaakt!";
 					$this->klas->create($_POST['naam']);
-					$id = $this->klas->fetchid($_POST['naam']);
-
-					foreach($_POST['deelnemers'] as $deelnemer)
-					{
-						$this->gebruiker->setklas($deelnemer, $id);
-					} 
 				}
 			}
 			$hargs['title'] = "Klas toevoegen";
@@ -127,5 +110,14 @@ class Klassen extends CI_Controller {
 
 			$this->load->view("footer");
 		}
+	}
+
+	public function persons($id)
+	{
+		$this->load->view("header", array("title" => "Deelnemers"));
+
+		$this->load->view("klassen/personen", array("deelnemers" => $this->klas->fetchin($id)));
+
+		$this->load->view("footer");
 	}
 }

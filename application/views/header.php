@@ -42,6 +42,8 @@
 		<script src="<?php echo asset_url(); ?>js/ace/ace.settings-skin.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/ace.widget-on-reload.js"></script>
 		<script src="<?php echo asset_url(); ?>js/ace/ace.searchbox-autocomplete.js"></script>
+		<script src="<?php echo asset_url(); ?>js/dataTables/jquery.datatables.min.js"></script>
+		<script src="<?php echo asset_url(); ?>js/dataTables/jquery.datatables.bootstrap.min.js"></script>
 		<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
 		<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 	</head>

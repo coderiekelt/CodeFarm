@@ -56,6 +56,11 @@
 							print('<i class="ace-icon fa fa-edit"></i>');
 						print('</button>');
 					print('</a> ');
+					print('<a href="' . site_url("gebruikers/password/" . $gebruiker->gebruikersnaam) . '">');
+						print('<button class="btn btn-minier btn-primary">');
+							print('<i class="ace-icon fa fa-asterisk"></i>');
+						print('</button>');
+					print('</a> ');
 					print('<a href="' . site_url("gebruikers/delete/" . $gebruiker->gebruikersnaam . "/" . $domein) . '">');
 						print('<button class="btn btn-minier btn-danger">');
 							print('<i class="ace-icon fa fa-remove"></i>');

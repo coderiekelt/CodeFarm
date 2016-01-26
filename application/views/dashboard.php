@@ -1,0 +1,30 @@
+<?php $this->load->view("header"); ?>
+<?php if (isset($koppelfout)) { ?>
+	<div class="alert alert-danger">
+		<b>Foutmelding!</b><br>
+		Uw account is nog niet gekoppeld aan een klas, hierdoor hebben wij geen trajecten kunnen ophalen.<br>
+		Vraag aan uw docent om u aan de correcte klas te koppelen.
+	</div>
+<?php } elseif ($_SESSION['domein'] != "beheerder") { ?>
+	<h6>Trajecten voor <?php echo $klas; ?></h6>
+<?php } elseif (isset($beheerder))
+	{
+	?>
+		<span class="pull-right">
+			<a href="<?php echo site_url("dashboard/addgroup"); ?>">
+				<button type="button" class="btn btn-success">
+					<i class="ace-icon fa fa-plus"></i> 
+					Groep toevoegen
+				</button>
+			</a>
+			<a href="<?php echo site_url("dashboard/addtraject"); ?>">
+				<button type="button" class="btn btn-success">
+				<i class="ace-icon fa fa-plus"></i> 
+					Traject toevoegen
+				</button>
+			</a>
+		</span>
+	<?php
+	}
+?>
+<?php $this->load->view("footer"); ?>

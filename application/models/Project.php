@@ -66,6 +66,13 @@
         	return $result;
         }
 
+        public function fetchAll()
+        {
+        	$query = $this->db->get("project");
+        	$result = $query->result();
+        	return $result;
+        }
+
         public function fetchDetails($id)
         {
         	$query = $this->db->get_where("project", array("project_id" => $id));

@@ -220,15 +220,15 @@
 			$CI =& get_instance();
 
 			$CI->db->set($key, $value);
-			$CI->db->where('gebruikersnaam', $id);
-			$CI->db->update('gebruiker');
+			$CI->db->where('project_id', $id);
+			$CI->db->update('project');
 		}
 
 		// GETS
 		public function Get($id, $key)
 		{
 			$CI =& get_instance();
-			$query = $CI->db->get_where('gebruiker', array('gebruikersnaam' => $id));
+			$query = $CI->db->get_where('project', array('project_id' => $id));
 			$row = $query->row_array();
 	
 			if (isset($row))

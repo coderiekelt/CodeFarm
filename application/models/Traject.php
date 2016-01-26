@@ -40,7 +40,40 @@
 
 		public function numKoppelingen($gebruiker)
 		{
-			$query = $this->db->get_where('trajectkoppeling', array('groep_naam' => $gebruiker));     
+			if (isset($split[1]))
+		{
+			$check = true;
+		}
+
+		if ($check && $split[1] == "edufp")
+		{
+			if ($this->gebruiker->verify("deelnemer", $_POST['username'], $_POST['password']))
+			{
+				$this->gebruiker->setupSession("deelnemer", $_POST['username']);
+				redirect("trajecten");
+			} else {
+				$this->load->view("login", array("error" => "Ongeldige gebruikersnaam of wachtwoord!"));
+			}
+		}
+		elseif ($check && $split[1] == "fp")
+		{
+			if ($this->gebruiker->verify("beheerder", $_POST['username'], $_POST['password']))
+			{
+				$this->gebruiker->setupSession("beheerder", $_POST['username']);
+				redirect("trajecten");
+			} else {
+				$this->load->view("login", array("error" => "Ongeldige gebruikersnaam of wachtwoord!"));
+			}
+		} else {
+			if ($this->gebruiker->verify("gast", $_POST['username'], $_POST['password']))
+			{
+				$this->gebruiker->setupSession("gast", $_POST['username']);
+				redirect("trajecten");
+			} else {
+				$this->load->view("login", array("error" => "Ongeldige gebruikersnaam of wachtwoord!"));
+			}
+		}
+			     
             $num = $query->num_rows();
 
             return $num;

@@ -1,1 +1,5 @@
-<h1>Oke dit is een begin</h1>
+<div class="page-header">
+    <h1>
+        Mijn Trajecten
+    </h1>
+</div>

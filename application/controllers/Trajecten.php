@@ -29,6 +29,8 @@ class Trajecten extends CI_Controller {
 		}
 
 		$this->load->view("header", $hargs);
+        
+        $this->load->view("trajecten/lijst");
 
 		$this->load->view("footer");
 	}

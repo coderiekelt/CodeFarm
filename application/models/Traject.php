@@ -40,7 +40,7 @@
 
 		public function numKoppelingen($gebruiker)
 		{
-			$query = $this->db->get_where('trajectkoppeling', array('gebruikersnaam' => $gebruiker));     
+			$query = $this->db->get_where('trajectkoppeling', array('groep_naam' => $gebruiker));     
             $num = $query->num_rows();
 
             return $num;

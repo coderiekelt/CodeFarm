@@ -20,9 +20,19 @@ class Projecten extends CI_Controller {
 
 		$hargs["title"] = "Projecten";
 
+		$error = false;
+
+		if($this->project->numkoppelingen($_SESSION['usernaam']) == 0)
+		{
+			$error = true;
+			$hargs["foutmelding"] = "<b>Foutmelding!</b><br>U bent nog niet gekoppeld aan een project, als dit een fout is neem dan contact op met uw docent!";
+		}
+
 		$this->load->view("header", $hargs);
 
-		$this->load->view("projecten/lijst");
+		if ($error == false) {
+			$this->load->view("projecten/lijst", array("projecten" => $this->project->fetchforuser($_SESSION['usernaam'])));
+		}
 
 		$this->load->view("footer");
 	}

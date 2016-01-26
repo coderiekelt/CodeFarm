@@ -40,7 +40,7 @@
 
 		public function numKoppelingen($gebruiker)
 		{
-			$query = $this->db->get_where('projectkoppeling', array('gebruikersnaam' => $gebruiker));     
+			$query = $this->db->get_where('trajectkoppeling', array('gebruikersnaam' => $gebruiker));     
             $num = $query->num_rows();
 
             return $num;
@@ -48,7 +48,7 @@
 
         public function exists($id)
         {
-            $query = $this->db->get_where('project', array('project_id' => $id));     
+            $query = $this->db->get_where('traject', array('traject_id' => $id));     
             $num = $query->num_rows();
 
             if ($num == 0) 
@@ -61,14 +61,14 @@
         public function fetchForUser($naam)
         {
         	if (!$this->gebruiker->exists($naam)) { return; }
-        	$query = $this->db->get_where("projectkoppeling", array("gebruikersnaam" => $naam));
+        	$query = $this->db->get_where("trajectkoppeling", array("gebruikersnaam" => $naam));
         	$result = $query->result();
         	return $result;
         }
 
         public function fetchDetails($id)
         {
-        	$query = $this->db->get_where("project", array("project_id" => $id));
+        	$query = $this->db->get_where("traject", array("traject_id" => $id));
         	$result = $query->result();
         	return $result[0];
         }

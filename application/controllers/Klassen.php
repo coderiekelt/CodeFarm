@@ -49,32 +49,28 @@ class Klassen extends CI_Controller {
 
 			$this->load->view("footer");
 		} else {
-			$deelnemers = $this->klas->fetchin($klas);
-			foreach ($deelnemers as $deelnemer)
-			{
-				$this->gebruiker->deleteklas($deelnemer);
-			}
 			$this->klas->delete($klas);
 			redirect("klassen/lijst");
 		}
 	}
 
-	public function edit($klas, $confirm = "no")
+	public function edit($klas)
 	{
 		if ($confirm == "no") {
-			$this->load->view("header", array("title" => "Bewerk " . $this->klas->get($klas, "naam")));
+			$this->load->view("header", array("title" => "Bewerk " . $gebruiker));
 		
-			$kdata = $this->klas->fetchdetails($klas);
-			$this->load->view("klassen/bewerk", array("klas" => $kdata));
+			$geb = $this->gebruiker->fetchdetails($gebruiker);
+			$this->load->view("gebruikers/bewerk", array("gebruiker" => $geb));
 
 			$this->load->view("footer");
 		} else {
-			$this->load->view("header", array("title" => "Bewerk " . $this->klas->get($klas, "naam"), "notificatie" => "Uw weizigingen zijn doorgevoerd naar de database!"));
+			$this->load->view("header", array("title" => "Bewerk " . $gebruiker, "notificatie" => "Uw weizigingen zijn doorgevoerd naar de database!"));
 		
-			$this->klas->set($klas, "naam", $_POST['naam']);
+			$this->gebruiker->updatePersonal($gebruiker, $_POST['voornaam'], $_POST['achternaam']);
+			$this->gebruiker->set($gebruiker, "email", $_POST['email']);
 
-			$kdata = $this->klas->fetchdetails($klas);
-			$this->load->view("klassen/bewerk", array("klas" => $kdata));
+			$geb = $this->gebruiker->fetchdetails($gebruiker);
+			$this->load->view("gebruikers/bewerk", array("gebruiker" => $geb));
 
 			$this->load->view("footer");
 		}
@@ -120,44 +116,8 @@ class Klassen extends CI_Controller {
 	{
 		$this->load->view("header", array("title" => "Deelnemers"));
 
-		$this->load->view("klassen/personen", array("deelnemers" => $this->klas->fetchin($id), "id" => $id));
+		$this->load->view("klassen/personen", array("deelnemers" => $this->klas->fetchin($id)));
 
 		$this->load->view("footer");
-	}
-
-	public function deletepersons($id)
-	{
-		$this->load->view("header", array("title" => "Deelnemers", "notificatie" => "U heeft de deelnemers uit deze klas verwijderd!"));
-
-		foreach($_POST['selected'] as $deelnemer)
-			{
-				$this->gebruiker->deleteklas($deelnemer);
-			}
-
-		$this->load->view("klassen/personen", array("deelnemers" => $this->klas->fetchin($id), "id" => $id));
-
-		$this->load->view("footer");
-	}
-
-	public function addpersons($id, $confirm = "no")
-	{
-		if ($confirm == "no") { 
-			$this->load->view("header", array("title" => "Deelnemers"));
-
-			$this->load->view("klassen/addpersonen", array("deelnemers" => $this->gebruiker->fetchdomein("deelnemer"), "id" => $id));
-
-			$this->load->view("footer");
-		} else {
-			$this->load->view("header", array("title" => "Deelnemers", "notificatie" => "Uw deelnemers zijn toegevoegd!"));
-
-			foreach($_POST['selected'] as $deelnemer)
-			{
-				$this->gebruiker->setklas($deelnemer, $id);
-			}
-
-			$this->load->view("klassen/personen", array("deelnemers" => $this->klas->fetchin($id), "id" => $id));
-
-			$this->load->view("footer");
-		}
 	}
 }

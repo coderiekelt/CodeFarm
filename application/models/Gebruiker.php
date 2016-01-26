@@ -37,8 +37,6 @@
 				$this->db->update('klaskoppeling');
 			}
 		}
-
-
 		
 		// BESTAAT GEBRUIKER?
         public function exists($naam)
@@ -153,11 +151,6 @@
 		{
 			$this->db->delete('gebruiker', array('gebruikersnaam' => $gebruiker));
 			$this->db->delete($domein, array('gebruikersnaam' => $gebruiker));
-		}
-
-		public function deleteKlas($gebruiker)
-		{
-			$this->db->delete('klaskoppeling', array('deelnemer' => $gebruiker));
 		}
 
 		public function verifyFe($domein, $gebruikersnaam)

@@ -96,6 +96,25 @@ class Gebruikers extends CI_Controller {
 		}
 	}
 
+	public function password($gebruiker = "199386_edufp", $confirm = "no")
+	{
+		if ($confirm == "no") {
+			$this->load->view("header", array("title" => "Wachtwoord van " . $gebruiker));
+		
+			$geb = $this->gebruiker->fetchdetails($gebruiker);
+			$this->load->view("gebruikers/wachtwoord", array("naam" => $gebruiker, "gebruiker" => $geb));
+
+			$this->load->view("footer");
+		} else {
+			$this->load->view("header", array("title" => "Bewerk " . $gebruiker, "notificatie" => "Uw weizigingen zijn doorgevoerd naar de database!"));
+
+			$geb = $this->gebruiker->updatePassword($gebruiker, $_POST['wachtwoord']);
+			$this->load->view("gebruikers/wachtwoord", array("naam" => $gebruiker));
+
+			$this->load->view("footer");
+		}
+	}
+
 	public function create($confirm = "no")
 	{
 		if ($confirm != "confirm")
@@ -118,7 +137,17 @@ class Gebruikers extends CI_Controller {
 			if ($this->form_validation->run() == FALSE) {
 				$hargs["foutmelding"] = "Gelieve alle vereiste velden in te vullen!";
 			} else {
-				if ($this->gebruiker->exists($_POST['gebruikersnaam']))
+				if ($_POST['domein'] == "deelnemer")
+					{
+						$naam = $_POST['gebruikersnaam'] . "_edufp";
+					} elseif ($_POST['domein'] == "beheerder")
+					{
+						$naam = $_POST['gebruikersnaam'] . "_fp";
+					} else {
+						$naam = $_POST['gebruikersnaam'];
+					}
+
+				if ($this->gebruiker->exists($naam))
 				{
 					$hargs['foutmelding'] = "Er bestaat al een gebruiker met deze gebruikersnaam!";
 				} else {

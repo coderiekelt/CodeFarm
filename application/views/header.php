@@ -86,6 +86,12 @@
 										Mijn Profiel
 									</a>
 								</li>
+								<li>
+									<a href="<?php echo site_url("profiel/password"); ?>">
+										<i class="ace-icon fa fa-asterisk"></i>
+										Mijn Wachtwoord
+									</a>
+								</li>
 								<li class="divider"></li>
 								<li>
 									<a href="<?php echo site_url("login/loguit"); ?>">

@@ -53,7 +53,7 @@ class Login extends CI_Controller {
 				$this->gebruiker->setupSession("deelnemer", $_POST['username']);
 				redirect("trajecten");
 			} else {
-				$this->load->view("login", array("error_creds" => true));
+				$this->load->view("login", array("error" => "Ongeldige gebruikersnaam of wachtwoord!"));
 			}
 		}
 		elseif ($check && $split[1] == "fp")
@@ -63,7 +63,7 @@ class Login extends CI_Controller {
 				$this->gebruiker->setupSession("beheerder", $_POST['username']);
 				redirect("trajecten");
 			} else {
-				$this->load->view("login", array("error_creds" => true));
+				$this->load->view("login", array("error" => "Ongeldige gebruikersnaam of wachtwoord!"));
 			}
 		} else {
 			if ($this->gebruiker->verify("gast", $_POST['username'], $_POST['password']))
@@ -71,7 +71,7 @@ class Login extends CI_Controller {
 				$this->gebruiker->setupSession("gast", $_POST['username']);
 				redirect("trajecten");
 			} else {
-				$this->load->view("login", array("error_creds" => true));
+				$this->load->view("login", array("error" => "Ongeldige gebruikersnaam of wachtwoord!"));
 			}
 		}
 	}

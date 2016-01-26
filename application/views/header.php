@@ -123,6 +123,23 @@
 					</li>
 					<?php if ($_SESSION['domein'] == "beheerder") { ?>
 					<li>
+						<a href="<?php echo site_url("projmanager"); ?>">
+							<i class="menu-icon fa fa fa-paper-plane"></i>
+							<span class="menu-text"> Projecten </span>
+						</a>
+						<b class="arrow"></b>
+					</li>
+					<?php } else { ?>
+					<li>
+						<a href="<?php echo site_url("projecten"); ?>">
+							<i class="menu-icon fa fa fa-paper-plane"></i>
+							<span class="menu-text"> Projecten </span>
+						</a>
+						<b class="arrow"></b>
+					</li>
+					<?php } 
+					if ($_SESSION['domein'] == "beheerder") { ?>
+					<li>
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text"> Gebruikers </span>

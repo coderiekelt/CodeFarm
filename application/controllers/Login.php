@@ -45,10 +45,6 @@ class Login extends CI_Controller {
 		{
 			$check = true;
 		}
-		print("<pre>");
-		print_r($_POST);
-		print("</pre>");
-		exit;
 
 		if ($check && $split[1] == "edufp")
 		{

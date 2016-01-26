@@ -1,5 +1,5 @@
 <?php 
-	// LAATST BEWERKT DOOR: RIEKELT BRANDS / 1-11-2016 18:05
+	// LAATST BEWERKT DOOR: Klaas Hakvoort / 26-1-2016 15:13
 
 	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 

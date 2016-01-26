@@ -74,11 +74,6 @@
 			}
 		}
 			     
-            $num = $query->num_rows();
-
-            return $num;
-		}
-
         public function exists($id)
         {
             $query = $this->db->get_where('traject', array('traject_id' => $id));     

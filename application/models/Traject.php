@@ -3,7 +3,7 @@
 
 	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-	class Project extends CI_Model {
+	class Traject extends CI_Model {
 		// CONSTRUCTOR
         public function __construct()
         {

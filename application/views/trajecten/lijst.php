@@ -5,7 +5,7 @@
 </div>
 <div class="row">
 	<?php foreach($projecten as $project) {
-		$data = $this->project->fetchdetails($project->project_id);
+		$data = $this->traject->fetchdetails($traject->traject_id);
 		print('<a href="' . site_url("projecten/view/" . $project->project_id) . '">');
 			print('<div class="col-xs-2">');
 				print('<div class="well">');

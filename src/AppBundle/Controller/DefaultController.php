@@ -18,4 +18,12 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
     }
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+        return $this->render('AppBundle::base.html.twig', []);
+    }
 }

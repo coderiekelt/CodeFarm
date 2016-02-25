@@ -78,10 +78,20 @@
             </div>
             <div class="main-content">
                 <div class="main-content-inner">
+                    <div class="page-content">
                         <div class="row">
                             <div class="col-xs-12">
-                                {% block body %}
-
+                                {% block content %}
+                                    <div class="alert alert-danger">
+                                        Daar ging iets fout... neem contact op met uw docent als deze fout blijft voorkomen!
+                                    </div>
+                                    {% if app.debug %}
+                                        <div class="alert alert-info">
+                                            <b>Ontwikkelaars details:</b><br>
+                                            Je bent vergeten een body te definieeren voor je view.<br>
+                                            <h1>Idioot.</h1>
+                                        </div>
+                                    {% endif %}
                                 {% endblock %}
                             </div>
                         </div>

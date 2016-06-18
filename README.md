@@ -41,7 +41,8 @@ Are you sure you are supposed to be doing PHP?
 
 ## Samples
 Simple usage of the database class
-`$db = new PHP4Noobs\Database();
+```
+$db = new PHP4Noobs\Database();
 
 // Establish a connection
 $db->connect("localhost", "username", "password", "database", $port=3306);
@@ -56,4 +57,4 @@ while($row = $db->fetchArray("users")) {
 
 // Close the database connection
 $db->close();
-`
+```
